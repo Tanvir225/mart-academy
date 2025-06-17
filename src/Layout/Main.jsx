@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import elips1 from "../assets/Ellipse 1.png"
 import elips2 from "../assets/Ellipse 2.png"
 import elips3 from "../assets/Ellipse 3.png"
@@ -9,13 +9,22 @@ import "aos/dist/aos.css";
 
 const Main = () => {
 
+    const location = useLocation()
+
     useEffect(() => {
         Aos.init({
-            duration: 800, // Animation duration in milliseconds
+            duration: 700, // Animation duration in milliseconds
             easing: "ease-in-out", // Easing function for the animation
             once: false, // Whether animation should only happen once
+            mirror: true, // Whether elements should animate on scroll back up
         });
+
     }, [])
+
+      // Refresh AOS on every route change
+  useEffect(() => {
+    Aos.refresh();
+  }, [location]);
 
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#0f0f0f]">
@@ -32,7 +41,7 @@ const Main = () => {
                 </div>
 
                 {/* Ellipse 2 - Bottom Right */}
-                <div data-aos="zoom-in-left" className="absolute  rounded-full  
+                <div data-aos="zoom-in-left" className="absolute rounded-full  
                         w-[250px] h-[250px] right-0 
                         sm:w-[300px] sm:h-[300px] 
                         md:w-[400px] md:h-[400px] 
@@ -42,8 +51,8 @@ const Main = () => {
                 </div>
 
                 {/* Ellipse 3 - Top Right Middle */}
-                <div data-aos="zoom-in-up" className="absolute  rounded-full 
-                        w-[180px] h-[180px] bottom-5 right-[20px] left-0
+                <div data-aos="zoom-in-up" className="absolute rounded-full 
+                        w-[180px] h-[180px] bottom-[700px]  md:bottom-96 lg:bottom-64 
                         sm:w-[220px] sm:h-[220px] 
                         md:w-[280px] md:h-[280px] 
                         lg:w-[300px] lg:h-[300px]">
@@ -53,7 +62,7 @@ const Main = () => {
             </div>
 
             {/* Main Content */}
-            <div className="relative z-40 container mx-auto">
+            <div className="relative z-40 container mx-auto px-2 sm:px-6 lg:px-8">
                 <section className="">
                     <Navbar></Navbar>
                 </section>
