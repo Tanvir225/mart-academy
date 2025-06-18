@@ -46,7 +46,7 @@ const Navbar = () => {
                 {links}
             </div>
 
-            <div className={`lg:hidden absolute  left-0 top-10 w-full h-full bg-base-100 p-5 transition-transform duration-300 ${isOpen ? 'translate-y-0' : '-translate-y-full -top-10'}`}>
+            <div className={`lg:hidden absolute   left-0 top-10 w-full h-full bg-base-100 p-5 transition-transform duration-300 ${isOpen ? 'translate-y-0' : '-translate-y-full -top-10'}`}>
                 <div className="flex justify-end">
                     <button onClick={() => setIsOpen(false)} className="btn btn-ghost">
                         <AiOutlineClose ></AiOutlineClose>
@@ -60,7 +60,7 @@ const Navbar = () => {
             <div className="flex space-x-2 lg:space-x-3">
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
+                        <div className="w-10 rounded-full z-20">
                             <img
                                 alt="Tailwind CSS Navbar component"
                                 src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />

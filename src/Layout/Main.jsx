@@ -13,7 +13,7 @@ const Main = () => {
 
     useEffect(() => {
         Aos.init({
-            duration: 700, // Animation duration in milliseconds
+            duration: 800, // Animation duration in milliseconds
             easing: "ease-in-out", // Easing function for the animation
             once: false, // Whether animation should only happen once
             mirror: true, // Whether elements should animate on scroll back up
