@@ -29,7 +29,7 @@ const Course = () => {
                         </g>
                     </svg>
                 </span>
-                <span className="absolute -bottom-6 left-1/2 z-20 h-0 w-0 -translate-x-1/2 transform rounded-full bg-gradient-to-tr from-[#0d87f8]/80 to-[#70c4ff]/80 duration-300 group-hover:h-[50px] group-hover:w-[50px]"></span>
+                <span className="absolute -bottom-6 left-1/2 z-20 h-0 w-0 hover:-translate-x-1/2 transform rounded-full bg-gradient-to-tr from-[#0d87f8]/80 to-[#70c4ff]/80 duration-300 group-hover:h-[50px] group-hover:w-[50px]"></span>
                 <span className="absolute -bottom-6 left-1/2 z-20 h-0 w-0 -translate-x-1/2 transform rounded-full bg-gradient-to-tr from-[#0d87f8]/50 to-[#70c4ff]/50 duration-500 hover:duration-300 group-hover:h-[60px] group-hover:w-[60px]"></span>
             </div>
             <div className="w-full h-64 overflow-y-auto space-y-7 rounded-br-lg rounded-tr-lg bg-white p-7 text-center shadow-[0px_7px_30px_2px_rgba(100,100,111,0.2)]  dark:bg-[#18181B] dark:shadow-[0px_2px_8px_0px_rgba(0,0,0,0.8)]">
