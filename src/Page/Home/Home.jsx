@@ -16,12 +16,16 @@ const Home = () => {
             <section className='my-10'>
                 <Title title="Our Courses"></Title>
 
-                <div className='grid mt-7 grid-cols-1  md:grid-cols-1 lg:grid-cols-2 gap-10'>
+                <div className='grid mt-7 grid-cols-1  md:grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16'>
                     <Course></Course>
                     <Course></Course>
                     <Course></Course>
                     <Course></Course>
                 </div>
+            </section>
+
+            <section className='my-16'>
+                <Title title="Success_Story"></Title>
             </section>
         </div>
     );

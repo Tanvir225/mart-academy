@@ -6,7 +6,7 @@ const Course = () => {
 
 
     return (
-        <div className="flex flex-col items-center justify-center w-full md:flex-row">
+        <div data-aos="fade-up" className="flex flex-col items-center justify-center w-full md:flex-row">
             <div className="group relative w-full">
                 <img
                     width={400}
