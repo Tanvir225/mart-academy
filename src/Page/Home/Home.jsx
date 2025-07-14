@@ -4,6 +4,7 @@ import SubTitle from '../../Component/Share/SubTitle';
 import Banner from '../../Component/Home/Banner';
 import Course from '../../Component/Share/Course';
 import Timeline from '../../Component/Home/Timeline';
+import FAQ from '../../Component/Share/FAQ';
 
 const Home = () => {
     return (
@@ -35,6 +36,10 @@ const Home = () => {
             </section>
             <section className='my-16'>
                 <Title title="Success_Story"></Title>
+            </section>
+            <section className='my-16'>
+                <Title title="FAQ"></Title>
+                <FAQ></FAQ>
             </section>
         </div>
     );
