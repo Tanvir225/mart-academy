@@ -2,8 +2,8 @@
 
 const Timeline = () => {
     return (
-        <div className="my-7 w-full">
-            <ul className="timeline timeline-vertical ">
+        <div className="my-7 w-full" >
+            <ul className="timeline timeline-vertical " data-aos="fade-up">
                 <li>
                     <div className="timeline-start timeline-box text-[16px]">Computer Fundametals Expert</div>
                     <div className="timeline-middle">
