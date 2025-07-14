@@ -3,6 +3,7 @@ import Title from '../../Component/Share/Title';
 import SubTitle from '../../Component/Share/SubTitle';
 import Banner from '../../Component/Home/Banner';
 import Course from '../../Component/Share/Course';
+import Timeline from '../../Component/Home/Timeline';
 
 const Home = () => {
     return (
@@ -24,6 +25,14 @@ const Home = () => {
                 </div>
             </section>
 
+            <section className='my-16'>
+                <Title title="Course_Overview"></Title>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16'>
+                    <Timeline></Timeline>
+                    <Timeline></Timeline>
+                    <Timeline></Timeline>
+                </div>
+            </section>
             <section className='my-16'>
                 <Title title="Success_Story"></Title>
             </section>
