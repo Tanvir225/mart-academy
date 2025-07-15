@@ -5,6 +5,7 @@ import Banner from '../../Component/Home/Banner';
 import Course from '../../Component/Share/Course';
 import Timeline from '../../Component/Home/Timeline';
 import FAQ from '../../Component/Share/FAQ';
+import contest from '../../assets/contest.gif';
 
 const Home = () => {
     return (
@@ -32,6 +33,13 @@ const Home = () => {
                     <Timeline></Timeline>
                     <Timeline></Timeline>
                     <Timeline></Timeline>
+                </div>
+            </section>
+            <section className='my-16'>
+                <Title title="Become_ A _ Champion" subtitle={<>Join <span className='bg-teal-200 p-1 rounded-xl text-black'>Contest</span> & Get <span className='bg-teal-200 p-1 rounded-xl text-black'>Money</span> </>}></Title>
+
+                <div className='border-2 mt-4 border-teal-200 ring-4 rounded-lg'>
+                    <img className='w-full' src={contest} alt=""/>
                 </div>
             </section>
             <section className='my-16'>
