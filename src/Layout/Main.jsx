@@ -6,6 +6,7 @@ import Navbar from "../Component/Share/Navbar";
 import { useEffect } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
+import Footer from "../Component/Share/Footer";
 
 const Main = () => {
 
@@ -70,6 +71,9 @@ const Main = () => {
                     <Outlet />
                 </div>
             </div>
+
+            {/* Footer */}
+            <Footer></Footer>
         </div>
     );
 };
