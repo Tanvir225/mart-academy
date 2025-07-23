@@ -40,7 +40,7 @@ const Home = () => {
             <section className='my-16'>
                 <Title title="Become_ A _ Champion" subtitle={<>Join <span className='bg-teal-200 p-1 rounded-xl text-black'>Contest</span> & Get <span className='bg-teal-200 p-1 rounded-xl text-black'>Money</span> </>}></Title>
 
-                <div className='border-2 mt-4 border-teal-200 lg:h-[500px]  rounded-2xl'>
+                <div className='border-2 mt-4 border-teal-200 lg:h-[580px]  rounded-2xl'>
                     <img className='w-full h-full' src={contest} alt="" />
                 </div>
             </section>
