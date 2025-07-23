@@ -48,7 +48,7 @@ const FAQ = () => {
                         <div className="text-center">
                             <div className="relative  border-t-[12px] border-zinc-700 bg-teal-200 p-3 shadow-md">
                                 <span className="absolute right-0 top-0 h-0 w-0 border-b-[40px] border-r-[40px] border-b-transparent border-r-zinc-700"></span>
-                                <h1 className="select-none text-lg text-zinc-700">{data.title}</h1>
+                                <h1 className="select-none  text-zinc-700">{data.title}</h1>
                             </div>
                             <div className={`grid overflow-hidden text-slate-600 transition-all duration-300 ease-in-out ${isOpen === idx ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
                                 <div className="overflow-hidden">
