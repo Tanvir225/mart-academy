@@ -47,14 +47,12 @@ const Home = () => {
             <section className='my-16'>
                 <Title title="Success_Story"></Title>
 
-                <Marquee className='my-10' speed={50} gradient={true} pauseOnHover={true}>
+                <Marquee className='my-10 ' speed={50} gradient={true} gradientColor='teal' gradientWidth={50} pauseOnHover={true}>
+                    <Success_Story></Success_Story>
+                    <Success_Story></Success_Story>
+                    <Success_Story></Success_Story>
+                    <Success_Story></Success_Story>
 
-                    <div className='flex items-center justify-center gap-10 rounded-xl'>
-                        <Success_Story></Success_Story>
-                        <Success_Story></Success_Story>
-                        <Success_Story></Success_Story>
-                        <Success_Story></Success_Story>
-                    </div>
 
                 </Marquee>
 

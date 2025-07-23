@@ -2,8 +2,8 @@ import React from 'react';
 
 const Success_Story = () => {
     return (
-        <div className='border-2 border-teal-200 rounded-2xl p-2 bg-gray-100 dark:bg-gray-800'>
-            <div className="max-w-[300px] space-y-8 rounded-2xl px-6 py-8 shadow-md  dark:bg-[#18181B] pt-16">
+        <div className='border-2 mr-10 border-teal-200 rounded-2xl p-2 bg-gray-100 '>
+            <div className="max-w-[290px] space-y-8 rounded-2xl px-6 py-8 shadow-md  bg-[#18181B] pt-16">
                 {/* profile image & bg  */}
                 <div className="relative">
                     <img
