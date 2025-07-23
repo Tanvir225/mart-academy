@@ -2,12 +2,25 @@ import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiAlignLeft } from "react-icons/fi";
 import { Link } from "react-router-dom";
+import useAuth from "../../Hook/useAuth";
+import toast from "react-hot-toast";
 
 
 const Navbar = () => {
 
     //state
     const [isOpen, setIsOpen] = useState(false);
+
+    //HOOK 
+    const { user, logoutUser } = useAuth();
+
+    //handleLogOut
+    const handleLogOut = () => {
+        logoutUser().then((res) => {
+            console.log(res);
+            toast.success("logout Successfull");
+        });
+    };
 
     const links = (
         <ul className="flex flex-col lg:flex-row justify-center items-center gap-5 space-x-0 sm:space-x-1 md:space-x-1">
@@ -58,29 +71,43 @@ const Navbar = () => {
             </div>
 
             <div className="flex space-x-2 lg:space-x-3">
-                <div className="dropdown dropdown-end">
-                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full z-20">
-                            <img
-                                alt="Tailwind CSS Navbar component"
-                                src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp" />
-                        </div>
-                    </div>
-                    <ul
-                        tabIndex={0}
-                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                        <li>
-                            <a className="justify-between">
-                                Profile
-                                <span className="badge">New</span>
-                            </a>
-                        </li>
-                        <li><a>Settings</a></li>
-                        <li><a>Logout</a></li>
-                    </ul>
-                </div>
+                {
+                    user ? (
+                        <div className="dropdown dropdown-end">
+                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                <div className="w-10 rounded-full z-20">
+                                    <img
+                                        alt={`${user?.displayName || "User's avatar"}`}
+                                        src={`${user?.photoURL}`} />
+                                </div>
+                            </div>
+                            <ul
+                                tabIndex={0}
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                                <li>
+                                    <a className="justify-between">
+                                        {user?.displayName || "Profile"}
+                                        <span className="badge">New</span>
+                                    </a>
+                                </li>
+                                <li><a>Settings</a></li>
+                                <li>
+                                    <Link
+                                        to={"/"}
+                                        onClick={handleLogOut}
 
-                <button className="btn button z-20">Sign up</button>
+                                    >
+                                        Logout
+                                    </Link>
+                                </li>
+                            </ul>
+                        </div>
+                    )
+                        :
+                        <Link to={"/login"} className="btn button z-20">Login</Link>
+                }
+
+
             </div>
         </div>
     );

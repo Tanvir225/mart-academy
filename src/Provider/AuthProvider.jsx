@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
 import usePublicAxios from "../Hook/usePublicAxios";
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import auth from "../Firebase/firebase.config";
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
 
-export const AutthContext = createContext(null);
+
+export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
 
 
@@ -75,9 +75,9 @@ const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AutthContext.Provider value={authInfo}>
+        <AuthContext.Provider value={authInfo}>
             {children}
-        </AutthContext.Provider>
+        </AuthContext.Provider>
     );
 
 };

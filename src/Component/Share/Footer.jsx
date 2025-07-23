@@ -22,26 +22,26 @@ const Footer = () => {
                     </p>
                     <p className='text-sm '>Providing reliable Lesson since 2024</p>
 
-                    <caption className="text-xs mt-2 leading-6">
+                    <p className="text-xs mt-2 leading-6">
                         <span className="">312/4 , Lalkuthi Second Colony</span>
                         <br />
                         <span className="">Mirpur-1, Dhaka-1216, Bangladesh</span>
-                    </caption>
+                    </p>
 
                     <p>Copyright © {new Date().getFullYear()} Mart Academy - All right reserved</p>
                 </aside>
 
 
-                <caption className="text-xs -mt-2">
+                <p className="text-xs -mt-2">
                     <span className="">Follow us on social media</span>
-                </caption>
+                </p>
                 <nav>
                     <div className="grid grid-flow-col gap-4 -mt-5">
                         <a>
                             <FaFacebook size={25}></FaFacebook>
                         </a>
                         <a>
-                           <FaYoutube size={25}></FaYoutube>
+                            <FaYoutube size={25}></FaYoutube>
                         </a>
                         <a>
                             <FaLinkedin size={25}></FaLinkedin>

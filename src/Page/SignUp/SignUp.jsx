@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 
 const SignUp = () => {
     return (
-        <div className='my-6'>
-            <div className="w-full max-w-3xl mx-auto  space-y-3  rounded-lg border p-5 shadow-lg ">
-                <div className="flex flex-col space-y-1">
+        <section className='my-10'>
+         
+            <div className="w-full max-w-2xl mx-auto  space-y-3  rounded-lg border p-5 shadow-lg ">
+                <div className="flex flex-col space-y-3">
                     <h3 className="text-3xl font-bold tracking-tight">Sign Up</h3>
                     <p className="text-sm text-zinc-200 ">Please fill in the form to create an account.</p>
                 </div>
@@ -103,12 +104,12 @@ const SignUp = () => {
                 </div>
                 <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
                     Already have an account?
-                    <Link to={'/login'} className="ml-1 text-teal-200 font-semibold underline">
+                    <Link to={'/login'} className="ml-1 text-teal-200">
                         Signin
                     </Link>
                 </p>
             </div>
-        </div>
+        </section>
     );
 };
 
