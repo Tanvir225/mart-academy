@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 
 const Login = () => {
     return (
-        <div className="my-10">
+        <section className="my-10">
             <div className="flex h-full w-full overflow-hidden rounded-xl shadow-md max-w-5xl mx-auto">
                 {/* design side  */}
                 <div className="relative hidden items-center justify-center bg-teal-300 md:flex md:w-[50%]">
@@ -32,12 +33,12 @@ const Login = () => {
                         />
                         <p className="text-[14px] ">
                             Do not have an account ?{' '}
-                            <a href="#" className="text-teal-200">
+                            <Link to={'/sign-up'} className="text-teal-200">
                                 Create one
-                            </a>
+                            </Link>
                         </p>
                         <button className="w-[80%] rounded-lg bg-teal-400 px-6 py-2 font-medium uppercase text-white outline-none hover:bg-teal-600 md:w-[60%]" type="submit">
-                            Submit
+                            Login
                         </button>
                     </form>
                     {/* divider  */}
@@ -57,7 +58,7 @@ const Login = () => {
                     </button>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
