@@ -25,10 +25,10 @@ const Navbar = () => {
     const links = (
         <ul className="flex flex-col lg:flex-row justify-center items-center gap-5 space-x-0 sm:space-x-1 md:space-x-1">
             <li>
-                <Link>Home</Link>
+                <Link to={"/"}>Home</Link>
             </li>
             <li>
-                <Link>Courses</Link>
+                <Link to={"/courses"}>Courses</Link>
             </li>
             <li>
                 <Link>Contact</Link>
@@ -49,9 +49,9 @@ const Navbar = () => {
                     <FiAlignLeft color="#D6FF7F" ></FiAlignLeft>
                 </div>
 
-                <p className="text-xs sm:text-xl md:text-xl lg:text-xl">
+                <Link to={"/"} className="text-xs sm:text-xl md:text-xl lg:text-xl">
                     MART-<span className="text-teal-300 font-bold">ACADEMY</span>
-                </p>
+                </Link>
 
             </div>
 
@@ -93,7 +93,7 @@ const Navbar = () => {
                                 <li><a>Settings</a></li>
                                 <li>
                                     <Link
-                                        to={"/"}
+                                        
                                         onClick={handleLogOut}
 
                                     >

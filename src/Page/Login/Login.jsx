@@ -62,14 +62,15 @@ const Login = () => {
     //sign in with google
     const handleMedia = (media) => {
         const toastId = toast.loading("sign in ...");
- 
+
         media()
             .then((result) => {
                 console.log(media);
                 const user = result.user;
                 console.log(user);
                 toast.success("signed in", { id: toastId });
-                navigate("/");
+                //redirect to the previous page
+                navigate(from, { replace: true });
 
                 // //send to database user information
                 // const dataUser = {
