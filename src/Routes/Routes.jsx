@@ -5,6 +5,7 @@ import Login from "../Page/Login/Login";
 import SignUp from "../Page/SignUp/SignUp";
 import Courses from "../Page/Courses/Courses";
 import PrivateRoute from "./PrivateRoute";
+import CourseDetails from "../Page/CourseDetails/CourseDetails";
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
         path: "/courses",
         element: <PrivateRoute><Courses></Courses></PrivateRoute>,
       },
+
+      {
+        path:"/course/:id",
+        element:<CourseDetails></CourseDetails>
+      }
 
     ],
 

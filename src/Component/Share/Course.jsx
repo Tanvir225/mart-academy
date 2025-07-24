@@ -1,5 +1,6 @@
 import CountUp from 'react-countup';
 import courseImage from '../../assets/course.jpg';
+import { Link } from 'react-router-dom';
 
 
 const Course = () => {
@@ -13,14 +14,14 @@ const Course = () => {
                     src={courseImage}
                     alt="Course"
                 />
-             
-                
+
+
             </div>
             <div className="w-full h-70 overflow-y-auto space-y-4 rounded-br-lg rounded-tr-lg  p-6 text-center shadow-[0px_7px_30px_2px_rgba(100,100,111,0.2)] bg-[#18181B]">
                 <div className="space-y-1 ">
                     <h2 className="text-center  font-medium text-lg ">Wordpress Web development</h2>
                     <p className="text-xs">Mart <span className='text-teal-300'>Academy</span></p>
-                    
+
                 </div>
                 <div className="flex flex-wrap items-center justify-between">
                     <div className="space-y-1">
@@ -70,9 +71,9 @@ const Course = () => {
                     </div>
                 </div>
                 <div>
-                    <button className="btn button">
+                    <Link to={`/course/${1}`} className="btn button Link">
                         View Details
-                    </button>
+                    </Link>
                 </div>
             </div>
         </div>

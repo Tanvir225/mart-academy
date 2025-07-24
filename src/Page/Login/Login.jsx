@@ -1,7 +1,7 @@
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
-import usePublicAxios from "../../Hook/usePublicAxios";
+// import usePublicAxios from "../../Hook/usePublicAxios";
 import toast from "react-hot-toast";
 
 const Login = () => {
@@ -10,7 +10,7 @@ const Login = () => {
     const { loginUser, googleLogin } = useAuth();
 
     //axios hook
-    const axios = usePublicAxios();
+    // const axios = usePublicAxios();
 
     //navigation
     const navigate = useNavigate();
