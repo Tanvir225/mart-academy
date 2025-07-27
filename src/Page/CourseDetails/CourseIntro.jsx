@@ -17,7 +17,7 @@ const CourseIntro = () => {
                 </div>
 
                 <div className='flex justify-center items-center my-7 w-full rounded '>
-                    <ReactPlayer src='https://www.youtube.com/watch?v=LXb3EKWsInQ' className='w-full object-cover rounded' width={900} light:true height={400} fallback playIcon playing></ReactPlayer>
+                    <ReactPlayer src='https://www.youtube.com/watch?v=LXb3EKWsInQ' className='w-full object-cover rounded' width={900} light:true height={350} fallback playIcon playing></ReactPlayer>
                 </div>
             </div>
         </section>

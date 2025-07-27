@@ -1,5 +1,6 @@
 import CourseCurriculm from "./CourseCurriculm";
 import CourseDetailsHero from "./CourseDetailsHero";
+import CourseFlowchart from "./CourseFlowchart";
 import CourseIntro from "./CourseIntro";
 import CourseSpeciality from "./CourseSpeciality";
 
@@ -12,6 +13,7 @@ const CourseDetails = () => {
                 <CourseIntro></CourseIntro>
                 <CourseCurriculm></CourseCurriculm>
                 <CourseSpeciality></CourseSpeciality>
+                <CourseFlowchart></CourseFlowchart>
             </section>
         </div>
     );
