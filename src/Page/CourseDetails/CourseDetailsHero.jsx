@@ -17,6 +17,11 @@ const CourseDetailsHero = () => {
                         <p className="text-sm">Ends on: <span className="font-bold">1st January 2024</span></p>
                     </div>
 
+                    <div className="bg-teal-200 p-5 rounded-lg text-center w-full md:max-w-md">
+                        <h2 className="text-lg font-semibold">Admission </h2>
+                        <p className="text-sm">Starts on: <span className="font-bold">5th January 2024</span></p>
+                    </div>
+
                     <div className="bg-teal-200 p-5 rounded-lg text-center animate-pulse w-full md:max-w-md">
                         <h2 className="text-lg font-semibold">Next Batch</h2>
                         <p className="text-sm">Starts on: <span className="font-bold">15th January 2024</span></p>
