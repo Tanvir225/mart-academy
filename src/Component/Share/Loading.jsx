@@ -1,4 +1,4 @@
-// import { HashLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 // import loading from "../../assets/loading.gif"
 
 const Loading = () => {
