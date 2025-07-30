@@ -68,7 +68,7 @@ const Navbar = () => {
                         <AiOutlineClose ></AiOutlineClose>
                     </button>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center" onClick={() => setIsOpen(false)}>
                     {links}
                 </div>
             </div>
