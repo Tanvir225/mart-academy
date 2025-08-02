@@ -7,6 +7,8 @@ import Courses from "../Page/Courses/Courses";
 import PrivateRoute from "./PrivateRoute";
 import CourseDetails from "../Page/CourseDetails/CourseDetails";
 import CourseInside from "../Page/CourseInside/CourseInside";
+import AboutUs from "../Page/AboutUs/AboutUs";
+import ContactUs from "../Page/ContactUs/ContactUs";
 
 
 const router = createBrowserRouter([
@@ -31,6 +33,14 @@ const router = createBrowserRouter([
       {
         path: "/courses/:id",
         element: <PrivateRoute><CourseInside></CourseInside></PrivateRoute>
+      },
+      {
+        path: "/about-us",
+        element: <AboutUs></AboutUs>,
+      },
+      {
+        path: "/contact-us",
+        element: <ContactUs></ContactUs>,
       },
 
     ],
