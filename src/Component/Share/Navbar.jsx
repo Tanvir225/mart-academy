@@ -49,7 +49,7 @@ const Navbar = () => {
                     <FiAlignLeft color="#D6FF7F" ></FiAlignLeft>
                 </div>
 
-                <Link to={"/"} className="text-xs sm:text-xl md:text-xl lg:text-xl">
+                <Link to={"/"} onClick={() => setIsOpen(false)} className="text-xs sm:text-xl md:text-xl lg:text-xl">
                     MART-<span className="text-teal-300 font-bold">ACADEMY</span>
                 </Link>
 

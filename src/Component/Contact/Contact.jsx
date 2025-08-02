@@ -35,12 +35,12 @@ const Contact = () => {
             <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 {/* Left Info Section */}
                 <div>
-                    <h1 className="text-5xl font-bold text-teal-200 mb-6">Let’s Connect</h1>
-                    <p className="text-lg mb-4">
+                    <h1 className="text-2xl md:text-5xl font-bold text-teal-200 mb-6">Let’s Connect</h1>
+                    <p className="text-base mb-4">
                         Have a question about our computer courses or want to enroll in a
                         batch? We’re happy to help you.
                     </p>
-                    <ul className="space-y-3 font-light">
+                    <ul className="space-y-3 font-light text-sm">
                         <li>
                             <strong>📧 Email:</strong> martacad200@gmail.com
                         </li>
@@ -62,8 +62,8 @@ const Contact = () => {
                 </div>
 
                 {/* Form Card */}
-                <div className="bg-base-100 md:p-8 rounded-2xl shadow-2xl border border-base-300">
-                    <h2 className="text-2xl font-semibold text-center mb-6">
+                <div className="bg-base-100 p-5 md:p-8 rounded-2xl shadow-2xl border border-base-300">
+                    <h2 className="text-xl font-semibold text-center mb-6">
                         Send Us a Message
                     </h2>
                     <form className="space-y-5" ref={form} onSubmit={sendEmail}>
