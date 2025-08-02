@@ -78,7 +78,7 @@ const Navbar = () => {
                     user ? (
                         <div className="dropdown dropdown-end">
                             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full z-20">
+                                <div className="w-10 rounded-full z-10">
                                     <img
                                         alt={`${user?.displayName || "User's avatar"}`}
                                         src={`${user?.photoURL}`} />
@@ -86,7 +86,7 @@ const Navbar = () => {
                             </div>
                             <ul
                                 tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-10 mt-3 w-52 p-2 shadow">
                                 <li>
                                     <a className="justify-between">
                                         {user?.displayName || "Profile"}
