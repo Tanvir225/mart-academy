@@ -59,7 +59,7 @@ const About = () => {
                 {/* CTA */}
                 <div className="mt-10 text-center">
                     <p className="text-lg mb-2">📌 Ready to begin your journey?</p>
-                    <a href="/courses" className="btn btn-outline font-light bg-teal-200 text-black">Explore Our Courses</a>
+                    <a href="/" className="btn btn-outline font-light bg-teal-200 text-black">Explore Our Courses</a>
                 </div>
             </div>
         </div>
