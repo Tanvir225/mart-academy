@@ -85,7 +85,7 @@ const Footer = () => {
                         href="https://wa.me/8801812122545"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="btn bg-green-500 text-white btn-circle btn-lg fixed bottom-20 right-5 shadow-lg hover:scale-110 transition-all"
+                        className="btn bg-green-500 text-white btn-circle btn-lg fixed bottom-28 right-5  shadow-lg hover:scale-110 transition-all"
                         title="Chat on WhatsApp"
                     >
                         <FaWhatsapp size={24} />
@@ -93,7 +93,7 @@ const Footer = () => {
 
                     <button
                         onClick={scrollTop}
-                        className="btn bg-blue-600 text-white btn-circle btn-lg fixed bottom-5 right-5 shadow-lg hover:scale-110 transition-all"
+                        className="btn bg-blue-600 text-white btn-circle btn-lg fixed bottom-12 right-5 shadow-lg hover:scale-110 transition-all"
                         title="Scroll to top"
                     >
                         <GoMoveToTop size={24} />

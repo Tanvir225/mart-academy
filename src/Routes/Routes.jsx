@@ -9,6 +9,7 @@ import CourseDetails from "../Page/CourseDetails/CourseDetails";
 import CourseInside from "../Page/CourseInside/CourseInside";
 import AboutUs from "../Page/AboutUs/AboutUs";
 import ContactUs from "../Page/ContactUs/ContactUs";
+import ProfilePage from "../Page/Profile/ProfilePage";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/contact-us",
         element: <ContactUs></ContactUs>,
+      },
+      {
+        path: "/profile",
+        element: <PrivateRoute><ProfilePage></ProfilePage></PrivateRoute>
       },
 
     ],

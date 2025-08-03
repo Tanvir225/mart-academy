@@ -4,6 +4,8 @@ import { TiMediaRecordOutline } from "react-icons/ti";
 import LiveInside from "./LiveInside";
 import RecordInside from "./RecordInside";
 import ContestInside from "./ContestInside";
+import { MdOutlineAssignment } from "react-icons/md";
+import AssignmentInside from "./AssignmentInside";
 
 
 const CoursePanel = () => {
@@ -21,12 +23,21 @@ const CoursePanel = () => {
                 </div>
 
                 <label className="tab text-lg">
-                    <input type="radio" name="my_tabs_4"  />
+                    <input type="radio" name="my_tabs_4" />
                     <TiMediaRecordOutline size={25} className="mr-1"></TiMediaRecordOutline >
-                    Record
+                    Recorded
                 </label>
                 <div className="tab-content bg-base-100 border-base-300 p-6">
                     <RecordInside></RecordInside>
+                </div>
+
+                <label className="tab text-lg ">
+                    <input type="radio" name="my_tabs_4" />
+                    <MdOutlineAssignment size={20} className="mr-2"></MdOutlineAssignment >
+                    Assignment
+                </label>
+                <div className="tab-content bg-base-100 border-base-300 p-6">
+                    <AssignmentInside></AssignmentInside>
                 </div>
 
                 <label className="tab text-lg ">
@@ -37,6 +48,8 @@ const CoursePanel = () => {
                 <div className="tab-content bg-base-100 border-base-300 p-6">
                     <ContestInside></ContestInside>
                 </div>
+
+
             </div>
         </section>
     );

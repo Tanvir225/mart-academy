@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import Footer from "../Component/Share/Footer";
+import MoblieNav from "../Component/Share/MoblieNav";
 
 const Main = () => {
 
@@ -22,10 +23,10 @@ const Main = () => {
 
     }, [])
 
-      // Refresh AOS on every route change
-  useEffect(() => {
-    Aos.refresh();
-  }, [location]);
+    // Refresh AOS on every route change
+    useEffect(() => {
+        Aos.refresh();
+    }, [location]);
 
     return (
         <div className="relative min-h-screen overflow-hidden bg-[#0f0f0f]">
@@ -61,6 +62,9 @@ const Main = () => {
                     <img src={elips3} alt="elips3" />
                 </div>
             </div>
+
+            {/* moblie nav */}
+            <MoblieNav></MoblieNav>
 
             {/* Main Content */}
             <div className="relative z-40 container mx-auto px-2 sm:px-6 lg:px-8">

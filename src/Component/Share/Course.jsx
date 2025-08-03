@@ -3,7 +3,9 @@ import courseImage from '../../assets/course.jpg';
 import { Link } from 'react-router-dom';
 
 
+
 const Course = () => {
+
 
 
     return (
@@ -70,9 +72,13 @@ const Course = () => {
                         </div>
                     </div>
                 </div>
-                <div>
+                <div className='w-full flex flex-row items-center justify-center gap-5'>
                     <Link to={`/course/${1}`} className="btn button Link">
                         View Details
+                    </Link>
+
+                    <Link to={`/payment`} className="btn btn-outline btn-sm rounded-xl border-teal-200 font-light hover:bg-teal-200 hover:text-black">
+                        Enroll Now
                     </Link>
                 </div>
             </div>
