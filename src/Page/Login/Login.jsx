@@ -3,6 +3,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 // import usePublicAxios from "../../Hook/usePublicAxios";
 import toast from "react-hot-toast";
+import { signOut } from "firebase/auth";
+import auth from "../../Firebase/firebase.config";
 
 const Login = () => {
 
@@ -33,6 +35,16 @@ const Login = () => {
             .then((res) => {
                 const user = res.user;
                 console.log(user);
+
+                // 🚨 Block unverified users
+                if (!user.emailVerified) {
+                    signOut(auth).then(() => {
+
+                    });
+
+                    return;
+                }
+
                 form.reset();
                 toast.success("Login successful", { id: toastId });
 

@@ -10,6 +10,7 @@ import CourseInside from "../Page/CourseInside/CourseInside";
 import AboutUs from "../Page/AboutUs/AboutUs";
 import ContactUs from "../Page/ContactUs/ContactUs";
 import ProfilePage from "../Page/Profile/ProfilePage";
+import VerifyEmail from "../Page/SignUp/VerifyEmail";
 
 
 const router = createBrowserRouter([
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/profile",
         element: <PrivateRoute><ProfilePage></ProfilePage></PrivateRoute>
+      },
+      {
+        path: "/verify-email",
+        element: <VerifyEmail></VerifyEmail>
       },
 
     ],

@@ -17,7 +17,6 @@ const AuthProvider = ({ children }) => {
     //axios hook
     const axios = usePublicAxios();
 
-
     //create a user
     const createUser = async (email, password) => {
         setLoading(true);
@@ -83,5 +82,6 @@ const AuthProvider = ({ children }) => {
     );
 
 };
+
 
 export default AuthProvider;
