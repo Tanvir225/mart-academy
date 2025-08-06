@@ -3,7 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 // import usePublicAxios from "../../Hook/usePublicAxios";
 import toast from "react-hot-toast";
-import { signOut } from "firebase/auth";
+import { sendPasswordResetEmail, signOut } from "firebase/auth";
 import auth from "../../Firebase/firebase.config";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
@@ -95,6 +95,24 @@ const Login = () => {
             });
     };
 
+    const handleForgotPassword = async () => {
+        const email = document.querySelector("input[name='email']").value;
+
+        if (!email) {
+            toast.error("Please enter your email first.");
+            return;
+        }
+
+        try {
+            await sendPasswordResetEmail(auth, email);
+            toast.success("Password reset email sent!");
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message.slice(10));
+        }
+    };
+
+
     return (
         <section className="my-10">
 
@@ -140,10 +158,12 @@ const Login = () => {
                                 Create one
                             </Link>
                         </p>
+
                         <button className="w-[80%] rounded-lg bg-teal-400 px-6 py-2 font-medium uppercase text-white outline-none hover:bg-teal-600 md:w-[60%]" type="submit">
                             Login
                         </button>
                     </form>
+                    <p className="text-sm w-[80%] lg:w-[60%] mx-auto mt-2 underline cursor-pointer " onClick={handleForgotPassword}>forget password</p>
                     {/* divider  */}
                     <div className="my-8 flex items-center px-8">
                         <hr className="flex-1 border-teal-200" />
