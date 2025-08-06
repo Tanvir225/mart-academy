@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hook/useAuth';
 // import usePublicAxios from '../../Hook/usePublicAxios';
 import toast from 'react-hot-toast';
 import { sendEmailVerification, signOut, updateProfile } from 'firebase/auth';
 import auth from '../../Firebase/firebase.config';
-
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const SignUp = () => {
 
     //useContext
     const { createUser } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
 
     //useAxios hook
     // const axios = usePublicAxios();
@@ -164,7 +165,7 @@ const SignUp = () => {
                         </div>
 
                         <div className='grid grid-cols-2 gap-4'>
-                            <div className="space-y-2 text-sm">
+                            <div className="space-y-2 text-sm relative">
                                 <label className="text-sm font-medium leading-none  " htmlFor="password_">
                                     Password
                                 </label>
@@ -173,11 +174,12 @@ const SignUp = () => {
                                     id="password_"
                                     placeholder="password"
                                     name="password"
-                                    type="password"
+                                     type={`${showPassword ? 'text' : 'password'}`}
                                 />
+                                <span onClick={() => setShowPassword(!showPassword)} className="absolute top-[35%] right-2 cursor-pointer">{showPassword ? <FiEyeOff></FiEyeOff> : <FiEye></FiEye>}</span>
                             </div>
 
-                            <fieldset className="fieldset">
+                            <fieldset className="fieldset mt-1">
                                 <legend className="text-sm">Upload your image</legend>
                                 <input name='photo' type="file" className="flex h-10 w-full rounded-md border px-3 py-2 focus-visible:outline-none " />
                                 <label className="">Max size 2MB</label>

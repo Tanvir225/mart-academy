@@ -5,11 +5,14 @@ import useAuth from "../../Hook/useAuth";
 import toast from "react-hot-toast";
 import { signOut } from "firebase/auth";
 import auth from "../../Firebase/firebase.config";
+import { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Login = () => {
 
     //useContext
     const { loginUser, googleLogin } = useAuth();
+    const [showPassword, setShowPassword] = useState(false);
 
     //axios hook
     // const axios = usePublicAxios();
@@ -112,20 +115,25 @@ const Login = () => {
                 <div className="flex w-full flex-col justify-center bg-white py-10 lg:w-[60%] dark:bg-zinc-900">
                     <h2 className="pb-8 text-center text-3xl font-semibold tracking-tight">Sign In</h2>
                     <form onSubmit={handleLogin} className="flex w-full flex-col items-center justify-center gap-4">
-                        <input
-                            className="w-[80%] rounded-lg border border-teal-200 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-300/50 md:w-[60%] dark:text-zinc-400"
-                            type="email"
-                            placeholder="Email"
-                            name="email"
-                            required
-                        />
-                        <input
-                            className="w-[80%] rounded-lg border border-teal-200 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-300/50 md:w-[60%] dark:text-zinc-400"
-                            type="password"
-                            placeholder="Password"
-                            required
-                            name="password"
-                        />
+                        <div className="w-full text-center">
+                            <input
+                                className=" rounded-lg border border-teal-200 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-300/50 md:w-[60%] dark:text-zinc-400"
+                                type="email"
+                                placeholder="Email"
+                                name="email"
+                                required
+                            />
+                        </div>
+                        <div className="relative w-full text-center">
+                            <input
+                                className=" rounded-lg border border-teal-200 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-300/50 md:w-[60%] dark:text-zinc-400"
+                                type={`${showPassword ? 'text' : 'password'}`}
+                                placeholder="Password"
+                                required
+                                name="password"
+                            />
+                            <span onClick={() => setShowPassword(!showPassword)} className="absolute top-[30%] right-[24%] cursor-pointer">{showPassword ? <FiEyeOff></FiEyeOff> : <FiEye></FiEye>}</span>
+                        </div>
                         <p className="text-[14px] ">
                             Do not have an account ?{' '}
                             <Link to={'/sign-up'} className="text-teal-200">

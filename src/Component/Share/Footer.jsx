@@ -67,7 +67,7 @@ const Footer = () => {
                     <p>Copyright © {new Date().getFullYear()} Mart Academy - All rights reserved</p>
                     <p className="text-xs mt-2">Follow us on social media</p>
                     <nav>
-                        <div className="grid grid-flow-col gap-4 ">
+                        <div className="grid grid-flow-col gap-4 mb-7 md:mb-0">
                             <a href="https://www.facebook.com/martAcadmy" target="_blank" rel="noopener noreferrer"><FaFacebook size={25} /></a>
                             <a href="#"><FaYoutube size={25} /></a>
                             <a href="#"><FaLinkedin size={25} /></a>
