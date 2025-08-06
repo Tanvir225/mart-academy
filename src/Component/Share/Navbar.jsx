@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FiAlignLeft } from "react-icons/fi";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import toast from "react-hot-toast";
 
@@ -25,16 +25,24 @@ const Navbar = () => {
     const links = (
         <ul className="flex flex-col lg:flex-row justify-center items-center gap-5 space-x-0 sm:space-x-1 md:space-x-1">
             <li>
-                <Link to={"/"}>Home</Link>
+                <NavLink style={({ isActive }) => ({
+                    color: isActive ? "#7aebeb	" : "",
+                })} to={"/"}>Home</NavLink>
             </li>
             <li>
-                <Link to={"/courses"}>Courses</Link>
+                <NavLink to={"/courses"} style={({ isActive }) => ({
+                    color: isActive ? "#7aebeb	" : "",
+                })}>Courses</NavLink>
             </li>
             <li>
-                <Link to={'contact-us'}>Contact</Link>
+                <NavLink to={'contact-us'} style={({ isActive }) => ({
+                    color: isActive ? "#7aebeb	" : "",
+                })}>Contact</NavLink>
             </li>
             <li>
-                <Link to={'/about-us'}>About</Link>
+                <NavLink to={'/about-us'} style={({ isActive }) => ({
+                    color: isActive ? "#7aebeb	" : "",
+                })}>About</NavLink>
             </li>
         </ul>
     )

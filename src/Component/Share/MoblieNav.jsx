@@ -1,5 +1,5 @@
 import { BsChat, BsEasel, BsHouse, BsPersonWorkspace } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 
 const MoblieNav = () => {
@@ -7,24 +7,32 @@ const MoblieNav = () => {
         <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 w-full">
             <ul className="menu menu-horizontal bg-base-200 rounded-box  w-full justify-between px-5 py-2">
                 <li>
-                    <Link to={"/"} className="tooltip" data-tip="Home">
+                    <NavLink to={"/"} style={({ isActive }) => ({
+                        color: isActive ? "#7aebeb	" : "",
+                    })} className="tooltip" data-tip="Home">
                         <BsHouse size={22}></BsHouse>
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to={'/courses'} className="tooltip" data-tip="Courses">
+                    <NavLink to={'/courses'} style={({ isActive }) => ({
+                        color: isActive ? "#7aebeb	" : "",
+                    })} className="tooltip" data-tip="Courses">
                         <BsEasel size={22}></BsEasel>
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to={'/profile'} className="tooltip" data-tip="Profile">
+                    <NavLink to={'/profile'} style={({ isActive }) => ({
+                        color: isActive ? "#7aebeb	" : "",
+                    })} className="tooltip" data-tip="Profile">
                         <BsPersonWorkspace size={22}></BsPersonWorkspace>
-                    </Link>
+                    </NavLink>
                 </li>
                 <li>
-                    <Link to={'/contact-us'} className="tooltip" data-tip="Contact">
+                    <NavLink to={'/contact-us'} style={({ isActive }) => ({
+                        color: isActive ? "#7aebeb	" : "",
+                    })} className="tooltip" data-tip="Contact">
                         <BsChat size={22} ></BsChat>
-                    </Link>
+                    </NavLink>
                 </li>
             </ul>
         </div>
