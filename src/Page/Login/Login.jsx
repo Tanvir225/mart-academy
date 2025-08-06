@@ -30,46 +30,27 @@ const Login = () => {
         const email = form.email.value;
         const password = form.password.value;
 
-        //login function 
-        loginUser(email, password)
-            .then((res) => {
-                const user = res.user;
-                console.log(user);
+        try {
+            const res = await loginUser(email, password);
+            const user = res.user;
 
-                // 🚨 Block unverified users
-                if (!user.emailVerified) {
-                    signOut(auth).then(() => {
+            // ✅ Check if user email is verified
+            if (!user.emailVerified) {
+                await signOut(auth); // ✅ safely sign out the user
+                toast.error("Please verify your email before logging in", { id: toastId });
+                return;
+            }
 
-                    });
+            form.reset();
+            toast.success("Login successful", { id: toastId });
+            navigate(from, { replace: true });
 
-                    return;
-                }
-
-                form.reset();
-                toast.success("Login successful", { id: toastId });
-
-                //send last logged time into database
-                //send to database user information
-                // const dataUser = {
-                //   logged: user?.metadata?.lastSignInTime,
-                // };
-
-                // //api call
-                // axios.patch(`/users/${user?.email}`, dataUser).then((result) => {
-                //   console.log(result.data);
-                // });
-
-                //redirect to the previous page
-                navigate(from, { replace: true });
-            })
-            .catch((error) => {
-                console.error(error);
-                toast.error(error.message.slice(10, error.message.length), {
-                    id: toastId,
-                });
-            });
-
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message.slice(10), { id: toastId });
+        }
     };
+
 
     //sign in with google
     const handleMedia = (media) => {
