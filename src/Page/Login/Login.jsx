@@ -117,7 +117,7 @@ const Login = () => {
                     <form onSubmit={handleLogin} className="flex w-full flex-col items-center justify-center gap-4">
                         <div className="w-full text-center">
                             <input
-                                className=" rounded-lg border border-teal-200 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-300/50 md:w-[60%] dark:text-zinc-400"
+                                className="w-[80%] rounded-lg border border-teal-200 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-300/50 md:w-[60%] dark:text-zinc-400"
                                 type="email"
                                 placeholder="Email"
                                 name="email"
@@ -126,13 +126,13 @@ const Login = () => {
                         </div>
                         <div className="relative w-full text-center">
                             <input
-                                className=" rounded-lg border border-teal-200 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-300/50 md:w-[60%] dark:text-zinc-400"
+                                className="w-[80%]  rounded-lg border border-teal-200 bg-transparent py-2 pl-4 text-zinc-600 focus:outline-none focus:ring-2 focus:ring-blue-300/50 md:w-[60%] dark:text-zinc-400"
                                 type={`${showPassword ? 'text' : 'password'}`}
                                 placeholder="Password"
                                 required
                                 name="password"
                             />
-                            <span onClick={() => setShowPassword(!showPassword)} className="absolute top-[30%] right-[24%] cursor-pointer">{showPassword ? <FiEyeOff></FiEyeOff> : <FiEye></FiEye>}</span>
+                            <span onClick={() => setShowPassword(!showPassword)} className="absolute top-[30%] right-[15%] md:right-[22%] cursor-pointer">{showPassword ? <FiEyeOff></FiEyeOff> : <FiEye></FiEye>}</span>
                         </div>
                         <p className="text-[14px] ">
                             Do not have an account ?{' '}
