@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { sendEmailVerification, signOut, updateProfile } from 'firebase/auth';
 import auth from '../../Firebase/firebase.config';
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import axios from 'axios';
 
 const SignUp = () => {
 
@@ -23,17 +24,31 @@ const SignUp = () => {
 
     // let from = location?.state?.from?.pathname || "/";
 
+    //image hosting key & api
+    const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+    const image_hosting_api = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
+
+
     //handle submit
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const toastId = toast.loading("sign up ...");
         const forms = e.target;
         const email = forms.email.value;
         const name = forms.name.value;
-        const photo = forms.photo.value;
+        const photo = forms.photo.files[0];
         const password = forms.password.value;
         const address = forms.address.value;
+
+        // image upload functionality
+        const imageFile = { image: photo };
+        // console.log(imageFile);
+        const res = await axios.post(image_hosting_api, imageFile, {
+            headers: { "content-Type": "multipart/form-data" },
+        });
+
+
 
         //console.log(email, name, photo, password);
         //signup functionality
@@ -45,7 +60,7 @@ const SignUp = () => {
                 //updateprofile
                 updateProfile(user, {
                     displayName: name,
-                    photoURL: photo,
+                    photoURL: res?.data?.data?.display_url || "https://i.ibb.co.com/TM6jBG7h/user-photo.jpg",
                 });
 
                 //send to database user information
@@ -174,7 +189,7 @@ const SignUp = () => {
                                     id="password_"
                                     placeholder="password"
                                     name="password"
-                                     type={`${showPassword ? 'text' : 'password'}`}
+                                    type={`${showPassword ? 'text' : 'password'}`}
                                 />
                                 <span onClick={() => setShowPassword(!showPassword)} className="absolute top-[35%] right-2 cursor-pointer">{showPassword ? <FiEyeOff></FiEyeOff> : <FiEye></FiEye>}</span>
                             </div>
