@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import faq from "../../assets/faq.png"
+
 const FAQ = () => {
     const dataArr = [
         {
@@ -28,7 +28,7 @@ const FAQ = () => {
     return (
         <div className='flex flex-col-reverse lg:flex-row-reverse gap-10 items-center justify-center'>
             <div className=''>
-                <img src={faq} alt="faq image" />
+                <img src='https://i.ibb.co.com/TxPxpPbm/faq.png' alt="faq image" />
             </div>
             <div className=" cursor-pointer space-y-6 mt-10">
                 {dataArr.map((data, idx) => (
