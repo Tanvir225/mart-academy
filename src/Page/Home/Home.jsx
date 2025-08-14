@@ -9,7 +9,10 @@ import Success_Story from '../../Component/Home/Success_Story';
 import Marquee from "react-fast-marquee";
 import { Helmet } from 'react-helmet-async';
 
+import banner_data from '../../../public/banner.json'; // Assuming you have a banner.json file in public
+
 const Home = () => {
+
     return (
         <div>
 
@@ -43,12 +46,21 @@ const Home = () => {
 
             {/* end meta */}
 
-            <section className='flex flex-col items-center justify-center mt-24'>
-                <Title title="Learn a Programming Language"></Title>
-                <SubTitle title="The Gateway to Endless Innovation Get Started">
-                </SubTitle>
-                <Banner></Banner>
-            </section>
+            {/* Banner Section */}
+            {
+
+                banner_data.length > 0 && banner_data.map((banner, index) => (
+                    <section key={index} className='flex flex-col items-center justify-center mt-24'>
+                        <Title title={banner.title}></Title>
+                        <SubTitle title={banner.subtitle}>
+                        </SubTitle>
+                        <Banner img={banner.image}></Banner>
+                    </section>
+                )
+                )
+
+            }
+
             <section className='my-10'>
                 <Title title="Our Courses"></Title>
 

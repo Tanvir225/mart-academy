@@ -4,20 +4,24 @@ import { useState } from 'react';
 const FAQ = () => {
     const dataArr = [
         {
-            title: 'How do I create an account?',
-            description: 'To create an account, click on the "Sign Up" button and fill out the required information. Once done, you can enjoy the benefits of being a registered member.'
+            "title": "What courses are available at Mart Academy?",
+            "description": "We offer online courses in Computer Basics, Graphics Design, Web Development, and ICT. All courses are designed for beginners and intermediate learners."
         },
         {
-            title: 'What is your return policy?',
-            description: 'Our return policy allows you to return items within 30 days of purchase. Please visit our returns page for detailed instructions and to initiate a return.'
+            "title": "Do I need prior experience to join?",
+            "description": "No prior experience is required. Our Computer Basics course starts from zero and gradually progresses to advanced topics."
         },
         {
-            title: 'Can I change my shipping address?',
-            description: 'Yes, you can change your shipping address before your order is shipped. Go to your account settings and update the shipping information accordingly.'
+            "title": "How can I enroll in a course?",
+            "description": "Sign up on our website, select the course you want, and complete the registration process. You will then get instant access to the course materials."
         },
         {
-            title: 'Are there any discounts for loyal customers?',
-            description: 'We appreciate our loyal customers! Stay tuned for exclusive discounts, promotions, and special offers available to members of our loyalty program.'
+            "title": "Can I win a prize by participating in Mart Academy contests?",
+            "description": "Yes! We regularly organize contests related to our courses. If you win, you can earn exciting prize money and certificates."
+        },
+        {
+            "title": "Is there any support if I face difficulties during the course?",
+            "description": "Absolutely! Our instructors and support team are available to help you with any course-related questions or technical issues."
         }
     ];
 

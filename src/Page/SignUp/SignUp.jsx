@@ -6,7 +6,8 @@ import toast from 'react-hot-toast';
 import { sendEmailVerification, signOut, updateProfile } from 'firebase/auth';
 import auth from '../../Firebase/firebase.config';
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import axios from 'axios';
+import usePublicAxios from '../../Hook/usePublicAxios';
+
 
 const SignUp = () => {
 
@@ -15,7 +16,7 @@ const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     //useAxios hook
-    // const axios = usePublicAxios();
+    const axios = usePublicAxios();
 
     //navigate
     const navigate = useNavigate();

@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
     return (
-        <div>
+        <div className="">
             <Helmet>
                 <title>Page Not Found - Mart Academy</title>
                 <meta name="description" content="The page you are looking for doesn't exist. Explore Mart Academy's Computer Basics, Graphics, Web, and ICT courses." />
             </Helmet>
 
-            <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 px-4">
-                <h1 className="text-9xl font-extrabold text-indigo-600">404</h1>
-                <h2 className="mt-4 text-2xl md:text-3xl font-bold text-gray-800">
+            <div className="min-h-screen flex flex-col items-center justify-center bg-black-50 px-4">
+                <h1 className="text-9xl font-extrabold text-teal-200">404</h1>
+                <h2 className="mt-4 text-2xl md:text-3xl font-bold text-teal-300">
                     Oops! Page not found
                 </h2>
-                <p className="mt-2 text-gray-600 text-center max-w-md">
+                <p className="mt-2 text-gray-300 text-center max-w-md animate-pulse">
                     The page you are looking for doesn't exist or has been moved.
                     Let’s get you back to learning digital skills.
                 </p>
