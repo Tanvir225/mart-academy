@@ -27,7 +27,7 @@ const Course = () => {
                 </div>
                 <div className="flex flex-wrap items-center justify-between">
                     <div className="space-y-1">
-                        <p className="text-sm text-gray-500 dark:text-teal-300">Duration</p>
+                        <p className="text-sm text-teal-300">Duration</p>
                         <div className="text-center">
                             <CountUp
                                 end={2}
@@ -35,14 +35,14 @@ const Course = () => {
                                 enableScrollSpy={true}
                                 scrollSpyOnce={false}
                                 scrollSpyDelay={200} // delay in ms
-                                className="text-2xl tracking-wider text-gray-700 lg:text-3xl dark:text-white/80"
+                                className="text-2xl tracking-wider  lg:text-3xl text-white/80"
                             />
                             <br />
                             <span className="text-xs">months</span>
                         </div>
                     </div>
                     <div className="space-y-1">
-                        <p className="text-sm text-gray-500 dark:text-teal-300">Modules</p>
+                        <p className="text-sm text-teal-300">Modules</p>
                         <div className="text-center">
                             <CountUp
                                 end={20}
@@ -50,14 +50,14 @@ const Course = () => {
                                 enableScrollSpy={true}
                                 scrollSpyOnce={false}
                                 scrollSpyDelay={200} // delay in ms
-                                className="text-2xl tracking-wider text-gray-700 lg:text-3xl dark:text-white/80"
+                                className="text-2xl tracking-wider  lg:text-3xl text-white/80"
                             />
                             <br />
                             <span className="text-xs">modules</span>
                         </div>
                     </div>
                     <div className="space-y-1">
-                        <p className="text-sm text-gray-500 dark:text-teal-300">Projects</p>
+                        <p className="text-sm text-teal-300">Projects</p>
                         <div className="text-center">
                             <CountUp
                                 end={10}
@@ -65,7 +65,7 @@ const Course = () => {
                                 enableScrollSpy={true}
                                 scrollSpyOnce={false}
                                 scrollSpyDelay={200} // delay in ms
-                                className="text-2xl tracking-wider text-gray-700 lg:text-3xl dark:text-white/80"
+                                className="text-2xl tracking-wider  lg:text-3xl text-white/80"
                             />
                             <br />
                             <span className="text-xs">live</span>
