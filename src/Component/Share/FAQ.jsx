@@ -1,30 +1,8 @@
 
 import { useState } from 'react';
 
-const FAQ = () => {
-    const dataArr = [
-        {
-            "title": "What courses are available at Mart Academy?",
-            "description": "We offer online courses in Computer Basics, Graphics Design, Web Development, and ICT. All courses are designed for beginners and intermediate learners."
-        },
-        {
-            "title": "Do I need prior experience to join?",
-            "description": "No prior experience is required. Our Computer Basics course starts from zero and gradually progresses to advanced topics."
-        },
-        {
-            "title": "How can I enroll in a course?",
-            "description": "Sign up on our website, select the course you want, and complete the registration process. You will then get instant access to the course materials."
-        },
-        {
-            "title": "Can I win a prize by participating in Mart Academy contests?",
-            "description": "Yes! We regularly organize contests related to our courses. If you win, you can earn exciting prize money and certificates."
-        },
-        {
-            "title": "Is there any support if I face difficulties during the course?",
-            "description": "Absolutely! Our instructors and support team are available to help you with any course-related questions or technical issues."
-        }
-    ];
-
+const FAQ = ({faqs}) => {
+    
     const [isOpen, setIsOpen] = useState(null);
     const handleToggle = (idx) => {
         setIsOpen((prevIdx) => (prevIdx === idx ? null : idx));
@@ -35,7 +13,7 @@ const FAQ = () => {
                 <img src='https://i.ibb.co.com/TxPxpPbm/faq.png' alt="faq image" />
             </div>
             <div className=" cursor-pointer space-y-6 mt-10">
-                {dataArr.map((data, idx) => (
+                {faqs?.map((data, idx) => (
                     <div key={idx} onClick={() => handleToggle(idx)} className="flex items-center">
                         {/* the index div  */}
                         <div className="flex  p-3  select-none items-center justify-center rounded-md bg-zinc-700 text-2xl font-semibold text-white">

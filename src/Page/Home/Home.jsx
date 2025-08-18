@@ -8,11 +8,24 @@ import FAQ from '../../Component/Share/FAQ';
 import Success_Story from '../../Component/Home/Success_Story';
 import Marquee from "react-fast-marquee";
 import { Helmet } from 'react-helmet-async';
+import useBanner from '../../Hook/useBanner';
+import Loading from '../../Component/Share/Loading';
+import useFaq from '../../Hook/useFaq';
 
-import banner_data from '../../../public/banner.json'; // Assuming you have a banner.json file in public
 
 const Home = () => {
 
+    // hook for  data
+    const [banner_data, isLoading] = useBanner();
+    const [faq_data,faqLoading] = useFaq();
+
+
+
+    //loading spinner
+    if (isLoading || faqLoading) {
+        return <Loading></Loading>
+    }
+    
     return (
         <div>
 
@@ -49,7 +62,7 @@ const Home = () => {
             {/* Banner Section */}
             {
 
-                banner_data.length > 0 && banner_data.map((banner, index) => (
+                banner_data?.map((banner, index) => (
                     <section key={index} className='flex flex-col items-center justify-center mt-24'>
                         <Title title={banner.title}></Title>
                         <SubTitle title={banner.subtitle}>
@@ -104,7 +117,7 @@ const Home = () => {
             </section>
             <section className='my-16'>
                 <Title title="FAQ"></Title>
-                <FAQ></FAQ>
+                <FAQ faqs={faq_data}></FAQ>
             </section>
         </div>
     );
