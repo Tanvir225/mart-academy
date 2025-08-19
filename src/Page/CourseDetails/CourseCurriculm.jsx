@@ -9,34 +9,34 @@ const CourseCurriculm = () => {
             </div>
             <div className=" w-full text-white relative h-96 overflow-y-auto p-3">
 
-                <div className="bg-gray-900 hover:text-teal-200 p-5 rounded-lg  w-full ">
-                    <h2 className="text-lg font-semibold">Module 1: Introduction to Computers</h2>
+                <div className="bg-gray-900 hover:text-teal-200 p-5 rounded-lg  w-full">
+                    <h2 className=" font-semibold">Module 1: Introduction to Computers</h2>
+                    <p className="text-sm text-gray-400 mt-1">This module covers the basics of computer hardware and software, including</p>
+                </div>
+
+                <div className="bg-gray-900 hover:text-teal-200 p-5 rounded-lg  w-full  mt-5">
+                    <h2 className=" font-semibold">Module 2: Microsoft Office Suite</h2>
 
                 </div>
 
                 <div className="bg-gray-900 hover:text-teal-200 p-5 rounded-lg  w-full  mt-5">
-                    <h2 className="text-lg font-semibold">Module 2: Microsoft Office Suite</h2>
-
-                </div>
-
-                <div className="bg-gray-900 hover:text-teal-200 p-5 rounded-lg  w-full  mt-5">
-                    <h2 className="text-lg font-semibold">Module 3: Internet and Online Tools</h2>
+                    <h2 className=" font-semibold">Module 3: Internet and Online Tools</h2>
 
                 </div>
                 <div className="bg-gray-900 hover:text-teal-200 p-5 rounded-lg  w-full  mt-5">
-                    <h2 className="text-lg font-semibold">Module 4: Practical Applications</h2>
+                    <h2 className=" font-semibold">Module 4: Practical Applications</h2>
 
                 </div>
                 <div className="bg-gray-900 hover:text-teal-200 p-5 rounded-lg  w-full  mt-5">
-                    <h2 className="text-lg font-semibold">Module 4: Practical Applications</h2>
+                    <h2 className=" font-semibold">Module 4: Practical Applications</h2>
 
                 </div>
                 <div className="bg-gray-900 hover:text-teal-200 p-5 rounded-lg  w-full  mt-5">
-                    <h2 className="text-lg font-semibold">Module 4: Practical Applications</h2>
+                    <h2 className=" font-semibold">Module 4: Practical Applications</h2>
 
                 </div>
                 <div className="bg-gray-900 hover:text-teal-200 p-5 rounded-lg  w-full  mt-5">
-                    <h2 className="text-lg font-semibold">Module 4: Practical Applications</h2>
+                    <h2 className=" font-semibold">Module 4: Practical Applications</h2>
 
                 </div>
             </div>

@@ -8,9 +8,8 @@ const CourseNotification = () => {
             <div className="">
                 <Link to={-1} className="btn btn-sm bg-teal-200 text-black">back</Link>
             </div>
-            <div className="relative cursor-pointer">
-                <IoIosNotificationsOutline size={30}></IoIosNotificationsOutline>
-                <span className="badge badge-warning badge-dash badge-sm absolute bottom-5 left-5">2</span>
+            <div className="">
+                <Link to={''} className="btn btn-sm bg-green-200 text-black font-light">game</Link>
             </div>
         </section>
     );

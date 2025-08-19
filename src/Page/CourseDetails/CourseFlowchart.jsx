@@ -22,43 +22,43 @@ const CourseFlowchart = () => {
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
                     <RiLiveLine size={30} className="text-amber-300"></RiLiveLine >
                     <h2 className="text-lg font-semibold">Module Release time</h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Access new modules as they are released.</p>
                 </div>
 
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
                     <BiVideoRecording deal size={40} className=""></BiVideoRecording   >
                     <h2 className="text-lg font-semibold">Watch Recorded Class more and more</h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Review recorded sessions anytime for better understanding.</p>
                 </div>
 
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
                     <FaSearch deal size={30} className="text-green-400"></FaSearch   >
                     <h2 className="text-lg font-semibold">Similar topic online search</h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Explore additional resources online to strengthen knowledge.</p>
                 </div>
 
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
                     <MdOutlineSupportAgent size={40} className="text-yellow-400"></MdOutlineSupportAgent >
                     <h2 className="text-lg font-semibold">Live Support <span className="text-[12px] text-teal-200 font-light">Tell us your problem</span></h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Get real-time help and ask questions to instructors.</p>
                 </div>
 
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
                     <MdOutlineAssignment  size={40} className="text-yellow-100"></MdOutlineAssignment  >
                     <h2 className="text-lg font-semibold">Submit Assignment </h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Complete and submit assignments for each module.</p>
                 </div>
 
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
                     <LiaFantasyFlightGames  size={40} className="text-green-300"></LiaFantasyFlightGames>
                     <h2 className="text-lg font-semibold">Join contest <span className="text-teal-200 text-sm font-light">get prize money</span> </h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Participate in contests based on exercises and win rewards.</p>
                 </div>
 
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
                     <GrCertificate  size={40}></GrCertificate >
                     <h2 className="text-lg font-semibold">Certification </h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Earn a certificate upon completing all modules and projects.</p>
                 </div>
 
 

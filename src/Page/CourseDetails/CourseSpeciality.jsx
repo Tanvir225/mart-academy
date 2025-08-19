@@ -17,37 +17,37 @@ const CourseSpeciality = () => {
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">
                     <RiLiveLine size={30} className="text-amber-300"></RiLiveLine >
                     <h2 className="text-lg font-semibold">Live Class</h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Interactive sessions covering all modules.</p>
                 </section>
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">
                     <HiOutlineLightBulb deal size={40} color="yellow"></HiOutlineLightBulb  >
-                    <h2 className="text-lg font-semibold">10 +  project</h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <h2 className="text-lg font-semibold">14 +  project</h2>
+                    <p className="text-sm">Hands-on projects in Word, Excel, PowerPoint, Google Sheets, and Canva.</p>
                 </section>
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">
                     <MdOutlineAssignment deal size={40} className="text-yellow-100"></MdOutlineAssignment  >
-                    <h2 className="text-lg font-semibold">8 +  Assignment</h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <h2 className="text-lg font-semibold">10 +  Assignment</h2>
+                    <p className="text-sm">Module-based exercises to practice key skills.</p>
                 </section>
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">
                     <BiVideoRecording deal size={40} className=""></BiVideoRecording   >
                     <h2 className="text-lg font-semibold">Recorded Class</h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Access recordings of all live sessions anytime.</p>
                 </section>
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">
                     <LiaFantasyFlightGames deal size={40} className="text-green-300"></LiaFantasyFlightGames>
                     <h2 className="text-lg font-semibold">Join Contest Get <span className="bg-teal-200 text-black p-1 rounded-xl">Money</span></h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Mini-contests based on exercises to win rewards.</p>
                 </section>
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">
                     <MdOutlineSupportAgent size={40} className="text-yellow-400"></MdOutlineSupportAgent >
                     <h2 className="text-lg font-semibold">Live Support</h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Real-time help from instructors when needed.</p>
                 </section>
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">
                     <GrCertificate deal size={40}></GrCertificate >
                     <h2 className="text-lg font-semibold">Certification </h2>
-                    <p className="text-sm">Interactive live sessions with experienced instructors.</p>
+                    <p className="text-sm">Receive a certificate after completing all modules and projects.</p>
                 </section>
             </div>
         </section>

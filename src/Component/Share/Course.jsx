@@ -4,24 +4,22 @@ import { Link } from 'react-router-dom';
 
 
 
-const Course = () => {
-
-
+const Course = ({course}) => {
 
     return (
         <div data-aos="fade-up" className="flex flex-col items-center justify-center w-full md:flex-row ">
             <div className="group relative w-full">
                 <img
                     className="h-64 w-full object-cover transform rounded-lg bg-black/70"
-                    src={courseImage}
-                    alt="Course"
+                    src={course?.thumbnail || courseImage}
+                    alt={course?.title || "Course Thumbnail"}
                 />
 
 
             </div>
             <div className="w-full h-70 overflow-y-auto space-y-4 rounded-br-lg rounded-tr-lg  p-6 text-center shadow-[0px_7px_30px_2px_rgba(100,100,111,0.2)] bg-[#18181B]">
                 <div className="space-y-1 ">
-                    <h2 className="text-center  font-medium text-lg ">Wordpress Web development</h2>
+                    <h2 className="text-center  font-medium text-lg ">{course?.title}</h2>
                     <p className="text-xs">Mart <span className='text-teal-300'>Academy</span></p>
 
                 </div>
@@ -30,7 +28,7 @@ const Course = () => {
                         <p className="text-sm text-teal-300">Duration</p>
                         <div className="text-center">
                             <CountUp
-                                end={2}
+                                end={course?.summary?.duration}
                                 duration={2}
                                 enableScrollSpy={true}
                                 scrollSpyOnce={false}
@@ -45,7 +43,7 @@ const Course = () => {
                         <p className="text-sm text-teal-300">Modules</p>
                         <div className="text-center">
                             <CountUp
-                                end={20}
+                                end={course?.summary?.modules}
                                 duration={2}
                                 enableScrollSpy={true}
                                 scrollSpyOnce={false}
@@ -60,7 +58,7 @@ const Course = () => {
                         <p className="text-sm text-teal-300">Projects</p>
                         <div className="text-center">
                             <CountUp
-                                end={10}
+                                end={course?.summary?.projects}
                                 duration={2}
                                 enableScrollSpy={true}
                                 scrollSpyOnce={false}
@@ -73,7 +71,7 @@ const Course = () => {
                     </div>
                 </div>
                 <div className='w-full flex flex-row items-center justify-center gap-5'>
-                    <Link to={`/course/${1}`} className="btn button Link">
+                    <Link to={`/course/${course?._id}`} className="btn button Link">
                         View Details
                     </Link>
 

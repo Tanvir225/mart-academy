@@ -11,18 +11,20 @@ import { Helmet } from 'react-helmet-async';
 import useBanner from '../../Hook/useBanner';
 import Loading from '../../Component/Share/Loading';
 import useFaq from '../../Hook/useFaq';
+import useCourses from '../../Hook/useCourses';
 
 
 const Home = () => {
 
     // hook for  data
     const [banner_data, isLoading] = useBanner();
-    const [faq_data,faqLoading] = useFaq();
+    const [faq_data] = useFaq();
+    const [courses] = useCourses();
 
 
 
     //loading spinner
-    if (isLoading || faqLoading) {
+    if (isLoading) {
         return <Loading></Loading>
     }
     
@@ -78,10 +80,9 @@ const Home = () => {
                 <Title title="Our Courses"></Title>
 
                 <div className='grid mt-7 grid-cols-1  md:grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16'>
-                    <Course></Course>
-                    <Course></Course>
-                    <Course></Course>
-                    <Course></Course>
+                    {
+                        courses?.map((course, index) => <Course key={index} course={course}></Course>)
+                    }
                 </div>
             </section>
 
