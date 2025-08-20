@@ -39,7 +39,7 @@ const CourseDetails = () => {
             <section>
                 <CourseDetailsHero courseDetails={courseDetails}></CourseDetailsHero>
                 <CourseIntro courseDetails={courseDetails}></CourseIntro>
-                <CourseCurriculm></CourseCurriculm>
+                <CourseCurriculm courseDetails={courseDetails}></CourseCurriculm>
                 <CourseSpeciality></CourseSpeciality>
                 <CourseFlowchart></CourseFlowchart>
             </section>

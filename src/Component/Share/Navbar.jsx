@@ -83,16 +83,13 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <div className="flex items-center justify-center gap-7 z-20">
+            <div className="flex space-x-5  z-20">
 
-                <div className="relative cursor-pointer" onClick={() => setClickNotification(!clickNotification)}>
-                    <IoIosNotificationsOutline size={30}></IoIosNotificationsOutline>
-                    <span className="badge badge-warning badge-dash badge-sm absolute bottom-5 left-5">2</span>
-                </div>
+
 
                 {/* notification area */}
                 {clickNotification && (
-                    <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-3 w-64 z-20">
+                    <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-4 w-64 z-20">
                         <h3 className="text-black text-base border-b-2 pb-1 ">Notifications</h3>
                         <ul className="space-y-2 mt-1">
                             <li className="text-sm text-gray-700">New course available: <span className="font-bold">React Basics</span></li>
@@ -116,34 +113,41 @@ const Navbar = () => {
 
                 {
                     user ? (
-                        <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full z-20">
-                                    <img
-                                        alt={`${user?.displayName || "User's avatar"}`}
-                                        src={`${user?.photoURL}`} />
-                                </div>
+                        <div className="flex items-center gap-7 justify-center relative ">
+                            <div className="relative cursor-pointer" onClick={() => setClickNotification(!clickNotification)}>
+                                <IoIosNotificationsOutline size={30}></IoIosNotificationsOutline>
+                                <span className="badge badge-warning badge-dash badge-sm absolute bottom-5 left-5">2</span>
                             </div>
-                            <ul
-                                tabIndex={0}
-                                className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                                <li>
-                                    <a className="justify-between">
-                                        {user?.displayName || "Xino"}
-                                        <span className="badge">S</span>
-                                    </a>
-                                </li>
-                                <li className="hidden md:block"><Link to={"/profile"}>profile</Link></li>
-                                <li>
-                                    <Link
 
-                                        onClick={handleLogOut}
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full z-20">
+                                        <img
+                                            alt={`${user?.displayName || "User's avatar"}`}
+                                            src={`${user?.photoURL}`} />
+                                    </div>
+                                </div>
+                                <ul
+                                    tabIndex={0}
+                                    className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                                    <li>
+                                        <a className="justify-between">
+                                            {user?.displayName || "Xino"}
+                                            <span className="badge">S</span>
+                                        </a>
+                                    </li>
+                                    <li className="hidden md:block"><Link to={"/profile"}>profile</Link></li>
+                                    <li>
+                                        <Link
 
-                                    >
-                                        Logout
-                                    </Link>
-                                </li>
-                            </ul>
+                                            onClick={handleLogOut}
+
+                                        >
+                                            Logout
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     )
                         :

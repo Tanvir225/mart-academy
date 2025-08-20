@@ -89,9 +89,7 @@ const Home = () => {
             <section className='my-16'>
                 <Title title="Course_Overview"></Title>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-16'>
-                    <Timeline></Timeline>
-                    <Timeline></Timeline>
-                    <Timeline></Timeline>
+                    <Timeline courses={courses}></Timeline>
                 </div>
             </section>
             <section className='my-16'>
