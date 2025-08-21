@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hook/useAuth';
-// import usePublicAxios from '../../Hook/usePublicAxios';
+import usePublicAxios from '../../Hook/usePublicAxios';
 import toast from 'react-hot-toast';
 import { sendEmailVerification, signOut, updateProfile } from 'firebase/auth';
 import auth from '../../Firebase/firebase.config';
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import usePublicAxios from '../../Hook/usePublicAxios';
-
+import { v4 as uuidv4 } from 'uuid';
+import axios from 'axios';
 
 const SignUp = () => {
 
@@ -16,7 +16,8 @@ const SignUp = () => {
     const [showPassword, setShowPassword] = useState(false);
 
     //useAxios hook
-    const axios = usePublicAxios();
+
+    const publicAxios = usePublicAxios();   
 
     //navigate
     const navigate = useNavigate();
@@ -41,6 +42,10 @@ const SignUp = () => {
         const photo = forms.photo.files[0];
         const password = forms.password.value;
         const address = forms.address.value;
+        const phone = forms.phone.value;
+
+        //student id
+        const studentId = uuidv4().slice(0, 8).toUpperCase();
 
         // image upload functionality
         const imageFile = { image: photo };
@@ -68,17 +73,20 @@ const SignUp = () => {
                 const dataUser = {
                     name: name,
                     email: email,
-                    photo: photo,
+                    photo: res?.data?.data?.display_url || "https://i.ibb.co.com/TM6jBG7h/user-photo.jpg",
                     address: address,
+                    phone: phone,
+                    studentId: studentId,
+                    role: "student",
                     logged: user?.metadata?.lastSignInTime,
                 };
 
-                console.log(dataUser);
+                // console.log(dataUser);
 
                 //api call
-                // axios.post("/users", dataUser).then((result) => {
-                //     console.log(result.data);
-                // });
+                publicAxios.post("/users", dataUser).then((result) => {
+                    console.log(result.data);
+                });
 
 
 

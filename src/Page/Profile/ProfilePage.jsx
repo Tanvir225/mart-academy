@@ -1,9 +1,21 @@
 import React, { useState } from "react";
 import { FaStar } from "react-icons/fa";
- // use your real data here
+import useUser from "../../Hook/useUser";
+import Loading from "../../Component/Share/Loading";
+// use your real data here
 
 const ProfilePage = () => {
     const [selectedCourse, setSelectedCourse] = useState(null);
+
+    //user data
+    const [userData, isLoading] = useUser();
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
+
+
+    console.log(userData);
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-6">
@@ -14,11 +26,11 @@ const ProfilePage = () => {
                 <div role="tabpanel" className="tab-content p-6">
                     <h3 className="text-xl font-semibold mb-4">Personal Data</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-white">
-                        <p><strong className="text-teal-200">Name : </strong> Tanvir Rehman</p>
-                        <p><strong className="text-teal-200">Email : </strong> tanvir@example.com</p>
-                        <p><strong>Address : </strong> Mirpur, Dhaka</p>
-                        <p><strong>Phone : </strong> 01812-122545</p>
-                        <p><strong className="text-teal-200">Student ID : </strong> STU-1001</p>
+                        <p><strong className="text-teal-200">Name : </strong> {userData?.name}</p>
+                        <p><strong className="text-teal-200">Email : </strong> {userData?.email}</p>
+                        <p><strong>Address : </strong>{userData?.address}</p>
+                        <p><strong>Phone : </strong> {userData?.phone}</p>
+                        <p><strong className="text-teal-200">Student ID : </strong>STU - {`${userData?.studentId}`}</p>
                     </div>
                 </div>
 
@@ -69,7 +81,7 @@ const ProfilePage = () => {
                         <h3 className="font-bold text-lg mb-2">Review: {selectedCourse.title}</h3>
                         <form className="space-y-4">
                             <textarea className="textarea textarea-bordered border-teal-200 focus:outline-none w-full" placeholder="Write your review..." />
-                           
+
                             <div className="modal-action">
                                 <button type="submit" className="btn button">Submit</button>
                                 <button
@@ -102,5 +114,5 @@ const courses = [
         title: "Data Science",
         description: "Master data analysis and machine learning."
     },
- 
+
 ];
