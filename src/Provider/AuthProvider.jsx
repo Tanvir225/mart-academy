@@ -51,11 +51,11 @@ const AuthProvider = ({ children }) => {
             if (currentUser) {
                 const user = { email: currentUser?.email }
                 console.log(user);
-                // setLoading(false);
-                // axios.post("/jwt", user).then((res) => {
-                //     console.log(res.data);
-                //     setLoading(false);
-                // });
+                setLoading(false);
+                axios.post("/jwt", user).then((res) => {
+                    console.log(res.data);
+                    setLoading(false);
+                });
 
             }
 
