@@ -3,10 +3,10 @@
 const Timeline = ({ courses }) => {
     // console.log(courses);
     return (
-        <div className="my-7 w-full" >
+        <div className="my-7 w-full items-center" >
             {
                 courses?.map((course, index) => (
-                    <ul key={index} className="timeline timeline-vertical " data-aos="fade-up">
+                    <ul key={index} className="timeline flex timeline-vertical " data-aos="fade-up">
                         <li>
                             <div className="timeline-start timeline-box text-[16px]">{course.title}</div>
                             <div className="timeline-middle">

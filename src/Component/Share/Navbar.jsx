@@ -5,6 +5,7 @@ import { Link, NavLink } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
 import toast from "react-hot-toast";
 import { IoIosNotificationsOutline } from "react-icons/io";
+import useAdmin from "../../Hook/useAdmin";
 
 
 const Navbar = () => {
@@ -15,6 +16,7 @@ const Navbar = () => {
 
     //HOOK 
     const { user, logoutUser } = useAuth();
+    const [isAdmin] = useAdmin();
 
     //handleLogOut
     const handleLogOut = () => {
@@ -137,6 +139,9 @@ const Navbar = () => {
                                         </a>
                                     </li>
                                     <li className="hidden md:block"><Link to={"/profile"}>profile</Link></li>
+                                    {
+                                        isAdmin && <li className="block"><Link to={"/dashboard"}>Dashboard</Link></li>
+                                    }
                                     <li>
                                         <Link
 

@@ -130,7 +130,8 @@ const Login = () => {
                     </div>
                 </div>
                 {/* form side  */}
-                <div className="flex w-full flex-col justify-center bg- py-10 lg:w-[60%] dark:bg-zinc-900">
+                <div className="flex w-full flex-col justify-center  py-7 lg:w-[60%] bg-zinc-900">
+                     <Link to={"/"} className="font-light md:hidden mx-7 w-12 border-b-2 border-teal-200 -mt-2">Back</Link >
                     <h2 className="pb-8 text-center text-3xl font-semibold tracking-tight">Sign In</h2>
                     <form onSubmit={handleLogin} className="flex w-full flex-col items-center justify-center gap-4">
                         <div className="w-full text-center">
