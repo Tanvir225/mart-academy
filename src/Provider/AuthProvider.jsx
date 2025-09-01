@@ -31,9 +31,14 @@ const AuthProvider = ({ children }) => {
 
     //logout user
     const logoutUser = async () => {
-        setLoading(true);
-        return signOut(auth);
-    }
+        try {
+            await axios.post(`${import.meta.env.VITE_API_URL}/logout`, {}, { withCredentials: true });
+            await signOut(auth);
+        } catch (error) {
+            console.error('Logout failed:', error);
+        }
+    };
+
 
     //google login
     const googleLogin = () => {

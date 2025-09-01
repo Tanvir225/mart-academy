@@ -1,7 +1,7 @@
 
 
 const Timeline = ({ courses }) => {
-    console.log(courses);
+    // console.log(courses);
     return (
         <div className="my-7 w-full" >
             {
