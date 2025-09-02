@@ -15,6 +15,7 @@ import ErrorPage from "../Component/Share/ErrorPage";
 import Dashboard from "../Layout/Dashboard";
 import DashHome from "../Page/Dashboard/DashHome";
 import AdminRoutes from "./AdminRoutes";
+import AddCourse from "../Page/Dashboard/AddCourse/AddCourse";
 
 
 const router = createBrowserRouter([
@@ -72,6 +73,11 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <AdminRoutes><DashHome></DashHome></AdminRoutes>
+
+      },
+      {
+        path: "add-course",
+        element: <AdminRoutes><AddCourse></AddCourse></AdminRoutes>
 
       },
     ]

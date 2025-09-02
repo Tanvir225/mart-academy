@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 
 //axios instance for private use
 const instance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL, // Base URL for the API
+    baseURL: import.meta.env.VITE_BASE_API_URL, // Base URL for the API
     withCredentials: true, // Include cookies in requests
 });
 

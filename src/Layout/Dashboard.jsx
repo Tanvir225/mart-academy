@@ -5,6 +5,7 @@ import elips1 from "../assets/Ellipse 1.png"
 import elips2 from "../assets/Ellipse 2.png"
 import elips3 from "../assets/Ellipse 3.png"
 import { Outlet } from "react-router-dom";
+import DashNav from "../Component/Dashboard/DashNav";
 
 
 const Dashboard = () => {
@@ -64,11 +65,11 @@ const Dashboard = () => {
             
 
             {/* Main Content */}
-            <div className="relative z-40 container mx-auto px-2 sm:px-6 lg:px-8">
-                <section className="">
-                    
+            <div className="relative z-40 container mx-auto px-2 sm:px-6 lg:p-8  grid grid-cols-12 gap-4 py-4">
+                <section className="lg:col-span-3 col-span-12 w-full border h-60 lg:h-screen rounded-lg border-teal-100 p-4 text-white">
+                    <DashNav></DashNav>
                 </section>
-                <div>
+                <div className="lg:col-span-9 col-span-12 w-full border h-screen rounded-lg border-teal-200 p-4 text-white overflow-y-auto">
                     <Outlet />
                 </div>
             </div>
