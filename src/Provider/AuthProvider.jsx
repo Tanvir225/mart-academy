@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
     //logout user
     const logoutUser = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_BASE_API_URL}/logout`, {}, { withCredentials: true });
+            await axios.post(`${import.meta.env.VITE_API_URL}/logout`, {}, { withCredentials: true });
             await signOut(auth);
         } catch (error) {
             console.error('Logout failed:', error);
