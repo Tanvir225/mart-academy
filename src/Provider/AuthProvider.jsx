@@ -48,26 +48,30 @@ const AuthProvider = ({ children }) => {
     // Handle Firebase auth state change
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-            setUser(currentUser);
-            setLoading(false);
-
-            if (currentUser) {
-                const userData = { email: currentUser.email };
-                try {
-                    const res = await axios.post("/jwt", userData);
-                    // Store JWT in localStorage
-                    localStorage.setItem("accessToken", res.data.token);
-                } catch (err) {
-                    console.error("JWT fetch failed:", err);
-                }
-            } else {
-                // User logged out
+            if (!currentUser) {
+                setUser(null);
+                setLoading(false);
                 localStorage.removeItem("accessToken");
+                return;
+            }
+
+            try {
+                const userData = { email: currentUser.email };
+                const res = await axios.post("/jwt", userData);
+                localStorage.setItem("accessToken", res.data.token);
+                setUser(currentUser);
+            } catch (err) {
+                console.error("JWT fetch failed:", err);
+                setUser(null);
+                localStorage.removeItem("accessToken");
+            } finally {
+                setLoading(false);
             }
         });
 
         return () => unsubscribe();
     }, [axios]);
+
 
     const authInfo = {
         user,
