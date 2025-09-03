@@ -16,7 +16,7 @@ const Navbar = () => {
 
     //HOOK 
     const { user, logoutUser } = useAuth();
-    const [isAdmin] = useAdmin();
+    const {isAdmin} = useAdmin();
 
     //handleLogOut
     const handleLogOut = () => {

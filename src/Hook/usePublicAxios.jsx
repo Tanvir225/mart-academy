@@ -1,9 +1,9 @@
 import axios from "axios";
 
 const instance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL, // Base URL for the API
-    withCredentials: true,
+    baseURL: import.meta.env.VITE_API_URL,
 });
+
 
 const usePublicAxios = () => {
     return instance;

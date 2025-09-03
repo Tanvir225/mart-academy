@@ -48,27 +48,23 @@ const AuthProvider = ({ children }) => {
 
     //useEffect to handle user state change
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
             setUser(currentUser);
             setLoading(false);
-            console.log("current user", currentUser);
 
             if (currentUser) {
-                const user = { email: currentUser?.email }
-                console.log(user);
-                setLoading(false);
-                axios.post("/jwt", user).then((res) => {
-                    console.log(res.data);
-                    setLoading(false);
-                });
-
+                const userData = { email: currentUser.email };
+                try {
+                    const res = await axios.post("/jwt", userData);
+                    localStorage.setItem("accessToken", res.data.token);
+                } catch (err) {
+                    console.error("JWT fetch failed", err);
+                }
             }
-
         });
-
         return () => unsubscribe();
+    }, [axios]);
 
-    }, [user, axios]);
 
     const authInfo = {
         // You can add authentication related methods and states here

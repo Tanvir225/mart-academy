@@ -3,49 +3,50 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
-
-//axios instance for private use
+// Create axios instance for private API calls
 const instance = axios.create({
-    baseURL: import.meta.env.VITE_API_URL, // Base URL for the API
-    withCredentials: true, // Include cookies in requests
+    baseURL: import.meta.env.VITE_API_URL,
+    // withCredentials is not needed if using Authorization header
 });
 
 const useAxios = () => {
-
-    //user information
     const { logoutUser } = useAuth();
-
     const navigate = useNavigate();
 
-    //interceptors for handling responses
-    instance.interceptors.response.use(
-        (response) => {
-            // If the response is successful, return it
-            return response;
+    // Attach JWT token to every request
+    instance.interceptors.request.use(
+        (config) => {
+            const token = localStorage.getItem("accessToken"); // JWT stored after login
+            if (token) {
+                config.headers.Authorization = `Bearer ${token}`;
+            }
+            return config;
         },
+        (error) => Promise.reject(error)
+    );
+
+    // Handle responses globally
+    instance.interceptors.response.use(
+        (response) => response, // Return response if successful
         async (error) => {
-            // If the error status is 401, log out the user and redirect to login
-            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
-                try {
-                    await logoutUser();
+            if (error.response) {
+                const status = error.response.status;
+
+                // Handle unauthorized or forbidden
+                if (status === 401 || status === 403) {
+                    toast.error("Session expired. Logging out...");
+                    try {
+                        await logoutUser(); // Clear user and tokens
+                    } catch (err) {
+                        console.error("Logout failed:", err);
+                    }
+                    localStorage.removeItem("accessToken");
                     navigate("/login");
-                } catch (error) {
-                    console.error("Error during logout:", error);
-                    toast.error("Failed to log out. Please try again.");
                 }
             }
-
-            // If the error status is 403, log out the user and redirect to login
-            if (error.response && error.response.status === 403) {
-                logoutUser();
-                navigate("/login");
-            }
-            // Reject the promise with the error
             return Promise.reject(error);
         }
     );
-
-
 
     return instance;
 };
