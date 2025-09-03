@@ -14,9 +14,7 @@ const useAdmin = () => {
         enabled: !!user && !loading,
         queryKey: ["admin", user?.email],
         queryFn: async () => {
-            const result = await axios.get(`admin/${user?.email}`, {
-                withCredentials: true, // 👈 ensure cookies are sent
-            });
+            const result = await axios.get(`admin/${user?.email}`);
             return result?.data?.isAdmin;
         },
     });

@@ -25,7 +25,7 @@ const useAxios = () => {
         },
         async (error) => {
             // If the error status is 401, log out the user and redirect to login
-            if (error.response && error.response.status === 401 || error.response && error.response.status === 403) {
+            if (error.response && (error.response.status === 401 || error.response.status === 403)) {
                 try {
                     await logoutUser();
                     navigate("/login");
@@ -34,6 +34,7 @@ const useAxios = () => {
                     toast.error("Failed to log out. Please try again.");
                 }
             }
+
             // If the error status is 403, log out the user and redirect to login
             if (error.response && error.response.status === 403) {
                 logoutUser();
