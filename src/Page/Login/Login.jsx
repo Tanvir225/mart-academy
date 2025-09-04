@@ -1,12 +1,14 @@
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hook/useAuth";
-// import usePublicAxios from "../../Hook/usePublicAxios";
 import toast from "react-hot-toast";
 import { sendPasswordResetEmail, signOut } from "firebase/auth";
 import auth from "../../Firebase/firebase.config";
 import { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { v4 as uuidv4 } from 'uuid';
+import usePublicAxios from "../../Hook/usePublicAxios";
+
 
 const Login = () => {
 
@@ -14,11 +16,12 @@ const Login = () => {
     const { loginUser, googleLogin } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
 
-    //axios hook
-    // const axios = usePublicAxios();
 
     //navigation
     const navigate = useNavigate();
+
+    //axios 
+    const axios = usePublicAxios()
 
     //location
     const location = useLocation();
@@ -54,6 +57,9 @@ const Login = () => {
         }
     };
 
+    //student id
+    const studentId = uuidv4().slice(0, 8).toUpperCase();
+
 
     //sign in with google
     const handleMedia = (media) => {
@@ -65,26 +71,28 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 toast.success("signed in", { id: toastId });
-                //redirect to the previous page
-                navigate(from, { replace: true });
+
 
                 // //send to database user information
-                // const dataUser = {
-                //     name: user?.displayName,
-                //     email: user?.email,
-                //     photo: user?.photoURL,
-                //     logged: user?.metadata?.lastSignInTime,
-                // };
+                const dataUser = {
+                    name: user?.displayName,
+                    email: user?.email,
+                    photo: user?.photoURL,
+                    logged: user?.metadata?.lastSignInTime,
+                    studentId: studentId,
+                    role: "student",
+                };
 
-                // //api call
-                // axios.post("/users", dataUser).then((result) => {
-                //     console.log(result.data);
+                //api call
+                axios.post("/users", dataUser).then((result) => {
+                    console.log(result.data);
 
-                //     toast.success("signed in", { id: toastId });
-                //     navigate("/");
-                // });
+                    toast.success("signed in", { id: toastId });
+                    //redirect to the previous page
+                    navigate(from, { replace: true });
+                });
 
-                // //api fro update call
+                // //api for update call
                 // axios.patch(`/users/${user?.email}`, dataUser).then((result) => {
                 //     console.log(result.data);
                 // });
@@ -131,7 +139,7 @@ const Login = () => {
                 </div>
                 {/* form side  */}
                 <div className="flex w-full flex-col justify-center  py-7 lg:w-[60%] bg-zinc-900">
-                     <Link to={"/"} className="font-light md:hidden mx-7 w-12 border-b-2 border-teal-200 -mt-2">Back</Link >
+                    <Link to={"/"} className="font-light md:hidden mx-7 w-12 border-b-2 border-teal-200 -mt-2">Back</Link >
                     <h2 className="pb-8 text-center text-3xl font-semibold tracking-tight">Sign In</h2>
                     <form onSubmit={handleLogin} className="flex w-full flex-col items-center justify-center gap-4">
                         <div className="w-full text-center">

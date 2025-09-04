@@ -1,79 +1,77 @@
 import { createContext, useEffect, useState } from "react";
 import usePublicAxios from "../Hook/usePublicAxios";
-import {
-    createUserWithEmailAndPassword,
-    GoogleAuthProvider,
-    onAuthStateChanged,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    signOut
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import auth from "../Firebase/firebase.config";
+
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider();
 
+
 const AuthProvider = ({ children }) => {
+    // You can add authentication related states and methods here
+    //state
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
+    //axios hook
     const axios = usePublicAxios();
 
-    // Create user
+    //create a user
     const createUser = async (email, password) => {
         setLoading(true);
-        return createUserWithEmailAndPassword(auth, email, password);
-    };
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
 
-    // Login user
+    //login user
     const loginUser = async (email, password) => {
         setLoading(true);
         return signInWithEmailAndPassword(auth, email, password);
-    };
+    }
 
-    // Logout user
+    //logout user
     const logoutUser = async () => {
         try {
-            // Remove JWT from localStorage
-            localStorage.removeItem("accessToken");
+            await axios.post(`${import.meta.env.VITE_API_URL}/logout`);
             await signOut(auth);
         } catch (error) {
-            console.error("Logout failed:", error);
+            console.error('Logout failed:', error);
         }
     };
 
-    // Google login
-    const googleLogin = () => signInWithPopup(auth, googleProvider);
 
-    // Handle Firebase auth state change
+    //google login
+    const googleLogin = () => {
+        return signInWithPopup(auth, googleProvider)
+    }
+
+
+    //useEffect to handle user state change
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-            if (!currentUser) {
-                setUser(null);
-                setLoading(false);
-                localStorage.removeItem("accessToken");
-                return;
+            setUser(currentUser);
+            setLoading(false);
+            console.log("current user", currentUser);
+
+            if (currentUser) {
+                const user = { email: currentUser?.email }
+                console.log(user);
+                await axios.post("/jwt", user).then((res) => {
+                    console.log(res.data);
+                    setLoading(false);
+                });
+                await new Promise(resolve => setTimeout(resolve, 500));
+
             }
 
-            try {
-                const userData = { email: currentUser.email };
-                const res = await axios.post("/jwt", userData);
-                localStorage.setItem("accessToken", res.data.token);
-                setUser(currentUser);
-            } catch (err) {
-                console.error("JWT fetch failed:", err);
-                setUser(null);
-                localStorage.removeItem("accessToken");
-            } finally {
-                setLoading(false);
-            }
         });
 
         return () => unsubscribe();
-    }, [axios]);
 
+    }, [user, axios]);
 
     const authInfo = {
+        // You can add authentication related methods and states here
         user,
         loading,
         createUser,
@@ -87,6 +85,8 @@ const AuthProvider = ({ children }) => {
             {children}
         </AuthContext.Provider>
     );
+
 };
+
 
 export default AuthProvider;
