@@ -8,9 +8,7 @@ import toast from "react-hot-toast";
 const instance = axios.create({
     baseURL: import.meta.env.VITE_API_URL, // Base URL for the API
     withCredentials: true, // Include cookies in requests
-    headers: {
-        "Content-Type": "application/json",
-    }
+   
 });
 
 const useAxios = () => {

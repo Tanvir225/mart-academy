@@ -60,7 +60,7 @@ const AuthProvider = ({ children }) => {
                     console.log(res.data);
                     setLoading(false);
                 });
-                await new Promise(resolve => setTimeout(resolve, 500));
+                // await new Promise(resolve => setTimeout(resolve, 500));
 
             }
 
