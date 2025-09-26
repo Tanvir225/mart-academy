@@ -10,6 +10,8 @@ import { v4 as uuidv4 } from 'uuid';
 import usePublicAxios from "../../Hook/usePublicAxios";
 
 
+
+
 const Login = () => {
 
     //useContext
@@ -17,11 +19,14 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false);
 
 
+
     //navigation
     const navigate = useNavigate();
 
     //axios 
     const axios = usePublicAxios()
+
+
 
     //location
     const location = useLocation();
@@ -39,6 +44,7 @@ const Login = () => {
         try {
             const res = await loginUser(email, password);
             const user = res.user;
+            console.log(user?.displayName, user?.emailVerified);
 
             // ✅ Check if user email is verified
             if (!user.emailVerified) {
@@ -46,10 +52,19 @@ const Login = () => {
                 toast.error("Please verify your email before logging in", { id: toastId });
                 return;
             }
+            else {
+                axios.post("/jwt", user, { withCredentials: true }).then((res) => {
+                    console.log(res.data);
+                    if (res.data) {
+                        form.reset();
+                        toast.success("Login successful", { id: toastId });
+                        navigate(from, { replace: true });
+                    }
 
-            form.reset();
-            toast.success("Login successful", { id: toastId });
-            navigate(from, { replace: true });
+                });
+            }
+
+
 
         } catch (error) {
             console.error(error);
@@ -87,9 +102,19 @@ const Login = () => {
                 axios.post("/users", dataUser).then((result) => {
                     console.log(result.data);
 
-                    toast.success("signed in", { id: toastId });
-                    //redirect to the previous page
-                    navigate(from, { replace: true });
+                    if (result?.data) {
+                        axios.post("/jwt", user, { withCredentials: true }).then((res) => {
+                            console.log(res.data);
+                            if (res.data) {
+                                toast.success("signed in", { id: toastId });
+                                //redirect to the previous page
+                                navigate(from, { replace: true });
+                            }
+
+                        });
+                    }
+
+
                 });
 
                 // //api for update call

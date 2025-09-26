@@ -16,7 +16,10 @@ const Navbar = () => {
 
     //HOOK 
     const { user, logoutUser } = useAuth();
-    const [isAdmin] = useAdmin();
+    const [isAdmin,isPending] = useAdmin();
+    console.log(isAdmin);
+
+    isPending && <div>Loading...</div>
 
     //handleLogOut
     const handleLogOut = () => {
@@ -51,7 +54,9 @@ const Navbar = () => {
         </ul>
     )
 
-    console.log(isOpen);
+    // console.log(isOpen);
+
+    
 
     return (
         <div className="flex my-5 items-center justify-between ">

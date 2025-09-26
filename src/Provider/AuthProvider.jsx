@@ -32,7 +32,7 @@ const AuthProvider = ({ children }) => {
     //logout user
     const logoutUser = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_API_URL}/logout`);
+            await axios.post("/logout", { withCredentials: true });
             await signOut(auth);
         } catch (error) {
             console.error('Logout failed:', error);
@@ -48,7 +48,7 @@ const AuthProvider = ({ children }) => {
 
     //useEffect to handle user state change
     useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             setUser(currentUser);
             setLoading(false);
             console.log("current user", currentUser);
@@ -56,10 +56,11 @@ const AuthProvider = ({ children }) => {
             if (currentUser) {
                 const user = { email: currentUser?.email }
                 console.log(user);
-                await axios.post("/jwt", user).then((res) => {
-                    console.log(res.data);
-                    setLoading(false);
-                });
+                setLoading(false);
+                // axios.post("/jwt", user,{withCredentials:true}).then((res) => {
+                //     console.log(res.data);
+                //     setLoading(false);
+                // });
                 // await new Promise(resolve => setTimeout(resolve, 500));
 
             }
@@ -68,7 +69,7 @@ const AuthProvider = ({ children }) => {
 
         return () => unsubscribe();
 
-    }, [user, axios]);
+    }, [axios]);
 
     const authInfo = {
         // You can add authentication related methods and states here
