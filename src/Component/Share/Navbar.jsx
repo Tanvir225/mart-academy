@@ -29,6 +29,13 @@ const Navbar = () => {
         });
     };
 
+    // handleClick
+    const handleClick = ()=>{
+        if (!user) {
+            toast.error("you need to login first")
+        }
+    }
+
     const links = (
         <ul className="flex flex-col lg:flex-row justify-center items-center gap-5 space-x-0 sm:space-x-1 md:space-x-1">
             <li>
@@ -37,7 +44,7 @@ const Navbar = () => {
                 })} to={"/"}>Home</NavLink>
             </li>
             <li>
-                <NavLink to={"/courses"} style={({ isActive }) => ({
+                <NavLink onClick={handleClick} to={"/courses"} style={({ isActive }) => ({
                     color: isActive ? "#7aebeb	" : "",
                 })}>Courses</NavLink>
             </li>
