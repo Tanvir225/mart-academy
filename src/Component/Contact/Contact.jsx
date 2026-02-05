@@ -8,15 +8,15 @@ const Contact = () => {
     const sendEmail = (e) => {
         e.preventDefault();
 
-        emailjs
-            .sendForm(
-                import.meta.env.VITE_SERVICE_KEY,
-                import.meta.env.VITE_TEMPLATE_KEY,
-                form.current,
-                {
-                    publicKey: import.meta.env.VITE_EMAIL_PUBLICKEY,
-                }
-            )
+        emailjs.sendForm(
+            import.meta.env.VITE_SERVICE_KEY,
+            import.meta.env.VITE_TEMPLATE_KEY,
+            form.current,
+            {
+                publicKey: import.meta.env.VITE_EMAIL_PUBLICKEY,
+            }
+        )
+
             .then(
                 () => {
                     console.log("SUCCESS!");
@@ -75,7 +75,7 @@ const Contact = () => {
                                 type="text"
                                 name="from_name"
                                 placeholder="Enter your name"
-                                className="input input-bordered input-primary w-full focus:scale-[1.02] transition"
+                                className="input input-bordered focus:outline-none input-primary w-full focus:scale-[1.02] transition"
                                 required
                             />
                         </div>
@@ -88,7 +88,7 @@ const Contact = () => {
                                 type="email"
                                 name="from_email"
                                 placeholder="you@example.com"
-                                className="input input-bordered input-primary w-full focus:scale-[1.02] transition"
+                                className="input input-bordered input-primary w-full focus:outline-none focus:scale-[1.02] transition"
                                 required
                             />
                         </div>
@@ -99,7 +99,7 @@ const Contact = () => {
                             </label>
                             <textarea
                                 name="message"
-                                className="textarea w-full textarea-bordered textarea-primary h-28 focus:scale-[1.02] transition"
+                                className="textarea w-full textarea-bordered textarea-primary focus:outline-none h-28 focus:scale-[1.02] transition"
                                 placeholder="Type your message..."
                                 required
                             ></textarea>
