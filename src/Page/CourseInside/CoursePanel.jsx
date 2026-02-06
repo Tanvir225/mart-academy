@@ -6,6 +6,7 @@ import RecordInside from "./RecordInside";
 import ContestInside from "./ContestInside";
 import { MdOutlineAssignment } from "react-icons/md";
 import AssignmentInside from "./AssignmentInside";
+import ExamInside from "./ExamInside";
 
 
 const CoursePanel = () => {
@@ -38,6 +39,15 @@ const CoursePanel = () => {
                 </label>
                 <div className="tab-content bg-base-100 border-base-300 p-6">
                     <AssignmentInside></AssignmentInside>
+                </div>
+
+                <label className="tab text-lg ">
+                    <input type="radio" name="my_tabs_4" />
+                    <MdOutlineAssignment size={20} className="mr-2"></MdOutlineAssignment >
+                    Exam
+                </label>
+                <div className="tab-content bg-base-100 border-base-300 p-6">
+                    <ExamInside></ExamInside>
                 </div>
 
                 <label className="tab text-lg ">

@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 
 const DashNav = () => {
 
     const links = (
-        <ul className="flex flex-col justify-center items-center gap-5 ">
+        <ul className="flex flex-col justify-center items-center gap-3 ">
             <li>
                 <NavLink style={({ isActive }) => ({
                     color: isActive ? "#7aebeb	" : "",
@@ -21,16 +21,26 @@ const DashNav = () => {
                 })}>Courses</NavLink>
             </li>
             <li>
-                <NavLink to={'/about-us'} style={({ isActive }) => ({
+                <NavLink to={'batches'} style={({ isActive }) => ({
+                    color: isActive ? "#7aebeb	" : "",
+                })}>Batches</NavLink>
+            </li>
+            <li>
+                <NavLink to={'all-users'} style={({ isActive }) => ({
                     color: isActive ? "#7aebeb	" : "",
                 })}>Students</NavLink>
             </li>
+
         </ul>
     )
 
 
     return (
-        <div className="flex items-center justify-center h-full">
+        <div className="flex items-center flex-col  justify-center h-full">
+            <Link to={"/"} className="text-xs sm:text-xl md:text-xl lg:text-xl">
+                MART-<span className="text-teal-300 font-bold">ACADEMY</span>
+            </Link>
+            <p className="divider"></p>
             {
                 links
             }

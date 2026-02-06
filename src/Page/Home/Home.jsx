@@ -27,7 +27,7 @@ const Home = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
-    
+
     return (
         <div>
 
@@ -103,16 +103,13 @@ const Home = () => {
                 <Title title="Success_Story"></Title>
 
                 <Marquee className='my-10 ' speed={50} gradient={true} gradientColor='teal' gradientWidth={50} pauseOnHover={true}>
-                    <Success_Story></Success_Story>
-                    <Success_Story></Success_Story>
-                    <Success_Story></Success_Story>
-                    <Success_Story></Success_Story>
 
+                    <Success_Story></Success_Story>
 
                 </Marquee>
 
 
-
+                
             </section>
             <section className='my-16'>
                 <Title title="FAQ"></Title>

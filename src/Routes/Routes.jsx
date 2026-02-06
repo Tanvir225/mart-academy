@@ -16,6 +16,9 @@ import Dashboard from "../Layout/Dashboard";
 import DashHome from "../Page/Dashboard/DashHome";
 import AdminRoutes from "./AdminRoutes";
 import AddCourse from "../Page/Dashboard/AddCourse/AddCourse";
+import Students from "../Page/Dashboard/Students/Students";
+import Batch from "../Page/Dashboard/Batch/Batch";
+import AddBatch from "../Page/Dashboard/Batch/AddBatch";
 
 
 const router = createBrowserRouter([
@@ -78,6 +81,21 @@ const router = createBrowserRouter([
       {
         path: "add-course",
         element: <AdminRoutes><AddCourse></AddCourse></AdminRoutes>
+
+      },
+      {
+        path: "batches",
+        element: <AdminRoutes><Batch></Batch></AdminRoutes>
+
+      },
+      {
+        path: "add-batch",
+        element: <AdminRoutes><AddBatch></AddBatch></AdminRoutes>
+
+      },
+      {
+        path: "all-users",
+        element: <AdminRoutes><Students></Students></AdminRoutes>
 
       },
     ]
