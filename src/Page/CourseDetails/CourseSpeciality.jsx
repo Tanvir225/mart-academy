@@ -8,7 +8,7 @@ import { RiLiveLine } from "react-icons/ri";
 
 
 
-const CourseSpeciality = () => {
+const CourseSpeciality = ({courseDetails}) => {
     return (
         <section className=" my-10 lg:my-16 bg-no-repeat object-contain border-dotted border-b-2 pb-5 " >
             <h1 className="text-xl mt-10 lg:text-3xl font-semibold border-dotted border-b-2 pb-5 sticky top-0 bg-gray-700 p-1 rounded border-teal-200">Course <span className="bg-teal-200 px-3 p-2 rounded-xl text-black">Speciality</span></h1>
@@ -21,12 +21,12 @@ const CourseSpeciality = () => {
                 </section>
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">
                     <HiOutlineLightBulb deal size={40} color="yellow"></HiOutlineLightBulb  >
-                    <h2 className="text-lg font-semibold">14 +  project</h2>
-                    <p className="text-sm">Hands-on projects in Word, Excel, PowerPoint, Google Sheets, and Canva.</p>
+                    <h2 className="text-lg font-semibold">{courseDetails?.summary?.projects}  Projects and Assignments</h2>
+                    <p className="text-sm">Hands-on projects and assignments on {courseDetails?.skill?.map(s => s.name).join(" , ")}</p>
                 </section>
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">
                     <MdOutlineAssignment deal size={40} className="text-yellow-100"></MdOutlineAssignment  >
-                    <h2 className="text-lg font-semibold">10 +  Assignment</h2>
+                    <h2 className="text-lg font-semibold">{courseDetails?.summary?.modules}  Modules</h2>
                     <p className="text-sm">Module-based exercises to practice key skills.</p>
                 </section>
                 <section className="space-y-3 p-5 border-2 border-teal-200 rounded-lg my-5 w-full">

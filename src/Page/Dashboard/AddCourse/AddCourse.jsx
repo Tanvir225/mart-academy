@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const AddCourse = () => {
     const [course, setCourse] = useState({
@@ -80,22 +81,22 @@ const AddCourse = () => {
         e.preventDefault();
         console.log(course);
         setCourse({
-                    title: "",
-                    subtitle: "",
-                    description: "",
-                    thumbnail: "",
-                    introVideo: "",
-                    summary: {
-                        modules: 0,
-                        duration: 0,
-                        projects: 0,
-                        batchEnd: "",
-                        admissionStart: "",
-                        newBatch: "",
-                    },
-                    skill: [],
-                    modules: [],
-                });
+            title: "",
+            subtitle: "",
+            description: "",
+            thumbnail: "",
+            introVideo: "",
+            summary: {
+                modules: 0,
+                duration: 0,
+                projects: 0,
+                batchEnd: "",
+                admissionStart: "",
+                newBatch: "",
+            },
+            skill: [],
+            modules: [],
+        });
 
 
         // try {
@@ -134,7 +135,10 @@ const AddCourse = () => {
 
     return (
         <div className="max-w-3xl mx-auto p-6 shadow rounded-lg">
-            <h2 className="text-2xl font-bold mb-4">Add New Course</h2>
+            <div className="flex flex-row-reverse justify-between border-b-2 mb-5">
+                <h2 className="text-2xl font-bold mb-4">Add New Course</h2>
+                <Link to={"/dashboard/admin-courses"} className="btn btn-sm bg-teal-200 text-black font-light">Back</Link>
+            </div>
             <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Basic Info */}
                 <input

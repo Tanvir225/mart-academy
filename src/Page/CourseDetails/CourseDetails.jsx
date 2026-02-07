@@ -40,7 +40,7 @@ const CourseDetails = () => {
                 <CourseDetailsHero courseDetails={courseDetails}></CourseDetailsHero>
                 <CourseIntro courseDetails={courseDetails}></CourseIntro>
                 <CourseCurriculm courseDetails={courseDetails}></CourseCurriculm>
-                <CourseSpeciality></CourseSpeciality>
+                <CourseSpeciality courseDetails={courseDetails}></CourseSpeciality>
                 <CourseFlowchart></CourseFlowchart>
             </section>
         </div>

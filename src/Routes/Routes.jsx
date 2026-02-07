@@ -19,6 +19,8 @@ import AddCourse from "../Page/Dashboard/AddCourse/AddCourse";
 import Students from "../Page/Dashboard/Students/Students";
 import Batch from "../Page/Dashboard/Batch/Batch";
 import AddBatch from "../Page/Dashboard/Batch/AddBatch";
+import AdminCourses from "../Page/Dashboard/AdminCourses/AdminCourses";
+
 
 
 const router = createBrowserRouter([
@@ -83,6 +85,12 @@ const router = createBrowserRouter([
         element: <AdminRoutes><AddCourse></AddCourse></AdminRoutes>
 
       },
+      {
+        path: "admin-courses",
+        element: <AdminRoutes><AdminCourses></AdminCourses></AdminRoutes>
+
+      },
+    
       {
         path: "batches",
         element: <AdminRoutes><Batch></Batch></AdminRoutes>

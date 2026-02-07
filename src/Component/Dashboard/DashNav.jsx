@@ -10,13 +10,9 @@ const DashNav = () => {
                     color: isActive ? "#7aebeb	" : "",
                 })} to={"/dashboard"}>Home</NavLink>
             </li>
+           
             <li>
-                <NavLink to={"add-course"} style={({ isActive }) => ({
-                    color: isActive ? "#7aebeb	" : "",
-                })}>Add Course</NavLink>
-            </li>
-            <li>
-                <NavLink to={'/'} style={({ isActive }) => ({
+                <NavLink to={'admin-courses'} style={({ isActive }) => ({
                     color: isActive ? "#7aebeb	" : "",
                 })}>Courses</NavLink>
             </li>

@@ -1,8 +1,9 @@
-import {useState } from "react";
+import { useState } from "react";
 import useCourses from "../../../Hook/useCourses";
+import { Link } from "react-router-dom";
 
 const AddBatch = () => {
-    const [courses] = useCourses() 
+    const [courses] = useCourses()
     const [selectedCourseId, setSelectedCourseId] =
         useState("");
 
@@ -14,7 +15,7 @@ const AddBatch = () => {
     const [batchName, setBatchName] = useState("");
     const [startDate, setStartDate] = useState("");
 
-   
+
 
     // When course change
     const handleCourseChange = (id) => {
@@ -65,9 +66,13 @@ const AddBatch = () => {
     return (
         <div className="p-4 space-y-5">
 
-            <h2 className="text-2xl font-bold">
-                ➕ Add Batch
-            </h2>
+            <div className="flex items-center flex-row-reverse justify-between border-b-2 p-2">
+                <h2 className="text-xl font-bold">
+                    ➕ Add Batch
+                </h2>
+
+                <Link to={"/dashboard/batches"} className="btn bg-teal-200 text-black font-thin btn-sm">Back</Link>
+            </div>
 
             {/* Select Course */}
             <select
