@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 const AdminCourses = () => {
-    const [courses, refetch] = useCourses()
+    const [courses,refetch] = useCourses()
     const [open, setOpen] = useState(false);
 
     const [courseList, setCourseList] = useState()
@@ -43,6 +43,9 @@ const AdminCourses = () => {
     const handleUpdate = (course) => {
         setSelectedCourse(course);
         setOpen(true);
+        
+        
+
     };
 
     return (
@@ -87,7 +90,7 @@ const AdminCourses = () => {
                             </p>
 
                             {/* Summary */}
-                            <div className="flex justify-between text-sm mt-2">
+                            <div className="flex justify-between text-sm">
 
                                 <span>
                                     📦 {course.summary.modules} Modules
@@ -103,7 +106,7 @@ const AdminCourses = () => {
                             </div>
 
                             {/* Skills */}
-                            <div className="flex flex-wrap gap-2 mt-3">
+                            <div className="flex flex-wrap gap-2">
                                 {course.skill.map((s, i) => (
                                     <span
                                         key={i}
@@ -115,7 +118,7 @@ const AdminCourses = () => {
                             </div>
 
                             {/* Actions */}
-                            <div className="card-actions justify-end mt-4">
+                            <div className="card-actions justify-end">
 
                                 <button
                                     className="btn btn-sm btn-info font-light text-white"
@@ -217,8 +220,7 @@ const AdminCourses = () => {
                 open &&
                 <UpdateCourseModal course={selectedCourse}
                     isOpen={open}
-                    onClose={() => setOpen(false)}
-                    refetch={refetch}></UpdateCourseModal>
+                    onClose={() => setOpen(false)} refetch={refetch}></UpdateCourseModal>
             }
 
         </div>

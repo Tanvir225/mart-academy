@@ -1,8 +1,11 @@
 import React, { useState } from "react";
-import axios from "axios";
+import useAxios from "../../../Hook/useAxios";
+import toast from "react-hot-toast";
+
 
 const UpdateCourseModal = ({ course, isOpen, onClose, refetch }) => {
   const [formData, setFormData] = useState(course);
+  const axios = useAxios()
 
   if (!course) return null;
 
@@ -43,18 +46,15 @@ const UpdateCourseModal = ({ course, isOpen, onClose, refetch }) => {
     e.preventDefault();
     console.log(formData);
 
-    // try {
-    //   await axios.patch(
-    //     `http://localhost:5000/courses/${course._id}`,
-    //     formData
-    //   );
+    try {
+      await axios.patch(`/courses/${course._id}`, formData);
+      refetch()
+      toast.success("Course Updated ✅")
+      onClose();
 
-    //   alert("Course Updated ✅");
-    //   refetch();
-    //   onClose();
-    // } catch (err) {
-    //   console.error(err);
-    // }
+    } catch (err) {
+      console.error(err);
+    }
   };
 
   return (
