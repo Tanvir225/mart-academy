@@ -6,11 +6,8 @@ import { Link } from "react-router-dom";
 
 
 const AdminCourses = () => {
-    const [courses,refetch] = useCourses()
+    const [courses, , isFetching, refetch] = useCourses()
     const [open, setOpen] = useState(false);
-
-    const [courseList, setCourseList] = useState()
-
 
     const [selectedCourse, setSelectedCourse] =
         useState(null);
@@ -35,7 +32,7 @@ const AdminCourses = () => {
                     (c) => c._id !== id
                 );
 
-            setCourseList(filtered);
+
         }
     };
 
@@ -43,10 +40,20 @@ const AdminCourses = () => {
     const handleUpdate = (course) => {
         setSelectedCourse(course);
         setOpen(true);
-        
-        
+
+
 
     };
+
+    const hadnleUpdateClose = () => {
+        setOpen(false);
+    };
+
+    if (isFetching) {
+        return <div className="text-center py-10">Loading...</div>;
+    }
+
+
 
     return (
         <div className="">
@@ -219,8 +226,10 @@ const AdminCourses = () => {
             {
                 open &&
                 <UpdateCourseModal course={selectedCourse}
+                    refetch={refetch}
                     isOpen={open}
-                    onClose={() => setOpen(false)} refetch={refetch}></UpdateCourseModal>
+                    onClose={hadnleUpdateClose}></UpdateCourseModal>
+
             }
 
         </div>

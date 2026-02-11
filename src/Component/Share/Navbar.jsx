@@ -6,6 +6,7 @@ import useAuth from "../../Hook/useAuth";
 import toast from "react-hot-toast";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import useAdmin from "../../Hook/useAdmin";
+import useNotifications from "../../Hook/useNotifications";
 
 
 const Navbar = () => {
@@ -13,10 +14,12 @@ const Navbar = () => {
     //state
     const [isOpen, setIsOpen] = useState(false);
     const [clickNotification, setClickNotification] = useState(false);
+    const [notifications] = useNotifications();
+
 
     //HOOK 
     const { user, logoutUser } = useAuth();
-    const [isAdmin,isPending] = useAdmin();
+    const [isAdmin, isPending] = useAdmin();
     console.log(isAdmin);
 
     isPending && <div>Loading...</div>
@@ -30,7 +33,7 @@ const Navbar = () => {
     };
 
     // handleClick
-    const handleClick = ()=>{
+    const handleClick = () => {
         if (!user) {
             toast.error("you need to login first")
         }
@@ -63,7 +66,7 @@ const Navbar = () => {
 
     // console.log(isOpen);
 
-    
+
 
     return (
         <div className="flex my-5 items-center justify-between ">
@@ -106,12 +109,24 @@ const Navbar = () => {
                     <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-4 w-64 z-20">
                         <h3 className="text-black text-base border-b-2 pb-1 ">Notifications</h3>
                         <ul className="space-y-2 mt-1">
-                            <li className="text-sm text-gray-700">New course available: <span className="font-bold">React Basics</span></li>
-                            <li className="text-sm text-gray-700">Your course <span className
-                                ="font-bold">JavaScript Essentials</span> has been updated.</li>
-                            <li className="text-sm text-gray-700">Don't miss our upcoming webinar on
-                                <span className="font-bold">Web Development Trends</span>.</li>
+                            {notifications.map((n) => (
+                                <li
+                                    key={n._id}
+                                    className="text-sm text-gray-700"
+                                >
+                                    {n.message} :
+
+                                    <span className="font-bold">
+                                        {n.courseTitle}
+                                    </span>
+
+                                    <div className="text-xs opacity-60">
+                                        {timeAgo(n.createdAt)}
+                                    </div>
+                                </li>
+                            ))}
                         </ul>
+
                         <button
                             onClick={() => setClickNotification(false)}
                             className="btn btn-sm btn-primary mt-3 w-full">
@@ -130,7 +145,7 @@ const Navbar = () => {
                         <div className="flex items-center gap-7 justify-center relative ">
                             <div className="relative cursor-pointer" onClick={() => setClickNotification(!clickNotification)}>
                                 <IoIosNotificationsOutline size={30}></IoIosNotificationsOutline>
-                                <span className="badge badge-warning badge-dash badge-sm absolute bottom-5 left-5">2</span>
+                                <span className="badge badge-warning badge-dash badge-sm absolute bottom-5 left-5">{notifications?.length || 0}</span>
                             </div>
 
                             <div className="dropdown dropdown-end">
@@ -178,3 +193,31 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+
+const timeAgo = (date) => {
+    const seconds =
+        Math.floor(
+            (new Date() - new Date(date)) / 1000
+        );
+
+    const intervals = {
+        year: 31536000,
+        month: 2592000,
+        day: 86400,
+        hour: 3600,
+        minute: 60,
+    };
+
+    for (let key in intervals) {
+        const value = Math.floor(
+            seconds / intervals[key]
+        );
+        if (value > 0) {
+            return `${value} ${key}${value > 1 ? "s" : ""
+                } ago`;
+        }
+    }
+
+    return "Just now";
+};

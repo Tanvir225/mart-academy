@@ -1,228 +1,238 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import useAuth from '../../Hook/useAuth';
-import usePublicAxios from '../../Hook/usePublicAxios';
-import toast from 'react-hot-toast';
-import { sendEmailVerification, signOut, updateProfile } from 'firebase/auth';
-import auth from '../../Firebase/firebase.config';
-import { FiEye, FiEyeOff } from "react-icons/fi";
-import { v4 as uuidv4 } from 'uuid';
-import axios from 'axios';
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import { updateProfile } from "firebase/auth";
+import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
+import usePublicAxios from "../../Hook/usePublicAxios";
 
-const SignUp = () => {
+const image_hosting_key = "YOUR_IMGBB_KEY"; // 🔑 add your key
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
-    //useContext
-    const { createUser } = useAuth();
-    const [showPassword, setShowPassword] = useState(false);
+const Signup = () => {
+    const { createUser } = useContext(AuthContext);
+    const publicAxios = usePublicAxios();
 
-    //useAxios hook
-
-    const publicAxios = usePublicAxios();   
-
-    //navigate
-    const navigate = useNavigate();
-    //location
-    // const location = useLocation();
-
-    // let from = location?.state?.from?.pathname || "/";
-
-    //image hosting key & api
-    const imageHostingKey = import.meta.env.VITE_IMAGE_HOSTING_KEY;
-    const image_hosting_api = `https://api.imgbb.com/1/upload?key=${imageHostingKey}`;
-
-
-    //handle submit
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const toastId = toast.loading("sign up ...");
         const forms = e.target;
-        const email = forms.email.value;
+
+        // BASIC
         const name = forms.name.value;
-        const photo = forms.photo.files[0];
+        const email = forms.email.value;
         const password = forms.password.value;
-        const address = forms.address.value;
+        const photo = forms.photo.files[0];
+
+        // EXTRA FIELDS
+        const fatherName = forms.fatherName.value;
+        const motherName = forms.motherName.value;
+        const dob = forms.dob.value;
+        const gender = forms.gender.value;
+        const blood = forms.blood.value;
+        const religion = forms.religion.value;
+        const presentAddress = forms.presentAddress.value;
+        const permanentAddress = forms.permanentAddress.value;
         const phone = forms.phone.value;
-
-        //student id
-        const studentId = uuidv4().slice(0, 8).toUpperCase();
-
-        // image upload functionality
-        const imageFile = { image: photo };
-        // console.log(imageFile);
-        const res = await axios.post(image_hosting_api, imageFile, {
-            headers: { "content-Type": "multipart/form-data" },
-        });
+        const guardianName = forms.guardianName.value;
+        const nid = forms.nid.value;
 
 
+        try {
+            // 🔑 Student ID
+            const studentId = uuidv4().slice(0, 8).toUpperCase();
 
-        //console.log(email, name, photo, password);
-        //signup functionality
-        createUser(email, password)
-            .then((result) => {
-                const user = result.user;
-                console.log(user);
-                forms.reset();
-                //updateprofile
-                updateProfile(user, {
-                    displayName: name,
-                    photoURL: res?.data?.data?.display_url || "https://i.ibb.co.com/TM6jBG7h/user-photo.jpg",
-                });
-
-                //send to database user information
-                const dataUser = {
-                    name: name,
-                    email: email,
-                    photo: res?.data?.data?.display_url || "https://i.ibb.co.com/TM6jBG7h/user-photo.jpg",
-                    address: address,
-                    phone: phone,
-                    studentId: studentId,
-                    role: "student",
-                    logged: user?.metadata?.lastSignInTime,
-                };
-
-                // console.log(dataUser);
-
-                //api call
-                publicAxios.post("/users", dataUser).then((result) => {
-                    console.log(result.data);
-                });
-
-
-
-                // ✅ Send Email Verification
-                sendEmailVerification(user)
-                    .then(() => {
-                        toast.success("Verification email sent. Please check your inbox.", { id: toastId });
-                        // ✅ Navigate to verification page
-                        navigate("/verify-email");
-                    })
-                    .catch((err) => {
-                        toast.error("Failed to send verification email.", { id: toastId });
-                        console.error(err);
-                    });
-
-                // 🚨 Block unverified users
-                if (!user.emailVerified) {
-                    signOut(auth).then(() => {
-
-                    });
-
-                    return;
-                }
-
-
-
-                // toast.success("signed up", { id: toastId });
-                // navigate("/");
-            })
-            .catch((error) => {
-                toast.error(error.message.slice(10, error.message.length), {
-                    id: toastId,
-                });
+            // 📸 Upload Image
+            const imageFile = { image: photo };
+            const res = await axios.post(image_hosting_api, imageFile, {
+                headers: { "content-type": "multipart/form-data" },
             });
+
+            const photoURL = res?.data?.data?.display_url;
+
+            // 🔐 Firebase Create
+            const result = await createUser(email, password);
+            const user = result.user;
+
+            await updateProfile(user, {
+                displayName: name,
+                photoURL: photoURL,
+            });
+
+            // 🗄️ Save to DB
+            const dataUser = {
+                name,
+                email,
+                photo: photoURL,
+                studentId,
+                fatherName,
+                motherName,
+                dob,
+                gender,
+                blood,
+                religion,
+                presentAddress,
+                permanentAddress,
+                phone,
+                guardianName,
+                nid,
+                role: "student",
+                createdAt: new Date(),
+            };
+
+            await publicAxios.post("/users", dataUser);
+
+            alert("Student Signup Successful ✅");
+            forms.reset();
+        } catch (error) {
+            console.error(error);
+            alert("Signup Failed ❌");
+        }
     };
 
-
     return (
-        <section className='my-10'>
+        <div className="min-h-screen flex items-center justify-center bg-base-200 p-6">
+            <div className="card w-full max-w-4xl bg-base-100 shadow-xl">
+                <div className="card-body">
+                    <div className="flex items-center justify-between border-b-2 p-2">
+                        <h2 className="text-lg lg:text-2xl font-bold text-center mb-4">
+                            Student Signup
+                        </h2>
 
-            <div className="w-full max-w-2xl mx-auto  space-y-3  rounded-lg border p-5 shadow-lg ">
-                <div className="flex flex-col space-y-3">
-                    <h3 className="text-3xl font-bold tracking-tight">Sign Up</h3>
-                    <p className="text-sm text-zinc-200 ">Please fill in the form to create an account.</p>
-                </div>
-                <div>
-                    <form className="space-y-5 " onSubmit={handleSubmit}>
-                        <div className="">
-                            <div className="space-y-2 text-sm">
-                                <label className="text-sm font-medium leading-none  " htmlFor="first_name">
-                                    Enter your Name
-                                </label>
-                                <input
-                                    className="flex h-10 w-full rounded-md border px-3 py-2 focus-visible:outline-none"
-                                    id="name"
-                                    placeholder="Enter your name"
-                                    name="name"
-                                    type="text"
-                                />
-                            </div>
+                        <img className="w-12 h-12 rounded-full ring-2 ring-offset-2" src="https://i.ibb.co.com/ZzygpVtn/logo.jpg" alt="" srcset="" />
+                    </div>
 
-                        </div>
+                    <form className="space-y-5" onSubmit={handleSubmit}>
+                        {/* Name */}
+                        <input
+                            name="name"
+                            placeholder="Student Name"
+                            className="input input-bordered w-full focus:outline-none"
+                            required
+                        />
+
+                        {/* Parents */}
                         <div className="grid grid-cols-2 gap-4">
-                            <div className="space-y-2 text-sm">
-                                <label className="text-sm font-medium leading-none  " htmlFor="first_name">
-                                    Phone
-                                </label>
-                                <input
-                                    className="flex h-10 w-full rounded-md border px-3 py-2 focus-visible:outline-none "
-                                    id="phone"
-                                    placeholder="+880 17 --"
-                                    name="phone"
-                                    type="tel"
-                                />
-                            </div>
-                            <div className="space-y-2 text-sm">
-                                <label className="text-sm font-medium leading-none  " htmlFor="last_name">
-                                    Address
-                                </label>
-                                <input
-                                    className="flex h-10 w-full rounded-md border px-3 py-2 focus-visible:outline-none"
-                                    id="address"
-                                    placeholder="Enter your address"
-                                    name="address"
-                                    type="text"
-                                />
-                            </div>
-                        </div>
-                        <div className="space-y-2 text-sm">
-                            <label className="text-sm font-medium leading-none  " htmlFor="email">
-                                Email
-                            </label>
                             <input
-                                className="flex h-10 w-full rounded-md border px-3 py-2 focus-visible:outline-none "
-                                id="email"
-                                placeholder="Enter your email"
-                                name="email"
-                                type="email"
+                                name="fatherName"
+                                required
+                                placeholder="Father Name"
+                                className="input input-bordered w-full focus:outline-none"
+                            />
+                            <input
+                                name="motherName"
+                                required
+                                placeholder="Mother Name"
+                                className="input input-bordered w-full focus:outline-none"
                             />
                         </div>
 
-                        <div className='grid grid-cols-2 gap-4'>
-                            <div className="space-y-2 text-sm relative">
-                                <label className="text-sm font-medium leading-none  " htmlFor="password_">
-                                    Password
-                                </label>
-                                <input
-                                    className="flex h-10 w-full rounded-md border px-3 py-2 focus-visible:outline-none "
-                                    id="password_"
-                                    placeholder="password"
-                                    name="password"
-                                    type={`${showPassword ? 'text' : 'password'}`}
-                                />
-                                <span onClick={() => setShowPassword(!showPassword)} className="absolute top-[35%] right-2 cursor-pointer">{showPassword ? <FiEyeOff></FiEyeOff> : <FiEye></FiEye>}</span>
-                            </div>
+                        {/* DOB + Gender */}
+                        <div className="grid grid-cols-2 gap-4">
+                            <input type="date" name="dob" placeholder="" className="input input-bordered w-full focus:outline-none" required />
 
-                            <fieldset className="fieldset mt-1">
-                                <legend className="text-sm">Upload your image</legend>
-                                <input name='photo' type="file" className="flex h-10 w-full rounded-md border px-3 py-2 focus-visible:outline-none " />
-                                <label className="">Max size 2MB</label>
-                            </fieldset>
+                            <select name="gender" required className="input input-bordered w-full focus:outline-none">
+                                <option>Male</option>
+                                <option>Female</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+
+                        {/* Blood + Religion */}
+                        <div className="grid grid-cols-2 gap-4">
+                            <select name="blood" required className="input input-bordered w-full focus:outline-none">
+                                <option>A+</option>
+                                <option>A-</option>
+                                <option>B+</option>
+                                <option>B-</option>
+                                <option>O+</option>
+                                <option>O-</option>
+                                <option>AB+</option>
+                                <option>AB-</option>
+                            </select>
+
+                            <select name="religion" required className="input input-bordered w-full focus:outline-none">
+                                <option>Muslim</option>
+                                <option>Hindu</option>
+                                <option>Christian</option>
+                                <option>Buddhist</option>
+                            </select>
+                        </div>
+
+                        {/* Address */}
+                        <input
+                            name="presentAddress"
+                            placeholder="Present Address"
+                            className="input input-bordered w-full focus:outline-none"
+                            required
+                        />
+
+                        <input
+                            name="permanentAddress"
+                            placeholder="Permanent Address"
+                            className="input input-bordered w-full focus:outline-none"
+                        />
+
+                        {/* Phone + Email */}
+                        <div className="grid grid-cols-2 gap-4">
+                            <input
+                                name="phone"
+                                placeholder="Phone"
+                                className="input input-bordered w-full focus:outline-none"
+                                required
+                            />
+
+                            <input
+                                name="email"
+                                type="email"
+                                placeholder="Email"
+                                className="input input-bordered w-full focus:outline-none"
+                                required
+                            />
+                        </div>
+
+                        {/* Guardian */}
+                        <div className="grid grid-cols-2 gap-4">
+                            <input
+                                name="guardianName"
+                                placeholder="Guardian Name"
+                                className="input input-bordered w-full focus:outline-none"
+                            />
+
+                            <input
+                                name="nid"
+                                placeholder="NID / Birth Certificate"
+                                className="input input-bordered w-full focus:outline-none"
+                                required
+                            />
                         </div>
 
 
-                        <button className="rounded-md bg-teal-500 px-4 py-2 text-white transition-colors hover:bg-teal-600">Submit</button>
+
+                        {/* Password */}
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="Password"
+                            className="input input-bordered w-full focus:outline-none"
+                            required
+                        />
+
+                        {/* Photo */}
+                        <input
+                            name="photo"
+                            type="file"
+                            className="input input-bordered w-full py-1 focus:outline-none"
+                            required
+                        />
+
+                        <button className="btn  bg-teal-400 font-light w-full ">
+                            Create Account
+                        </button>
                     </form>
                 </div>
-                <p className="text-center text-sm text-zinc-700 dark:text-zinc-300">
-                    Already have an account?
-                    <Link to={'/login'} className="ml-1 text-teal-200">
-                        Signin
-                    </Link>
-                </p>
             </div>
-        </section>
+        </div>
     );
 };
 
-export default SignUp;
+export default Signup;

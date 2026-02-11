@@ -3,7 +3,7 @@ import useAxios from "../../../Hook/useAxios";
 import toast from "react-hot-toast";
 
 
-const UpdateCourseModal = ({ course, isOpen, onClose, refetch }) => {
+const UpdateCourseModal = ({ course, isOpen, onClose,refetch }) => {
   const [formData, setFormData] = useState(course);
   const axios = useAxios()
 
@@ -48,8 +48,8 @@ const UpdateCourseModal = ({ course, isOpen, onClose, refetch }) => {
 
     try {
       await axios.patch(`/courses/${course._id}`, formData);
-      refetch()
       toast.success("Course Updated ✅")
+      refetch()
       onClose();
 
     } catch (err) {

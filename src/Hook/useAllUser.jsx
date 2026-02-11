@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
-import usePublicAxios from "./usePublicAxios";
+import useAxios from "./useAxios";
 
 
 
 const useAllUser = () => {
 
     //public Axios call to fetch banner data
-    const axios = usePublicAxios()
+    const axios = useAxios()
 
     const { data: users, isLoading, refetch } = useQuery({
         queryKey: ['users'],
