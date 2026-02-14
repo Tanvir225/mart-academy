@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 
 
 const CourseDetailsHero = ({courseDetails}) => {
@@ -30,7 +31,7 @@ const CourseDetailsHero = ({courseDetails}) => {
                 </div>
 
                 <div className="text-center my-10">
-                    <button className="button btn text-lg">Enroll Now</button>
+                    <Link to={`/enroll/${courseDetails?._id}`} className="button btn text-lg">Enroll Now</Link>
                 </div>
             </section>
         </div>

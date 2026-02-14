@@ -98,6 +98,9 @@ const Batch = () => {
                                 <p>
                                     📦 Modules: {batch.modules.length}
                                 </p>
+                                <p>
+                                    💺 Seat: {batch?.seat || "0"}
+                                </p>
 
                                 <div className="card-actions justify-end mt-4">
 

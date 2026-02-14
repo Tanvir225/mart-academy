@@ -4,9 +4,10 @@ import { GrCertificate } from "react-icons/gr";
 import { LiaFantasyFlightGames } from "react-icons/lia";
 import { MdOutlineAssignment, MdOutlineSupportAgent } from "react-icons/md";
 import { RiLiveLine } from "react-icons/ri";
+import { Link } from "react-router-dom";
 
 
-const CourseFlowchart = () => {
+const CourseFlowchart = ({ courseDetails }) => {
     return (
         <section className="flex flex-col md:flex-row my-16 ">
             <div className="space-y-5 p-5 ">
@@ -15,7 +16,9 @@ const CourseFlowchart = () => {
                     The course flowchart provides a visual representation of the learning path, outlining the sequence of modules and key topics covered in the course.
                 </p>
 
-                <button className="button btn">Enroll now</button>
+                <Link to={`/enroll/${courseDetails?._id}`} className="btn btn-outline  rounded-xl border-teal-200 font-light hover:bg-teal-200 hover:text-black">
+                    Enroll Now
+                </Link>
             </div>
 
             <div className="h-96 w-full space-y-5 overflow-y-auto p-3">
@@ -44,19 +47,19 @@ const CourseFlowchart = () => {
                 </div>
 
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
-                    <MdOutlineAssignment  size={40} className="text-yellow-100"></MdOutlineAssignment  >
+                    <MdOutlineAssignment size={40} className="text-yellow-100"></MdOutlineAssignment  >
                     <h2 className="text-lg font-semibold">Submit Assignment </h2>
                     <p className="text-sm">Complete and submit assignments for each module.</p>
                 </div>
 
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
-                    <LiaFantasyFlightGames  size={40} className="text-green-300"></LiaFantasyFlightGames>
+                    <LiaFantasyFlightGames size={40} className="text-green-300"></LiaFantasyFlightGames>
                     <h2 className="text-lg font-semibold">Join contest <span className="text-teal-200 text-sm font-light">get prize money</span> </h2>
                     <p className="text-sm">Participate in contests based on exercises and win rewards.</p>
                 </div>
 
                 <div className="bg-gray-800 border-dashed border border-teal-200  hover:text-teal-300  p-5 space-y-3 w-full rounded ">
-                    <GrCertificate  size={40}></GrCertificate >
+                    <GrCertificate size={40}></GrCertificate >
                     <h2 className="text-lg font-semibold">Certification </h2>
                     <p className="text-sm">Earn a certificate upon completing all modules and projects.</p>
                 </div>

@@ -84,13 +84,27 @@ const UpdateBatchModal = ({
           {/* Start Date */}
           <input
             type="date"
-            className="input input-bordered w-full"
+            className="input input-bordered w-full focus:outline-none"
             value={formData.startDate}
             onChange={(e) =>
               setFormData({
                 ...formData,
                 startDate: e.target.value,
               })
+            }
+          />
+          {/* seat */}
+          <input
+            type="number"
+            className="input w-1/2 input-bordered  focus:outline-none"
+            value={formData.seat}
+            placeholder="seat"
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                seat: parseInt(e.target.value),
+              })
+
             }
           />
 
@@ -121,7 +135,7 @@ const UpdateBatchModal = ({
 
                       <td>
                         <input
-                          className="input input-sm input-bordered"
+                          className="input input-sm input-bordered focus:outline-none"
                           value={
                             m.liveClass || ""
                           }
@@ -137,7 +151,7 @@ const UpdateBatchModal = ({
 
                       <td>
                         <input
-                          className="input input-sm input-bordered"
+                          className="input input-sm input-bordered focus:outline-none"
                           value={
                             m.recordedClass ||
                             ""
@@ -154,7 +168,7 @@ const UpdateBatchModal = ({
 
                       <td>
                         <input
-                          className="input input-sm input-bordered"
+                          className="input input-sm input-bordered focus:outline-none"
                           value={
                             m.assignment || ""
                           }
@@ -170,7 +184,7 @@ const UpdateBatchModal = ({
 
                       <td>
                         <input
-                          className="input input-sm input-bordered"
+                          className="input input-sm input-bordered focus:outline-none"
                           value={
                             m.exam || ""
                           }
@@ -185,7 +199,7 @@ const UpdateBatchModal = ({
                       </td>
                       <td>
                         <input
-                          className="input input-sm input-bordered"
+                          className="input input-sm input-bordered focus:outline-none"
                           value={
                             m.contest || ""
                           }

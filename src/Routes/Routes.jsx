@@ -20,6 +20,7 @@ import Students from "../Page/Dashboard/Students/Students";
 import Batch from "../Page/Dashboard/Batch/Batch";
 import AddBatch from "../Page/Dashboard/Batch/AddBatch";
 import AdminCourses from "../Page/Dashboard/AdminCourses/AdminCourses";
+import EnrollPage from "../Page/Enroll/EnrollPage";
 
 
 
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
       {
         path: "/courses/:id",
         element: <PrivateRoute><CourseInside></CourseInside></PrivateRoute>
+      },
+      {
+        path: "/enroll/:id",
+        element: <PrivateRoute><EnrollPage></EnrollPage></PrivateRoute>
       },
       {
         path: "/about-us",

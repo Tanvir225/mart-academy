@@ -14,7 +14,7 @@ const ViewBatchModal = ({ batch, open, onClose }) => {
                 </h3>
 
                 <p className="mb-4">
-                    Course: {batch?.courseName}
+                    Course: {batch?.courseName} | Seat : {batch?.seat || "0"}
                 </p>
 
                 <div className="overflow-x-auto">

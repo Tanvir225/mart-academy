@@ -124,7 +124,7 @@ const UpdateCourseModal = ({ course, isOpen, onClose,refetch }) => {
               name="modules"
               value={formData.summary.modules}
               onChange={handleSummaryChange}
-              className="input input-bordered focus:outline-none"
+              className="input input-bordered focus:outline-none w-full"
               placeholder="Modules"
             />
 
@@ -133,7 +133,7 @@ const UpdateCourseModal = ({ course, isOpen, onClose,refetch }) => {
               name="duration"
               value={formData.summary.duration}
               onChange={handleSummaryChange}
-              className="input input-bordered focus:outline-none"
+              className="input input-bordered focus:outline-none w-full"
               placeholder="Duration"
             />
 
@@ -142,7 +142,7 @@ const UpdateCourseModal = ({ course, isOpen, onClose,refetch }) => {
               name="projects"
               value={formData.summary.projects}
               onChange={handleSummaryChange}
-              className="input input-bordered focus:outline-none"
+              className="input input-bordered focus:outline-none w-full"
               placeholder="Projects"
             />
 
@@ -151,7 +151,7 @@ const UpdateCourseModal = ({ course, isOpen, onClose,refetch }) => {
               name="batchEnd"
               value={formData.summary.batchEnd}
               onChange={handleSummaryChange}
-              className="input input-bordered focus:outline-none"
+              className="input input-bordered focus:outline-none w-full"
             />
 
             <input
@@ -159,7 +159,7 @@ const UpdateCourseModal = ({ course, isOpen, onClose,refetch }) => {
               name="admissionStart"
               value={formData.summary.admissionStart}
               onChange={handleSummaryChange}
-              className="input input-bordered focus:outline-none"
+              className="input input-bordered focus:outline-none w-full"
             />
 
             <input
@@ -167,7 +167,15 @@ const UpdateCourseModal = ({ course, isOpen, onClose,refetch }) => {
               name="newBatch"
               value={formData.summary.newBatch}
               onChange={handleSummaryChange}
-              className="input input-bordered focus:outline-none"
+              className="input input-bordered focus:outline-none w-full"
+            />
+            <input
+              type="number"
+              name="price"
+              value={parseInt(formData.summary.price)}
+              onChange={handleSummaryChange}
+              placeholder="Course Fee"
+              className="input input-bordered focus:outline-none w-full"
             />
           </div>
 

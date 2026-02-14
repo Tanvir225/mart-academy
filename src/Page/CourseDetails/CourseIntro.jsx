@@ -27,13 +27,3 @@ const CourseIntro = ({courseDetails}) => {
 export default CourseIntro;
 
 
-
-// dummy data
-const skills = [
-    { name: "MS WORD", bg: "bg-[#2c1513]", text: "text-[#e44d26]" },
-    { name: "MS EXCEL", bg: "bg-[#1e2c5f]", text: "text-[#fff]" },
-    { name: "MS POWERPOINT", bg: "bg-[#0f2d42]", text: "text-[#38bdf8]" },
-    { name: "Google Sheets", bg: "bg-[#2d2b1a]", text: "text-[#f0db4f]" },
-    { name: "Canva", bg: "bg-[#012a3a]", text: "text-[#61dafb]" },
-
-];

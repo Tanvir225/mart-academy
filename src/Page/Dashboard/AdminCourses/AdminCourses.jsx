@@ -140,6 +140,9 @@ const AdminCourses = () => {
                                 <span>
                                     🧪 {course.summary.projects} Projects
                                 </span>
+                                <span>
+                                    💰 {course.summary.price ? `${course.summary.price} TK` : "0 TK"}
+                                </span>
                             </div>
 
                             {/* Skills */}

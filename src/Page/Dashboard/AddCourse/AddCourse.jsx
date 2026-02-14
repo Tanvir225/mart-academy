@@ -15,6 +15,7 @@ const AddCourse = () => {
             batchEnd: "",
             admissionStart: "",
             newBatch: "",
+            price: parseInt(0),
         },
         skill: [],
         modules: [],
@@ -93,6 +94,7 @@ const AddCourse = () => {
                 batchEnd: "",
                 admissionStart: "",
                 newBatch: "",
+                price: 0,
             },
             skill: [],
             modules: [],
@@ -184,7 +186,7 @@ const AddCourse = () => {
 
                 {/* Summary */}
                 <h3 className="text-lg font-semibold">Course Summary</h3>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                     <input
                         type="number"
                         name="modules"
@@ -243,6 +245,18 @@ const AddCourse = () => {
                         value={course?.summary?.newBatch}
                         onChange={handleSummaryChange}
                         onFocus={(e) => (e.target.type = "date")}
+                        onBlur={(e) => {
+                            if (!e.target.value) e.target.type = "text";
+                        }}
+                    />
+                    <input
+                        type="number"
+                        name="price"
+                        placeholder="Course Price"
+                        className="w-full border border-teal-200 bg-transparent focus:outline-none p-2 rounded"
+                        value={parseInt(course?.summary?.price) || 0}
+                        onChange={handleSummaryChange}
+                        onFocus={(e) => (e.target.type = "number")}
                         onBlur={(e) => {
                             if (!e.target.value) e.target.type = "text";
                         }}

@@ -16,6 +16,7 @@ const AddBatch = () => {
 
     const [batchName, setBatchName] = useState("");
     const [startDate, setStartDate] = useState("");
+    const [seat, setSeat] = useState(0);
     const axios = useAxios();
 
 
@@ -61,6 +62,7 @@ const AddBatch = () => {
             courseName: selectedCourse.title,
             batchName,
             startDate,
+            seat,
             modules,
         };
 
@@ -125,7 +127,7 @@ const AddBatch = () => {
                         <input
                             type="text"
                             placeholder="Batch Name"
-                            className="input input-bordered focus:outline-none"
+                            className="input input-bordered focus:outline-none w-full"
                             onChange={(e) =>
                                 setBatchName(e.target.value)
                             }
@@ -133,9 +135,17 @@ const AddBatch = () => {
 
                         <input
                             type="date"
-                            className="input input-bordered focus:outline-none"
+                            className="input input-bordered focus:outline-none w-full"
                             onChange={(e) =>
                                 setStartDate(e.target.value)
+                            }
+                        />
+                        <input
+                            type="number"
+                            className="input input-bordered focus:outline-none w-full"
+                            placeholder="Seat"
+                            onChange={(e) =>
+                                setSeat(parseInt(e.target.value))
                             }
                         />
                     </div>

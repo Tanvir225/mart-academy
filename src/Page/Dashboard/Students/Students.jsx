@@ -2,6 +2,9 @@ import { AllCommunityModule, ModuleRegistry } from "ag-grid-community";
 import { AgGridReact } from "ag-grid-react";
 import { useMemo, useState } from "react";
 import useAllUser from "../../../Hook/useAllUser";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+import useAxios from "../../../Hook/useAxios";
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 
@@ -54,7 +57,7 @@ const ActionRenderer = (props) => {
 
             <button
                 className="btn btn-xs btn-error text-white"
-                onClick={() => onDelete(data._id)}
+                onClick={() => onDelete(data.email)}
             >
                 Delete
             </button>
@@ -66,9 +69,10 @@ const ActionRenderer = (props) => {
 
 const Students = () => {
 
-    const [users] = useAllUser()
+    const [users,,refetch] = useAllUser()
 
 
+    const axios = useAxios();
 
     const [selectedUser, setSelectedUser] = useState(null);
 
@@ -79,8 +83,44 @@ const Students = () => {
     };
 
     // 👉 Delete
-    const handleDelete = (id) => {
-        console.log(id);
+    const handleDelete = (email) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+
+            if (result.isConfirmed) {
+                try {
+                    const res = await axios.delete(`/users/${email}`);
+
+                    if (res?.data) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "User deleted successfully.",
+                            icon: "success"
+                        });
+
+                        toast.success("User deleted successfully!");
+                        refetch();
+                    }
+
+                } catch (error) {
+                    console.error(error);
+
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Failed to delete user.",
+                        icon: "error"
+                    });
+                }
+            }
+
+        });
     };
 
     // 👉 Columns
@@ -156,8 +196,8 @@ const Students = () => {
                 </div>
 
                 {/* VIEW MODAL */}
-                <dialog id="view_modal" className="modal">
-                    <div className="modal-box">
+                <dialog id="view_modal" className="modal modal-middle">
+                    <div className="modal-box max-w-3xl">
 
                         {selectedUser && (
                             <>
@@ -165,20 +205,94 @@ const Students = () => {
                                     User Details
                                 </h3>
 
-                                <div className="flex flex-col items-center gap-3">
+                                <div className="flex flex-col lg:flex-row gap-5 font-light">
 
-                                    <div className="avatar">
-                                        <div className="w-20 rounded-full">
-                                            <img src={selectedUser.photo} />
-                                        </div>
+                                    {/* Profile Photo */}
+                                    <div className="flex flex-col items-center gap-4">
+                                        <img
+                                            src={selectedUser?.photo}
+                                            alt="student"
+                                            className="w-20 h-20 rounded-full object-cover ring ring-teal-300 ring-offset-2"
+                                        />
+
+                                        <p className="font-semibold">
+                                            STU - {selectedUser?.studentId}
+                                        </p>
+
+                                        <span className="badge badge-outline border-teal-300">
+                                            {selectedUser?.role}
+                                        </span>
                                     </div>
 
-                                    <p><b>Name:</b> {selectedUser.name}</p>
-                                    <p><b>Email:</b> {selectedUser.email}</p>
-                                    <p><b>Student ID:</b> {selectedUser.studentId}</p>
-                                    <p><b>Role:</b> {selectedUser.role}</p>
-                                    <p><b>Phone:</b> {selectedUser.phone || "N/A"}</p>
-                                    <p><b>Address:</b> {selectedUser.address || "N/A"}</p>
+                                    {/* Info Grid */}
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 flex-1 text-sm">
+
+                                        <p>
+                                            <strong className="text-teal-400">Name : </strong>
+                                            {selectedUser?.name}
+                                        </p>
+
+                                        <p>
+                                            <strong className="text-teal-400">Email : </strong>
+                                            {selectedUser?.email}
+                                        </p>
+
+                                        <p>
+                                            <strong>Father Name : </strong>
+                                            {selectedUser?.fatherName}
+                                        </p>
+
+                                        <p>
+                                            <strong>Mother Name : </strong>
+                                            {selectedUser?.motherName}
+                                        </p>
+
+                                        <p>
+                                            <strong>Date of Birth : </strong>
+                                            {selectedUser?.dob}
+                                        </p>
+
+                                        <p>
+                                            <strong>Gender : </strong>
+                                            {selectedUser?.gender}
+                                        </p>
+
+                                        <p>
+                                            <strong>Blood Group : </strong>
+                                            {selectedUser?.blood}
+                                        </p>
+
+                                        <p>
+                                            <strong>Religion : </strong>
+                                            {selectedUser?.religion}
+                                        </p>
+
+                                        <p>
+                                            <strong>Phone : </strong>
+                                            {selectedUser?.phone}
+                                        </p>
+
+                                        <p>
+                                            <strong>Guardian : </strong>
+                                            {selectedUser?.guardianName}
+                                        </p>
+
+                                        <p>
+                                            <strong>NID / Birth Cert : </strong>
+                                            {selectedUser?.nid}
+                                        </p>
+
+                                        <p>
+                                            <strong>Present Address : </strong>
+                                            {selectedUser?.presentAddress}
+                                        </p>
+
+                                        <p>
+                                            <strong>Account Created : </strong>
+                                            {new Date(selectedUser?.createdAt).toLocaleDateString()}
+                                        </p>
+
+                                    </div>
                                 </div>
                             </>
                         )}
