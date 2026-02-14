@@ -1,19 +1,27 @@
-import { useContext } from "react";
-import { AuthContext } from "../../Provider/AuthProvider";
-import { updateProfile } from "firebase/auth";
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
-import usePublicAxios from "../../Hook/usePublicAxios";
+import toast from "react-hot-toast";
 
-const image_hosting_key = "YOUR_IMGBB_KEY"; // 🔑 add your key
+import {
+    sendEmailVerification,
+    updateProfile,
+    signOut,
+} from "firebase/auth";
+import { v4 as uuidv4 } from "uuid";
+import { Link, useNavigate } from "react-router-dom";
+import usePublicAxios from "../../Hook/usePublicAxios";
+import useAuth from "../../Hook/useAuth";
+import axios from "axios";
+import auth from "../../Firebase/firebase.config";
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Signup = () => {
-    const { createUser } = useContext(AuthContext);
+    const { createUser } = useAuth();
     const publicAxios = usePublicAxios();
+    const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const toastId = toast.loading("Signing up...");
 
         const forms = e.target;
 
@@ -23,7 +31,7 @@ const Signup = () => {
         const password = forms.password.value;
         const photo = forms.photo.files[0];
 
-        // EXTRA FIELDS
+        // EXTRA
         const fatherName = forms.fatherName.value;
         const motherName = forms.motherName.value;
         const dob = forms.dob.value;
@@ -31,34 +39,41 @@ const Signup = () => {
         const blood = forms.blood.value;
         const religion = forms.religion.value;
         const presentAddress = forms.presentAddress.value;
-        const permanentAddress = forms.permanentAddress.value;
         const phone = forms.phone.value;
         const guardianName = forms.guardianName.value;
         const nid = forms.nid.value;
 
-
         try {
-            // 🔑 Student ID
+            // 🆔 Student ID
             const studentId = uuidv4().slice(0, 8).toUpperCase();
 
             // 📸 Upload Image
             const imageFile = { image: photo };
-            const res = await axios.post(image_hosting_api, imageFile, {
-                headers: { "content-type": "multipart/form-data" },
-            });
+            const uploadRes = await axios.post(
+                image_hosting_api,
+                imageFile,
+                {
+                    headers: {
+                        "content-type": "multipart/form-data",
+                    },
+                }
+            );
 
-            const photoURL = res?.data?.data?.display_url;
+            const photoURL =
+                uploadRes?.data?.data?.display_url ||
+                "https://i.ibb.co.com/TM6jBG7h/user-photo.jpg";
 
-            // 🔐 Firebase Create
+            // 🔐 Create User
             const result = await createUser(email, password);
             const user = result.user;
 
+            // 👤 Update Profile
             await updateProfile(user, {
                 displayName: name,
-                photoURL: photoURL,
+                photoURL,
             });
 
-            // 🗄️ Save to DB
+            // 🗄️ Save DB
             const dataUser = {
                 name,
                 email,
@@ -71,7 +86,6 @@ const Signup = () => {
                 blood,
                 religion,
                 presentAddress,
-                permanentAddress,
                 phone,
                 guardianName,
                 nid,
@@ -81,11 +95,24 @@ const Signup = () => {
 
             await publicAxios.post("/users", dataUser);
 
-            alert("Student Signup Successful ✅");
-            forms.reset();
+            // 📧 Send Verification (IMPORTANT → await)
+            await sendEmailVerification(user);
+
+            toast.success(
+                "Verification email sent. Please check inbox.",
+                { id: toastId }
+            );
+
+            // 🔒 Logout until verified
+            await signOut(auth);
+
+            // 🚀 Redirect
+            navigate("/verify-email");
         } catch (error) {
             console.error(error);
-            alert("Signup Failed ❌");
+            toast.error("Signup Failed ❌", {
+                id: toastId,
+            });
         }
     };
 
@@ -93,16 +120,28 @@ const Signup = () => {
         <div className="min-h-screen flex items-center justify-center bg-base-200 p-6">
             <div className="card w-full max-w-4xl bg-base-100 shadow-xl">
                 <div className="card-body">
-                    <div className="flex items-center justify-between border-b-2 p-2">
-                        <h2 className="text-lg lg:text-2xl font-bold text-center mb-4">
-                            Student Signup
-                        </h2>
 
-                        <img className="w-12 h-12 rounded-full ring-2 ring-offset-2" src="https://i.ibb.co.com/ZzygpVtn/logo.jpg" alt="" srcset="" />
+                    <div className="flex items-center justify-between border-b-2 p-2">
+                        <div>
+                            <img className="w-14 rounded-full ring-1 ring-offset-1 ring-teal-200" src="https://i.ibb.co.com/ZzygpVtn/logo.jpg" alt="mart-academy" srcset="" />
+                            <h2 className="text-xl font-bold">
+                                Student Signup
+                            </h2>
+
+                        </div>
+
+                        <Link
+                            to="/login"
+                            className="btn btn-sm btn-outline"
+                        >
+                            Back
+                        </Link>
                     </div>
 
-                    <form className="space-y-5" onSubmit={handleSubmit}>
-                        {/* Name */}
+                    <form
+                        className="space-y-3"
+                        onSubmit={handleSubmit}
+                    >
                         <input
                             name="name"
                             placeholder="Student Name"
@@ -110,36 +149,70 @@ const Signup = () => {
                             required
                         />
 
-                        {/* Parents */}
                         <div className="grid grid-cols-2 gap-4">
                             <input
                                 name="fatherName"
-                                required
                                 placeholder="Father Name"
                                 className="input input-bordered w-full focus:outline-none"
+                                required
                             />
                             <input
                                 name="motherName"
-                                required
                                 placeholder="Mother Name"
                                 className="input input-bordered w-full focus:outline-none"
+                                required
                             />
                         </div>
 
-                        {/* DOB + Gender */}
                         <div className="grid grid-cols-2 gap-4">
-                            <input type="date" name="dob" placeholder="" className="input input-bordered w-full focus:outline-none" required />
+                            <input
+                                type="date"
+                                name="dob"
+                                className="input input-bordered w-full focus:outline-none"
+                                required
+                            />
 
-                            <select name="gender" required className="input input-bordered w-full focus:outline-none">
+                            <select
+                                name="gender"
+                                className="input input-bordered w-full focus:outline-none"
+                            >
                                 <option>Male</option>
                                 <option>Female</option>
                                 <option>Other</option>
                             </select>
                         </div>
 
-                        {/* Blood + Religion */}
                         <div className="grid grid-cols-2 gap-4">
-                            <select name="blood" required className="input input-bordered w-full focus:outline-none">
+                            <input
+                                name="presentAddress"
+                                placeholder="Present Address"
+                                className="input input-bordered w-full focus:outline-none"
+                                required
+                            />
+
+                            <input
+                                name="phone"
+                                placeholder="Phone"
+                                className="input input-bordered w-full focus:outline-none"
+                                required
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                            <select
+                                name="religion"
+                                className="input input-bordered w-full focus:outline-none"
+                            >
+                                <option>Muslim</option>
+                                <option>Hindhu</option>
+                                <option>Boddho</option>
+                                <option>Christians</option>
+                            </select>
+
+                            <select
+                                name="blood"
+                                className="input input-bordered w-full focus:outline-none"
+                            >
                                 <option>A+</option>
                                 <option>A-</option>
                                 <option>B+</option>
@@ -149,37 +222,30 @@ const Signup = () => {
                                 <option>AB+</option>
                                 <option>AB-</option>
                             </select>
-
-                            <select name="religion" required className="input input-bordered w-full focus:outline-none">
-                                <option>Muslim</option>
-                                <option>Hindu</option>
-                                <option>Christian</option>
-                                <option>Buddhist</option>
-                            </select>
                         </div>
 
-                        {/* Address */}
-                        <input
-                            name="presentAddress"
-                            placeholder="Present Address"
-                            className="input input-bordered w-full focus:outline-none"
-                            required
-                        />
-
-                        <input
-                            name="permanentAddress"
-                            placeholder="Permanent Address"
-                            className="input input-bordered w-full focus:outline-none"
-                        />
-
-                        {/* Phone + Email */}
                         <div className="grid grid-cols-2 gap-4">
+
                             <input
-                                name="phone"
-                                placeholder="Phone"
+                                name="guardianName"
+                                type="text"
+                                placeholder="Guardian Name"
                                 className="input input-bordered w-full focus:outline-none"
                                 required
                             />
+
+                            <input
+                                name="nid"
+                                type="text"
+                                placeholder="NID Number / Birth Certificate"
+                                className="input input-bordered w-full focus:outline-none"
+                                required
+                            />
+
+                        </div>
+
+
+                        <div className="grid grid-cols-2 gap-4">
 
                             <input
                                 name="email"
@@ -188,44 +254,26 @@ const Signup = () => {
                                 className="input input-bordered w-full focus:outline-none"
                                 required
                             />
-                        </div>
-
-                        {/* Guardian */}
-                        <div className="grid grid-cols-2 gap-4">
-                            <input
-                                name="guardianName"
-                                placeholder="Guardian Name"
-                                className="input input-bordered w-full focus:outline-none"
-                            />
 
                             <input
-                                name="nid"
-                                placeholder="NID / Birth Certificate"
+                                name="password"
+                                type="password"
+                                placeholder="Password"
                                 className="input input-bordered w-full focus:outline-none"
                                 required
                             />
+
                         </div>
 
 
-
-                        {/* Password */}
-                        <input
-                            name="password"
-                            type="password"
-                            placeholder="Password"
-                            className="input input-bordered w-full focus:outline-none"
-                            required
-                        />
-
-                        {/* Photo */}
                         <input
                             name="photo"
                             type="file"
-                            className="input input-bordered w-full py-1 focus:outline-none"
+                            className="file-input file-input-bordered w-full focus:outline-none"
                             required
                         />
 
-                        <button className="btn  bg-teal-400 font-light w-full ">
+                        <button className="btn bg-teal-400 w-full font-light">
                             Create Account
                         </button>
                     </form>
@@ -236,3 +284,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

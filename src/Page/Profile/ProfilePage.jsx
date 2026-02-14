@@ -1,14 +1,17 @@
 import React, { useState } from "react";
-import { FaStar } from "react-icons/fa";
+import { FaEdit, FaStar } from "react-icons/fa";
 import useUser from "../../Hook/useUser";
 import Loading from "../../Component/Share/Loading";
+import UpdateUserModal from "../../Component/Dashboard/User/UpdateUserModal";
 // use your real data here
 
 const ProfilePage = () => {
     const [selectedCourse, setSelectedCourse] = useState(null);
+    const [openUpdate, setOpenUpdate] = useState(false);
+
 
     //user data
-    const [userData, isLoading] = useUser();
+    const [userData, isLoading, refetch] = useUser();
 
     if (isLoading) {
         return <Loading></Loading>
@@ -21,28 +24,148 @@ const ProfilePage = () => {
         <div className="max-w-4xl mx-auto px-4 py-6">
             <h2 className="text-3xl font-bold mb-6 text-center">My Profile</h2>
 
+
             <div role="tablist" className="tabs tabs-bordered justify-center">
-                <input type="radio" name="profile-tabs" role="tab" className="tab" aria-label="Personal Data" defaultChecked />
-                <div role="tabpanel" className="tab-content p-6">
-                    <h3 className="text-xl font-semibold mb-4">Personal Data</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-white">
-                        <p><strong className="text-teal-200">Name : </strong> {userData?.name}</p>
-                        <p><strong className="text-teal-200">Email : </strong> {userData?.email}</p>
-                        <p><strong>Address : </strong>{userData?.address}</p>
-                        <p><strong>Phone : </strong> {userData?.phone}</p>
-                        <p><strong className="text-teal-200">Student ID : </strong>STU - {`${userData?.studentId}`}</p>
+
+                {/* ---------------- PERSONAL DATA ---------------- */}
+                <input
+                    type="radio"
+                    name="profile-tabs"
+                    role="tab"
+                    className="tab"
+                    aria-label="Personal Data"
+                    defaultChecked
+                />
+
+                <div role="tabpanel" className="tab-content p-6 ring-teal-100 ring-1 ring-offset-1 rounded-box mt-4 shadow">
+
+                    <div className="flex items-center justify-between mb-3">
+                        <h3 className="text-xl font-semibold ">
+                            Personal Information
+                        </h3>
+
+                        <FaEdit className="cursor-pointer" onClick={() => setOpenUpdate(true)} size={22} ></FaEdit>
+                    </div>
+
+                    <div className="flex flex-col lg:flex-row gap-6 font-light">
+
+                        {/* Profile Photo */}
+                        <div className="flex flex-col items-center gap-3">
+                            <img
+                                src={userData?.photo}
+                                alt="student"
+                                className="w-32 h-32 rounded-full object-cover ring ring-teal-300 ring-offset-2"
+                            />
+
+                            <p className="font-semibold">
+                                STU - {userData?.studentId}
+                            </p>
+
+                            <span className="badge badge-outline border-teal-300">
+                                {userData?.role}
+                            </span>
+                        </div>
+
+                        {/* Info Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 flex-1 text-sm">
+
+                            <p>
+                                <strong className="text-teal-400">Name : </strong>
+                                {userData?.name}
+                            </p>
+
+                            <p>
+                                <strong className="text-teal-400">Email : </strong>
+                                {userData?.email}
+                            </p>
+
+                            <p>
+                                <strong>Father Name : </strong>
+                                {userData?.fatherName}
+                            </p>
+
+                            <p>
+                                <strong>Mother Name : </strong>
+                                {userData?.motherName}
+                            </p>
+
+                            <p>
+                                <strong>Date of Birth : </strong>
+                                {userData?.dob}
+                            </p>
+
+                            <p>
+                                <strong>Gender : </strong>
+                                {userData?.gender}
+                            </p>
+
+                            <p>
+                                <strong>Blood Group : </strong>
+                                {userData?.blood}
+                            </p>
+
+                            <p>
+                                <strong>Religion : </strong>
+                                {userData?.religion}
+                            </p>
+
+                            <p>
+                                <strong>Phone : </strong>
+                                {userData?.phone}
+                            </p>
+
+                            <p>
+                                <strong>Guardian : </strong>
+                                {userData?.guardianName}
+                            </p>
+
+                            <p>
+                                <strong>NID / Birth Cert : </strong>
+                                {userData?.nid}
+                            </p>
+
+                            <p>
+                                <strong>Present Address : </strong>
+                                {userData?.presentAddress}
+                            </p>
+
+                            <p>
+                                <strong>Account Created : </strong>
+                                {new Date(userData?.createdAt).toLocaleDateString()}
+                            </p>
+
+                        </div>
                     </div>
                 </div>
 
-                <input type="radio" name="profile-tabs" role="tab" className="tab" aria-label="Review" />
-                <div role="tabpanel" className="tab-content p-6">
-                    <h3 className="text-xl font-semibold mb-4">Review Courses</h3>
+                {/* ---------------- REVIEW ---------------- */}
+                <input
+                    type="radio"
+                    name="profile-tabs"
+                    role="tab"
+                    className="tab"
+                    aria-label="Review"
+                />
+
+                <div role="tabpanel" className="tab-content p-6 bg-base-100 rounded-box mt-4 shadow">
+
+                    <h3 className="text-xl font-semibold mb-4">
+                        Review Courses
+                    </h3>
+
                     <div className="grid md:grid-cols-2 gap-4">
                         {courses.map(course => (
-                            <div key={course.id} className="card bg-base-100 shadow-md border">
+                            <div
+                                key={course.id}
+                                className="card bg-base-100 shadow-md border"
+                            >
                                 <div className="card-body">
-                                    <h2 className="card-title">{course.title}</h2>
+                                    <h2 className="card-title">
+                                        {course.title}
+                                    </h2>
+
                                     <p>{course.description}</p>
+
                                     <div className="card-actions justify-end">
                                         <button
                                             className="btn btn-outline btn-sm font-light border-teal-200 hover:bg-teal-200 hover:text-black"
@@ -57,22 +180,48 @@ const ProfilePage = () => {
                     </div>
                 </div>
 
-                <input type="radio" name="profile-tabs" role="tab" className="tab" aria-label="History" />
-                <div role="tabpanel" className="tab-content p-6">
-                    <h3 className="text-xl font-semibold mb-4">Purchase History</h3>
+                {/* ---------------- HISTORY ---------------- */}
+                <input
+                    type="radio"
+                    name="profile-tabs"
+                    role="tab"
+                    className="tab"
+                    aria-label="History"
+                />
+
+                <div role="tabpanel" className="tab-content p-6 bg-base-100 rounded-box mt-4 shadow">
+
+                    <h3 className="text-xl font-semibold mb-4">
+                        Purchase History
+                    </h3>
+
                     <div className="grid md:grid-cols-2 gap-4">
                         {courses.map(course => (
-                            <div key={course.id} className="card bg-base-100 border shadow">
+                            <div
+                                key={course.id}
+                                className="card bg-base-100 border shadow"
+                            >
                                 <div className="card-body">
-                                    <h2 className="card-title">{course.title}</h2>
+
+                                    <h2 className="card-title">
+                                        {course.title}
+                                    </h2>
+
                                     <p>{course.description}</p>
-                                    <span className="badge border-teal-200 badge-outline">Purchased</span>
+
+                                    <span className="badge border-teal-200 badge-outline">
+                                        Purchased
+                                    </span>
+
                                 </div>
                             </div>
                         ))}
                     </div>
                 </div>
+
             </div>
+
+
 
             {/* Review Modal */}
             {selectedCourse && (
@@ -96,6 +245,17 @@ const ProfilePage = () => {
                     </div>
                 </dialog>
             )}
+
+            {/* update user modal */}
+            {
+                <UpdateUserModal
+                    userData={userData}
+                    open={openUpdate}
+                    onClose={() => setOpenUpdate(false)}
+                    refetch={refetch}
+                />
+
+            }
         </div>
     );
 };

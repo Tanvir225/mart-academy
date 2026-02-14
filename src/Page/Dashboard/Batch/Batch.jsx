@@ -2,16 +2,67 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import ViewBatchModal from '../../../Component/Dashboard/Batch/ViewBatchModal';
 import UpdateBatchModal from '../../../Component/Dashboard/Batch/UpdateBatchModal';
+import useBatches from '../../../Hook/useBatches';
+import useAxios from '../../../Hook/useAxios';
+import toast from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const Batch = () => {
 
-    const [batches, setBatches] = useState(fakeData);
+    const [batches, isLoading, refetch] = useBatches();
+    const axios = useAxios()
     const [selectedBatch, setSelectedBatch] = useState({});
-   
+
 
     const [viewOpen, setViewOpen] = useState(false);
 
     const [updateOpen, setUpdateOpen] = useState(false);
+
+    if (isLoading) {
+        return <div className="text-center py-10">Loading...</div>;
+    }
+
+    const handleDelete = (batchId) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
+
+            if (result.isConfirmed) {
+                try {
+                    const res = await axios.delete(`/batches/${batchId}`);
+
+                    if (res?.data) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Batch deleted successfully.",
+                            icon: "success"
+                        });
+
+                        toast.success("Batch deleted successfully!");
+                        refetch();
+                    }
+
+                } catch (error) {
+                    console.error(error);
+
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Failed to delete batch.",
+                        icon: "error"
+                    });
+                }
+            }
+
+        });
+    };
+
 
     return (
         <div>
@@ -37,7 +88,7 @@ const Batch = () => {
                                 </h2>
 
                                 <p className="text-sm opacity-70">
-                                    {batch.courseTitle}
+                                    {batch.courseName}
                                 </p>
 
                                 <p>
@@ -73,7 +124,7 @@ const Batch = () => {
                                     </button>
 
                                     {/* Delete */}
-                                    <button className="btn btn-sm btn-error">
+                                    <button onClick={() => handleDelete(batch?._id)} className="btn btn-sm btn-error">
                                         Delete
                                     </button>
 
@@ -92,7 +143,10 @@ const Batch = () => {
                     <UpdateBatchModal
                         batch={selectedBatch}
                         open={updateOpen}
-                        onClose={() => setUpdateOpen(false)}
+                        onClose={() => {
+                            setUpdateOpen(false);
+                            refetch();
+                        }}
                     />
                 </div>
             </div>
@@ -102,23 +156,3 @@ const Batch = () => {
 
 export default Batch;
 
-
-// fake data
-const fakeData = [
-    {
-        "_id": "BATCH001",
-        "courseId": "68a44cf687ac66b203487620",
-        "courseTitle": "Computer Skills for Everyday Life",
-        "batchName": "Batch 01",
-        "startDate": "2025-02-01",
-        "modules": [
-            {
-                "moduleId": 1,
-                "liveClass": "zoom link",
-                "recordedClass": "drive link",
-                "assignment": "docs link",
-                "exam": "form link"
-            }
-        ]
-    }
-]

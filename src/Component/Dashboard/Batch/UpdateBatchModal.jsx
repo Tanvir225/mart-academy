@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import useAxios from "../../../Hook/useAxios";
+import toast from "react-hot-toast";
+
 
 const UpdateBatchModal = ({
   batch,
   open,
   onClose,
 }) => {
+
+  const axios = useAxios()
 
   const [formData, setFormData] =
     useState(null);
@@ -38,16 +42,17 @@ const UpdateBatchModal = ({
     });
   };
 
+
   // Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     await axios.patch(
-      `http://localhost:5000/batches/${batch._id}`,
+      `/batches/${batch._id}`,
       formData
     );
 
-    alert("Batch Updated ✅");
+    toast.success("Batch Updated ✅");
     onClose();
   };
 
@@ -101,6 +106,7 @@ const UpdateBatchModal = ({
                   <th>Recorded</th>
                   <th>Assignment</th>
                   <th>Exam</th>
+                  <th>Contest</th>
                 </tr>
               </thead>
 
@@ -172,6 +178,21 @@ const UpdateBatchModal = ({
                             handleChange(
                               i,
                               "exam",
+                              e.target.value
+                            )
+                          }
+                        />
+                      </td>
+                      <td>
+                        <input
+                          className="input input-sm input-bordered"
+                          value={
+                            m.contest || ""
+                          }
+                          onChange={(e) =>
+                            handleChange(
+                              i,
+                              "contest",
                               e.target.value
                             )
                           }

@@ -1,6 +1,8 @@
 import { useState } from "react";
 import useCourses from "../../../Hook/useCourses";
 import { Link } from "react-router-dom";
+import useAxios from "../../../Hook/useAxios";
+import toast from "react-hot-toast";
 
 const AddBatch = () => {
     const [courses] = useCourses()
@@ -14,6 +16,7 @@ const AddBatch = () => {
 
     const [batchName, setBatchName] = useState("");
     const [startDate, setStartDate] = useState("");
+    const axios = useAxios();
 
 
 
@@ -55,12 +58,30 @@ const AddBatch = () => {
 
         const batchData = {
             courseId: selectedCourseId,
+            courseName: selectedCourse.title,
             batchName,
             startDate,
             modules,
         };
 
-        console.log(batchData);
+        // console.log(batchData);
+        axios.post("/batches", batchData)
+            .then((res) => {
+                console.log(res.data);
+                if (res?.data) {
+                    toast.success("Batch added successfully!");
+                    // Reset form
+                    setSelectedCourseId("");
+                    setSelectedCourse(null);
+                    setModules([]);
+                    setBatchName("");
+                    setStartDate("");
+                }
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+
     };
 
     return (

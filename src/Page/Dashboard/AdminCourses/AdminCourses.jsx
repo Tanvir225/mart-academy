@@ -2,12 +2,16 @@ import { useState } from "react";
 import useCourses from "../../../Hook/useCourses";
 import UpdateCourseModal from "../../../Component/Dashboard/UpdateCourseModal.jsx/UpdateCourseModal";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import toast from "react-hot-toast";
+import useAxios from "../../../Hook/useAxios";
 
 
 
 const AdminCourses = () => {
     const [courses, , isFetching, refetch] = useCourses()
     const [open, setOpen] = useState(false);
+    const axios = useAxios();
 
     const [selectedCourse, setSelectedCourse] =
         useState(null);
@@ -22,18 +26,44 @@ const AdminCourses = () => {
 
     // 👉 Delete
     const handleDelete = (id) => {
-        const confirmDelete = confirm(
-            "Are you sure?"
-        );
 
-        if (confirmDelete) {
-            const filtered =
-                courses?.filter(
-                    (c) => c._id !== id
-                );
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
 
+            if (result.isConfirmed) {
+                try {
+                    const res = await axios.delete(`/courses/${id}`);
 
-        }
+                    if (res?.data) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Course deleted successfully.",
+                            icon: "success"
+                        });
+
+                        toast.success("Course deleted successfully!");
+                        refetch();
+                    }
+
+                } catch (error) {
+                    console.error(error);
+
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Failed to delete course.",
+                        icon: "error"
+                    });
+                }
+            }
+
+        });
     };
 
     // 👉 Update
