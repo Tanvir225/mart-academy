@@ -44,7 +44,10 @@ const Success_Story = () => {
                 <div className="carousel-item w-72 rounded-r-2xl  border border-teal-100 flex-col p-3">
                     <img
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop"
-                        className="w-20 h-20 mx-auto my-5 ring-4 ring-offset-2 rounded-full" />
+                        className="w-20 h-20 mx-auto my-5 ring-4 ring-offset-2 rounded-full" 
+                        alt="Shiyam Sarker"
+                        />
+                        
 
                     {/* profile name & role */}
                     <div>
@@ -62,7 +65,9 @@ const Success_Story = () => {
                 <div className="carousel-item w-72 border rounded-r-2xl border-teal-100 flex-col p-3">
                     <img
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop"
-                        className="w-20 h-20 mx-auto my-5  ring-4 ring-offset-2  rounded-full" />
+                        className="w-20 h-20 mx-auto my-5  ring-4 ring-offset-2  rounded-full"
+                        alt="Shiyam Sarker"
+                        />
 
                     {/* profile name & role */}
                     <div>
@@ -81,7 +86,9 @@ const Success_Story = () => {
                   <div className="carousel-item w-72 border rounded-r-2xl border-teal-100 flex-col p-3">
                     <img
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop"
-                        className="w-20 h-20 mx-auto my-5  ring-4 ring-offset-2  rounded-full" />
+                        className="w-20 h-20 mx-auto my-5  ring-4 ring-offset-2  rounded-full" 
+                        alt="Shiyam Sarker"
+                        />
 
                     {/* profile name & role */}
                     <div>
@@ -100,7 +107,9 @@ const Success_Story = () => {
                   <div className="carousel-item w-72 border rounded-r-2xl border-teal-100 flex-col p-3">
                     <img
                         src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop"
-                        className="w-20 h-20 mx-auto my-5  ring-4 ring-offset-2  rounded-full" />
+                        className="w-20 h-20 mx-auto my-5  ring-4 ring-offset-2  rounded-full"
+                        alt="Shiyam Sarker"
+                        />
 
                     {/* profile name & role */}
                     <div>
