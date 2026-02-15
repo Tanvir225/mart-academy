@@ -9,7 +9,7 @@ const AboutUs = () => {
             <Helmet>
                 {/* Basic SEO */}
                 <title>
-                    Mart Academy – About Us | Learn Skills
+                    Mart Academy - About Us | Learn Skills
                 </title>
 
                 <meta
