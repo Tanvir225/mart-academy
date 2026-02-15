@@ -52,7 +52,7 @@ const Home = () => {
                     content="Join Mart Academy and master Computer Basics, Graphics, Web Development, and ICT with our affordable online courses."
                 />
                 <meta property="og:image" content="https://i.ibb.co.com/CK4MGtGx/contest.gif" />
-                <meta property="og:url" content="http://hideous-ray.surge.sh/" />
+                <meta property="og:url" content="https://mart-academy.web.app/" />
                 <meta property="og:type" content="website" />
 
                 {/* Twitter Card */}
