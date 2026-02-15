@@ -11,7 +11,7 @@ const Course = ({ course }) => {
         <div data-aos="fade-up" className="flex flex-col items-center justify-center w-full md:flex-row ">
             <div className="group relative w-full">
                 <img
-                    className="h-64 w-full object-cover transform rounded-lg bg-black/70"
+                    className="h-72 w-full object-cover transform rounded-lg bg-black/70"
                     src={course?.thumbnail || courseImage}
                     alt={course?.title || "Course Thumbnail"}
                 />
