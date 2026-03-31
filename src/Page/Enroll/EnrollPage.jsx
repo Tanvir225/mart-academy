@@ -16,12 +16,29 @@ const EnrollPage = () => {
     const [selectedBatch, setSelectedBatch] =
         useState(null);
 
+
+    // coupon code
+    const [couponCode, setCouponCode] = useState("");
+    const [discount, setDiscount] = useState(0);
+    const [finalPrice, setFinalPrice] = useState(0);
+    const [appliedCoupon, setAppliedCoupon] =
+        useState(null);
+
     // 📚 Get Course
     useEffect(() => {
         axios.get(`/courses/${id}`).then((res) => {
             setCourse(res.data);
         });
     }, [id, axios]);
+
+
+
+    // Set Base Price
+    useEffect(() => {
+        if (course?.summary?.price) {
+            setFinalPrice(course?.summary?.price);
+        }
+    }, [course]);
 
     // 📦 Get Upcoming Batches
     useEffect(() => {
@@ -31,6 +48,47 @@ const EnrollPage = () => {
                 setBatches(res.data);
             });
     }, [id, axios]);
+
+    // apply coupon function
+    const handleApplyCoupon = async () => {
+        if (!couponCode) {
+            return toast.error("Enter coupon code");
+        }
+
+        const res = await axios.post(
+            "/verify-coupon",
+            {
+                code: couponCode,
+                courseId: course?._id,
+            }
+        );
+
+        if (!res.data.valid) {
+            return toast.error(res.data.message);
+        }
+
+        const coupon = res.data.coupon;
+
+        let discountAmount = 0;
+
+        if (coupon.discountType === "percentage") {
+            discountAmount =
+                (course?.summary?.price * coupon.discountValue) / 100;
+        } else {
+            discountAmount = coupon.discountValue;
+        }
+
+        setDiscount(discountAmount);
+        setFinalPrice(course?.summary?.price - discountAmount);
+        setAppliedCoupon(coupon);
+
+        if (appliedCoupon) {
+            toast.error("Coupon already applied");
+            return;
+            
+        }
+        toast.success("Coupon Applied 🎉");
+    };
 
     // 💳 Payment + Enroll
     const handleEnroll = async () => {
@@ -140,11 +198,11 @@ const EnrollPage = () => {
 
                                 {
                                     selectedBatch?._id ===
-                                        batch._id && (
+                                    batch._id && (
                                         <span className="badge badge-success text-white font-light">
                                             Selected
                                         </span>
-                                        )
+                                    )
                                 }
 
                             </div>
@@ -179,13 +237,61 @@ const EnrollPage = () => {
                             </span>
                         </div>
 
+
+
+                    </div>
+
+                    {/* Coupon Section */}
+                    <div className="card-body -mt-7">
+                        <div className="flex gap-2">
+                            <input
+                                type="text"
+                                placeholder="Enter Coupon"
+                                className="input input-bordered focus:outline-none"
+                                value={couponCode}
+                                onChange={(e) =>
+                                    setCouponCode(e.target.value)
+                                }
+                            />
+
+                            <button
+                                onClick={handleApplyCoupon}
+                                className="btn btn-outline"
+                            >
+                                Apply
+                            </button>
+                        </div>
+
+                        {/* Price Summary */}
+                        <div className="mt-4 space-y-2">
+
+                            <div className="flex justify-between">
+                                <span>Original Price</span>
+                                <span>৳ {course?.summary?.price}</span>
+                            </div>
+
+                            {discount > 0 && (
+                                <div className="flex justify-between text-green-500">
+                                    <span>Discount</span>
+                                    <span>- ৳ {discount}</span>
+                                </div>
+                            )}
+
+                            <div className="flex justify-between font-bold">
+                                <span>Total</span>
+                                <span>৳ {finalPrice}</span>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div className="card-body">
                         <button
                             onClick={handleEnroll}
-                            className="btn bg-teal-400 text-black w-full mt-4"
+                            className="btn bg-teal-400 text-black w-full "
                         >
                             Pay & Enroll
                         </button>
-
                     </div>
                 </div>
             )}

@@ -106,13 +106,22 @@ const Navbar = () => {
 
                 {/* notification area */}
                 {clickNotification && (
-                    <div className="absolute top-12 right-0 bg-white shadow-lg rounded-lg p-4 w-64 z-20">
-                        <h3 className="text-black text-base border-b-2 pb-1 ">Notifications</h3>
+                    <div className="absolute top-12 right-2 bg-white shadow-lg rounded-lg p-4 w-60 h-64 overflow-y-auto z-20">
+                        <div className="flex justify-between items-center text-base border-b-2 pb-1">
+                            <h3 className="text-black ">Notifications</h3>
+                            <button
+                                onClick={() => setClickNotification(false)}
+                                className="btn btn-xs btn-error font-thin text-white">
+
+                                Close
+                            </button>
+                        </div>
+
                         <ul className="space-y-2 mt-1">
                             {notifications.map((n) => (
                                 <li
                                     key={n._id}
-                                    className="text-sm text-gray-700"
+                                    className="text-sm text-gray-700 border-b-2"
                                 >
                                     {n.message} :
 
@@ -127,12 +136,7 @@ const Navbar = () => {
                             ))}
                         </ul>
 
-                        <button
-                            onClick={() => setClickNotification(false)}
-                            className="btn btn-sm btn-primary mt-3 w-full">
 
-                            Close
-                        </button>
                     </div>
                 )}
 

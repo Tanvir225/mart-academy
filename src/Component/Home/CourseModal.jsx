@@ -12,7 +12,7 @@ const CourseModal = ({ openModal, setOpenModal }) => {
 
     return (
         <div className="">
-            <div className="mx-auto flex w-72 items-center justify-center ">
+            <div className="mx-auto flex w-72 items-center justify-center  ">
 
                 <div className={`fixed inset-0 z-[100] transition-opacity duration-300 ${openModal ? 'opacity-100' : 'pointer-events-none opacity-0'} bg-black/60 backdrop-blur-sm`}>
                     <div className="absolute inset-0" onClick={() => setOpenModal(false)} />
@@ -30,7 +30,7 @@ const CourseModal = ({ openModal, setOpenModal }) => {
                                 <section className=''>
                                     <Title title="Our Courses"></Title>
 
-                                    <div className='w-full my-5'>
+                                    <div className='w-full my-5 space-y-5'>
                                         {
                                             courses?.map((course, index) => <Course key={index} course={course}></Course>)
                                         }

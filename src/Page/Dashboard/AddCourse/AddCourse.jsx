@@ -1,5 +1,7 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAxios from "../../../Hook/useAxios";
+import toast from "react-hot-toast";
 
 const AddCourse = () => {
     const [course, setCourse] = useState({
@@ -15,7 +17,7 @@ const AddCourse = () => {
             batchEnd: "",
             admissionStart: "",
             newBatch: "",
-            price: parseInt(0),
+            price: 0,
         },
         skill: [],
         modules: [],
@@ -29,6 +31,12 @@ const AddCourse = () => {
         title: "",
         description: "",
     });
+
+    //axios hook calling
+    const axios = useAxios();
+
+    //navigation hooks
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -80,59 +88,43 @@ const AddCourse = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(course);
-        setCourse({
-            title: "",
-            subtitle: "",
-            description: "",
-            thumbnail: "",
-            introVideo: "",
-            summary: {
-                modules: 0,
-                duration: 0,
-                projects: 0,
-                batchEnd: "",
-                admissionStart: "",
-                newBatch: "",
-                price: 0,
-            },
-            skill: [],
-            modules: [],
-        });
+        // console.log(course);
 
 
-        // try {
-        //     const res = await fetch("http://localhost:5000/api/courses", {
-        //         method: "POST",
-        //         headers: { "Content-Type": "application/json" },
-        //         body: JSON.stringify(course),
-        //     });
+        try {
+            const response = await axios.post("/courses", course);
+            console.log(response.data);
 
-        //     if (res.ok) {
-        //         alert("✅ Course created successfully!");
-        //         setCourse({
-        //             title: "",
-        //             subtitle: "",
-        //             description: "",
-        //             thumbnail: "",
-        //             introVideo: "",
-        //             summary: {
-        //                 modules: 0,
-        //                 duration: 0,
-        //                 projects: 0,
-        //                 batchEnd: "",
-        //                 admissionStart: "",
-        //                 newBatch: "",
-        //             },
-        //             skill: [],
-        //             modules: [],
-        //         });
-        //     } else {
-        //         alert("❌ Failed to create course");
-        //     }
-        // } catch (err) {
-        //     console.error(err);
-        // }
+            if (response?.data?.status === 'success') {
+                // Reset form after successful submission
+                setCourse({
+                    title: "",
+                    subtitle: "",
+                    description: "",
+                    thumbnail: "",
+                    introVideo: "",
+                    summary: {
+                        modules: 0,
+                        duration: 0,
+                        projects: 0,
+                        batchEnd: "",
+                        admissionStart: "",
+                        newBatch: "",
+                        price: 0,
+                    },
+                    skill: [],
+                    modules: [],
+                });
+
+                toast.success("Course added successfully!");
+                // Navigate to the courses list page after adding a course
+                navigate("/dashboard/admin-courses");
+
+            }
+
+        } catch (err) {
+            console.error(err);
+        }
     };
 
     return (
@@ -254,7 +246,7 @@ const AddCourse = () => {
                         name="price"
                         placeholder="Course Price"
                         className="w-full border border-teal-200 bg-transparent focus:outline-none p-2 rounded"
-                        value={parseInt(course?.summary?.price) || 0}
+                        value={parseInt(course?.summary?.price)}
                         onChange={handleSummaryChange}
                         onFocus={(e) => (e.target.type = "number")}
                         onBlur={(e) => {

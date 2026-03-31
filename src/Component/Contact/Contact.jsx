@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import toast from "react-hot-toast";
 import emailjs from "@emailjs/browser";
+import { Link } from "react-router-dom";
 
 const Contact = () => {
     const form = useRef();
@@ -36,11 +37,11 @@ const Contact = () => {
                 {/* Left Info Section */}
                 <div>
                     <h1 className="text-2xl md:text-5xl font-bold text-teal-200 mb-6">Let’s Connect</h1>
-                    <p className="text-base mb-4">
+                    <p className="text-base mb-4 font-light">
                         Have a question about our computer courses or want to enroll in a
                         batch? We’re happy to help you.
                     </p>
-                    <ul className="space-y-3 font-light text-sm">
+                    <ul className="space-y-3 font-thin text-sm">
                         <li>
                             <strong>📧 Email:</strong> martacad200@gmail.com
                         </li>
@@ -49,14 +50,12 @@ const Contact = () => {
                         </li>
                         <li>
                             <strong>🌐 Facebook:</strong>{" "}
-                            <a
-                                href="https://facebook.com/martAcadmy"
-                                target="_blank"
-                                rel="noreferrer"
-                                className="text-teal-200 underline"
+                            <Link
+                                to="https://facebook.com/martAcadmy"
+                                className="text-teal-200 underline font-thinner"
                             >
                                 Mart Academy
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                 </div>
@@ -75,7 +74,7 @@ const Contact = () => {
                                 type="text"
                                 name="from_name"
                                 placeholder="Enter your name"
-                                className="input input-bordered focus:outline-none input-primary w-full focus:scale-[1.02] transition"
+                                className="input input-bordered focus:outline-none w-full focus:scale-[1.02] transition"
                                 required
                             />
                         </div>
@@ -88,7 +87,7 @@ const Contact = () => {
                                 type="email"
                                 name="from_email"
                                 placeholder="you@example.com"
-                                className="input input-bordered input-primary w-full focus:outline-none focus:scale-[1.02] transition"
+                                className="input input-bordered w-full focus:outline-none focus:scale-[1.02] transition"
                                 required
                             />
                         </div>
@@ -99,7 +98,7 @@ const Contact = () => {
                             </label>
                             <textarea
                                 name="message"
-                                className="textarea w-full textarea-bordered textarea-primary focus:outline-none h-28 focus:scale-[1.02] transition"
+                                className="textarea w-full textarea-bordered focus:outline-none h-28 focus:scale-[1.02] transition"
                                 placeholder="Type your message..."
                                 required
                             ></textarea>

@@ -7,10 +7,10 @@ const CourseCurriculm = ({ courseDetails }) => {
             <div className="bg-teal-200 border-2 my-10  rounded-lg w-full mb-3 sticky top-0">
                 <h2 className="text-lg font-semibold text-black p-4  ">Course Modules</h2>
             </div>
-            <div className=" w-full text-white relative h-96 overflow-y-auto p-3 space-y-5 font-semibold">
+            <div data-aos="flip-up" className=" w-full text-white relative h-96 overflow-y-auto p-3 space-y-5 font-semibold">
                 {courseDetails?.modules?.map((module, index) => (
 
-                    <div key={index} className="bg-gray-900 hover:text-teal-200 p-5  rounded-lg  w-full">
+                    <div  key={index} className="bg-gray-900 hover:text-teal-200 p-5  rounded-lg  w-full">
                         <h2 className=" font-semibold">Module {module?.module} : {module?.title}</h2>
                         <p className="text-sm text-gray-400 mt-1">{module?.description}</p>
                     </div>

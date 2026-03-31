@@ -3,10 +3,10 @@
 const Timeline = ({ courses }) => {
     // console.log(courses);
     return (
-        <div className="my-7 w-full items-center" >
+        <div className="my-7 w-full flex flex-col md:flex-row" >
             {
                 courses?.map((course, index) => (
-                    <ul key={index} className="timeline flex timeline-vertical " data-aos="fade-up">
+                    <ul key={index} className="timeline flex x timeline-vertical " data-aos="fade-up">
                         <li>
                             <div className="timeline-start timeline-box text-[16px]">{course.title}</div>
                             <div className="timeline-middle">
@@ -27,7 +27,7 @@ const Timeline = ({ courses }) => {
                         </li>
                         {
                             course?.skill?.map((skill, skillIndex) => (
-                                <li key={skillIndex} className="timeline-item">
+                                <li key={skillIndex} className="timeline-item w-96">
                                     <hr className="bg-teal-200" />
                                     <div className="timeline-middle timeline-box">
                                         <svg
