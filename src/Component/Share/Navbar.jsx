@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import useAdmin from "../../Hook/useAdmin";
 import useNotifications from "../../Hook/useNotifications";
+import coupon from "../../assets/coupon.png";
 
 
 const Navbar = () => {
@@ -146,10 +147,14 @@ const Navbar = () => {
 
                 {
                     user ? (
-                        <div className="flex items-center gap-7 justify-center relative ">
+                        <div className="flex items-center gap-5 justify-center relative ">
                             <div className="relative cursor-pointer" onClick={() => setClickNotification(!clickNotification)}>
                                 <IoIosNotificationsOutline size={30}></IoIosNotificationsOutline>
                                 <span className="badge badge-warning badge-dash badge-sm absolute bottom-5 left-5">{notifications?.length || 0}</span>
+                            </div>
+
+                            <div className="w-10 h-10 ml-2">
+                                <img src={coupon} alt="Coupon" srcset="" className="w-full"/>
                             </div>
 
                             <div className="dropdown dropdown-end">

@@ -24,6 +24,12 @@ const EnrollPage = () => {
     const [appliedCoupon, setAppliedCoupon] =
         useState(null);
 
+    // payment method
+    const [method, setMethod] = useState(null);
+    const [trxId, setTrxId] = useState("");
+    const [senderNumber, setSenderNumber] =
+        useState("");
+
     // 📚 Get Course
     useEffect(() => {
         axios.get(`/courses/${id}`).then((res) => {
@@ -82,12 +88,8 @@ const EnrollPage = () => {
         setFinalPrice(course?.summary?.price - discountAmount);
         setAppliedCoupon(coupon);
 
-        if (appliedCoupon) {
-            toast.error("Coupon already applied");
-            return;
-            
-        }
-        toast.success("Coupon Applied 🎉");
+
+        toast.success("Coupon applied successfully");
     };
 
     // 💳 Payment + Enroll
@@ -96,6 +98,14 @@ const EnrollPage = () => {
             return toast.error(
                 "Please select a batch"
             );
+        }
+
+        if (!method) {
+            return toast.error("Select payment method");
+        }
+
+        if (!trxId || !senderNumber) {
+            return toast.error("Fill transaction info");
         }
 
         const enrollData = {
@@ -108,13 +118,21 @@ const EnrollPage = () => {
             batchId: selectedBatch?._id,
             batchName: selectedBatch?.batchName,
 
-            amount: course?.price,
-            paymentId: "MANUAL_" + Date.now(),
-            paymentStatus: "paid",
+            amount: finalPrice,
+
+            paymentMethod: method,
+            transactionId: trxId,
+            senderNumber: senderNumber,
+
+            paymentStatus: "pending", // 🔥 important
+            status: "pending",
+
+            couponCode: appliedCoupon?.code || null,
+            discountAmount: discount,
 
             enrolledAt: new Date(),
-            status: "active",
         };
+
 
         const res = await axios.post(
             "/enrollments",
@@ -285,19 +303,121 @@ const EnrollPage = () => {
                         </div>
                     </div>
 
-                    <div className="card-body">
+                    {/* Payment Method */}
+                    <div className="card-body -mt-7">
+
+                        <h3 className="font-bold text-lg mb-3">
+                            Payment Method
+                        </h3>
+
+                        <div className="grid grid-cols-3 gap-2">
+
+                            {/* bKash */}
+                            <div
+                                onClick={() => setMethod("bkash")}
+                                className={`border p-2 rounded cursor-pointer text-center
+                                    ${method === "bkash" ? "border-pink-500" : ""}`}
+                            >
+                                <img src="https://i.ibb.co/7tD3nhmp/BKash-Icon-Logo-wine.png" className="h-12 mx-auto" />
+                                <p>bKash</p>
+                            </div>
+
+                            {/* Nagad */}
+                            <div
+                                onClick={() => setMethod("nagad")}
+                                className={`border p-2 rounded cursor-pointer text-center
+                                    ${method === "nagad" ? "border-orange-500" : ""}`}
+                            >
+                                <img src="https://i.ibb.co/B5mjcFnD/Nagad-Vertical-Logo-wine.png" className="h-12 mx-auto" />
+                                <p>Nagad</p>
+                            </div>
+
+                            {/* Rocket */}
+                            <div
+                                onClick={() => setMethod("rocket")}
+                                className={`border p-2 rounded cursor-pointer text-center
+                                ${method === "rocket" ? "border-purple-500" : ""}`}
+                            >
+                                <img src="https://i.ibb.co/cXS1Dm0J/dutch-bangla-rocket-logo.png" className="h-12 w-11 rounded-md mx-auto" />
+                                <p>Rocket</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            )}
+
+
+            <div className="bg-base-100 p-6 mt-5 space-y-5 text-center rounded-xl shadow">
+                {/* QR Code */}
+                {method && (
+                    <div className="mt-6 text-center  ">
+
+                        <h4 className="font-semibold mb-2">
+                            Scan & Pay via {method}
+                        </h4>
+
+                        <img
+                            src={`/qr/${method}-qr.jpeg`}
+                            className="w-48 mx-auto border p-2"
+                        />
+
+                        <p className="text-sm mt-2">
+                            Send exact amount: ৳ {finalPrice}
+                        </p>
+
+                    </div>
+                )}
+
+                {/* Transaction Form */}
+                {method && (
+                    <div className="flex items-center gap-4 mt-6 justify-center">
+
+                        <input
+                            type="text"
+                            placeholder={`${method} Transaction ID`}
+                            className="input input-bordered w-full"
+                            value={trxId}
+                            onChange={(e) => setTrxId(e.target.value)}
+                        />
+
+                        <input
+                            type="text"
+                            placeholder={`Sender ${method} Number`}
+                            className="input input-bordered w-full"
+                            value={senderNumber}
+                            onChange={(e) =>
+                                setSenderNumber(e.target.value)
+                            }
+                        />
+
+                    </div>
+                )}
+
+                {/* Enroll Button */}
+                {method && (
+                    <div className="">
                         <button
                             onClick={handleEnroll}
-                            className="btn bg-teal-400 text-black w-full "
+                            className="btn bg-teal-400 text-black w-full font-thin"
                         >
-                            Pay & Enroll
+                            Enroll
                         </button>
                     </div>
-                </div>
-            )}
+                )}
+
+
+            </div>
 
         </div>
     );
 };
+
+
+
 
 export default EnrollPage;
