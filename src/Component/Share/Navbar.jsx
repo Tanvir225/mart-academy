@@ -8,6 +8,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import useAdmin from "../../Hook/useAdmin";
 import useNotifications from "../../Hook/useNotifications";
 import coupon from "../../assets/coupon.png";
+import useCoupons from "../../Hook/useCoupons";
 
 
 const Navbar = () => {
@@ -16,6 +17,9 @@ const Navbar = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [clickNotification, setClickNotification] = useState(false);
     const [notifications] = useNotifications();
+    const [couponShown, setCouponShown] = useState(false);
+
+    const [coupons, isLoading] = useCoupons();
 
 
     //HOOK 
@@ -66,7 +70,6 @@ const Navbar = () => {
     )
 
     // console.log(isOpen);
-
 
 
     return (
@@ -153,8 +156,8 @@ const Navbar = () => {
                                 <span className="badge badge-warning badge-dash badge-sm absolute bottom-5 left-5">{notifications?.length || 0}</span>
                             </div>
 
-                            <div className="w-10 h-10 ml-2">
-                                <img src={coupon} alt="Coupon" srcset="" className="w-full"/>
+                            <div className="w-10 h-10 ml-2" onClick={() => setCouponShown(!couponShown)}>
+                                <img src={coupon} alt="Coupon" srcset="" className="w-full" />
                             </div>
 
                             <div className="dropdown dropdown-end">
@@ -195,13 +198,42 @@ const Navbar = () => {
                         <Link to={"/login"} className="btn button z-20">Login</Link>
                 }
 
+                {
+
+                    couponShown && (
+                        <div className="dropdown dropdown-end w-52 right-2 absolute mt-12 bg-base-100 p-3 rounded-lg">
+                            <div className="">
+                                <h3 className="text-xs border-b-2 pb-1">Available Coupons</h3>
+                                {coupons?.length === 0 && <p className="text-xs text-gray-500">No coupons available</p>}
+                                <ul className="space-y-2 mt-2 text-white text-base ">
+                                    {coupons?.map((c) => (
+                                        <li key={c._id} className="text-sm order-b-2 text-gray-300">
+                                            <span className="text-teal-200 font-mono">{c.code}</span> - {c.discountValue}% - {c.status}
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <div className="flex justify-start mt-2">
+                                    <button onClick={() => setCouponShown(false)} className="btn btn-xs btn-error font-thin text-white">
+                                        Close
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+
 
             </div>
+
+
         </div>
+
     );
 };
 
 export default Navbar;
+
 
 
 const timeAgo = (date) => {
