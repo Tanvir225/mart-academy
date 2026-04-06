@@ -19,7 +19,7 @@ const Navbar = () => {
     const [notifications] = useNotifications();
     const [couponShown, setCouponShown] = useState(false);
 
-    const [coupons, isLoading] = useCoupons();
+    const [coupons] = useCoupons();
 
 
     //HOOK 

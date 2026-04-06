@@ -118,7 +118,7 @@ const EnrollPage = () => {
             batchId: selectedBatch?._id,
             batchName: selectedBatch?.batchName,
 
-            amount: finalPrice,
+            amount: parseInt(finalPrice),
 
             paymentMethod: method,
             transactionId: trxId,
@@ -128,18 +128,19 @@ const EnrollPage = () => {
             status: "pending",
 
             couponCode: appliedCoupon?.code || null,
-            discountAmount: discount,
+            discountAmount: parseInt(discount),
 
             enrolledAt: new Date(),
         };
 
 
         const res = await axios.post(
-            "/enrollments",
+            "/enroll",
             enrollData
         );
+        // console.log(res?.data);
 
-        if (res.data.insertedId) {
+        if (res?.data?.success) {
             toast.success(
                 "Enrollment Successful 🎉"
             );
@@ -380,7 +381,7 @@ const EnrollPage = () => {
                         <input
                             type="text"
                             placeholder={`${method} Transaction ID`}
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full focus:outline-none"
                             value={trxId}
                             onChange={(e) => setTrxId(e.target.value)}
                         />
@@ -388,7 +389,7 @@ const EnrollPage = () => {
                         <input
                             type="text"
                             placeholder={`Sender ${method} Number`}
-                            className="input input-bordered w-full"
+                            className="input input-bordered w-full focus:outline-none"
                             value={senderNumber}
                             onChange={(e) =>
                                 setSenderNumber(e.target.value)

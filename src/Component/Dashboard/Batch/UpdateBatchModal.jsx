@@ -93,20 +93,38 @@ const UpdateBatchModal = ({
               })
             }
           />
-          {/* seat */}
-          <input
-            type="number"
-            className="input w-1/2 input-bordered  focus:outline-none"
-            value={formData.seat}
-            placeholder="seat"
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                seat: parseInt(e.target.value),
-              })
+          <div className="flex items-center gap-5">
+            {/* seat */}
+            <input
+              type="number"
+              className="input input-bordered w-full focus:outline-none"
+              value={formData.seat}
+              placeholder="seat"
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  seat: parseInt(e.target.value),
+                })
 
-            }
-          />
+              }
+            />
+
+            <select
+              className="select  select-bordered focus:outline-none w-full"
+              value={formData.status}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  status: e.target.value,
+                })
+              }
+            >
+              <option value="upcoming">Upcoming</option>
+              <option value="ongoing">Ongoing</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+
 
           {/* Modules Table */}
           <div className="max-h-80 overflow-y-auto">

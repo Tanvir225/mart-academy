@@ -17,6 +17,7 @@ const AddBatch = () => {
     const [batchName, setBatchName] = useState("");
     const [startDate, setStartDate] = useState("");
     const [seat, setSeat] = useState(0);
+    const [status, setStatus] = useState("upcoming");
     const axios = useAxios();
 
 
@@ -64,6 +65,8 @@ const AddBatch = () => {
             startDate,
             seat,
             modules,
+            status,
+
         };
 
         // console.log(batchData);
@@ -148,6 +151,17 @@ const AddBatch = () => {
                                 setSeat(parseInt(e.target.value))
                             }
                         />
+
+                        <select
+                            className="select select-bordered focus:outline-none w-full"
+                            onChange={(e) =>
+                                setStatus(e.target.value)
+                            }
+                        >
+                            <option value="upcoming">Upcoming</option>
+                            <option value="ongoing">Ongoing</option>
+                            <option value="completed">Completed</option>
+                        </select>
                     </div>
 
                     {/* Modules */}
