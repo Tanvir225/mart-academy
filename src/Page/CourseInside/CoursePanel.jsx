@@ -9,7 +9,7 @@ import AssignmentInside from "./AssignmentInside";
 import ExamInside from "./ExamInside";
 
 
-const CoursePanel = () => {
+const CoursePanel = ({batchDetails}) => {
     return (
         <section className="my-10">
             {/* name of each tab group should be unique */}
@@ -20,7 +20,7 @@ const CoursePanel = () => {
                     Live
                 </label>
                 <div className="tab-content bg-base-100 border-base-300 p-6">
-                    <LiveInside></LiveInside>
+                    <LiveInside batchDetails={batchDetails}></LiveInside>
                 </div>
 
                 <label className="tab text-lg">
@@ -29,7 +29,7 @@ const CoursePanel = () => {
                     Recorded
                 </label>
                 <div className="tab-content bg-base-100 border-base-300 p-6">
-                    <RecordInside></RecordInside>
+                    <RecordInside batchDetails={batchDetails}></RecordInside>
                 </div>
 
                 <label className="tab text-lg ">
@@ -38,7 +38,7 @@ const CoursePanel = () => {
                     Assignment
                 </label>
                 <div className="tab-content bg-base-100 border-base-300 p-6">
-                    <AssignmentInside></AssignmentInside>
+                    <AssignmentInside batchDetails={batchDetails}></AssignmentInside>
                 </div>
 
                 <label className="tab text-lg ">
@@ -47,7 +47,7 @@ const CoursePanel = () => {
                     Exam
                 </label>
                 <div className="tab-content bg-base-100 border-base-300 p-6">
-                    <ExamInside></ExamInside>
+                    <ExamInside batchDetails={batchDetails}></ExamInside>
                 </div>
 
                 <label className="tab text-lg ">
@@ -56,7 +56,7 @@ const CoursePanel = () => {
                     Contest
                 </label>
                 <div className="tab-content bg-base-100 border-base-300 p-6">
-                    <ContestInside></ContestInside>
+                    <ContestInside batchDetails={batchDetails}></ContestInside>
                 </div>
 
 

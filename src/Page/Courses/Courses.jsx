@@ -1,7 +1,8 @@
-import {useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useUser from "../../Hook/useUser";
 import CourseCard from "./CourseCard";
 import useAxios from "../../Hook/useAxios";
+import Loading from "../../Component/Share/Loading";
 
 
 const Courses = () => {
@@ -9,14 +10,17 @@ const Courses = () => {
     const [userData] = useUser();
     const [myCourses, setMyCourses] = useState();
     const axios = useAxios();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchMyCourses = async () => {
             try {
                 const res = await axios.get(`/my-courses/${userData?.email}`);
                 setMyCourses(res.data);
+                setLoading(false);
             } catch (error) {
                 console.error("Error fetching my courses:", error);
+                setLoading(false);
             }
         };
         if (userData?.email) {
@@ -24,6 +28,10 @@ const Courses = () => {
         }
 
     }, [axios, userData?.email]);
+
+    if (loading) {
+        return <Loading></Loading>
+    }
 
     return (
         <section className="my-10 space-y-5">

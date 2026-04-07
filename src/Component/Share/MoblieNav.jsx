@@ -23,7 +23,7 @@ const MoblieNav = () => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink onClick={handleClick} to={'/courses'} style={({ isActive }) => ({
+                    <NavLink onClick={handleClick} to={'/my-courses'} style={({ isActive }) => ({
                         color: isActive ? "#7aebeb	" : "",
                     })} className="tooltip" data-tip="Courses">
                         <BsEasel size={22}></BsEasel>

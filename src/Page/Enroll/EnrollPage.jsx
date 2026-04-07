@@ -146,6 +146,7 @@ const EnrollPage = () => {
             toast.success(
                 "Enrollment Successful 🎉"
             );
+            navigate("/my-courses");
         } else {
             toast.error(
                 res.data.message ||

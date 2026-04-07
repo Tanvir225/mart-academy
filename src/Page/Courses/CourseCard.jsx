@@ -12,7 +12,7 @@ const CourseCard = ({ myCourse }) => {
             <Helmet>
                 <title>{myCourse?.courseTitle} - Mart Academy</title>
                 <meta name="description" content={myCourse?.courseDescription} />
-      
+
 
                 {/* Open Graph */}
                 <meta property="og:title" content={myCourse?.courseTitle} />
@@ -51,9 +51,15 @@ const CourseCard = ({ myCourse }) => {
                     </div>
 
                     <div className='w-full'>
-                        <Link to={`/my-courses/${myCourse?.courseId}`} className="btn button Link">
-                            View Course
-                        </Link>
+                        {
+                            myCourse?.status === 'pending' ?
+                                <div>
+                                    <p className="text-sm text-left mb-3">Please wait for Admin <sub className='text-red-600'>approval .</sub></p>
+                                    <button className="btn btn-sm btn-disabled w-full">Pending</button>
+                                </div>
+                                :
+                                <Link to={`/course/${myCourse?.courseId}`} className="btn btn-sm w-full">View Course</Link>
+                        }
                     </div>
                 </div>
             </div>
