@@ -1,4 +1,4 @@
-import { use, useEffect, useState } from "react";
+import {useEffect, useState } from "react";
 import useUser from "../../Hook/useUser";
 import CourseCard from "./CourseCard";
 import useAxios from "../../Hook/useAxios";
