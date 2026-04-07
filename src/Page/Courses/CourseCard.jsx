@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import courseImage from '../../assets/course.jpg';
 import { Helmet } from 'react-helmet-async';
 
 const CourseCard = ({ myCourse }) => {
