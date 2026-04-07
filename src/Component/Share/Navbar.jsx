@@ -52,7 +52,7 @@ const Navbar = () => {
                 })} to={"/"}>Home</NavLink>
             </li>
             <li>
-                <NavLink onClick={handleClick} to={"/courses"} style={({ isActive }) => ({
+                <NavLink onClick={handleClick} to={"/my-courses"} style={({ isActive }) => ({
                     color: isActive ? "#7aebeb	" : "",
                 })}>Courses</NavLink>
             </li>

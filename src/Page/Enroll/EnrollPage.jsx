@@ -114,6 +114,8 @@ const EnrollPage = () => {
 
             courseId: course?._id,
             courseTitle: course?.title,
+            courseImage: course?.thumbnail,
+            courseDescription: course?.description,
 
             batchId: selectedBatch?._id,
             batchName: selectedBatch?.batchName,

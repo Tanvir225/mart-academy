@@ -2,22 +2,24 @@ import { Link } from 'react-router-dom';
 import courseImage from '../../assets/course.jpg';
 import { Helmet } from 'react-helmet-async';
 
-const CourseCard = () => {
+const CourseCard = ({ myCourse }) => {
+
+
     return (
         <>
 
             {/* meta data */}
 
             <Helmet>
-                {/* <title>{course.title} - Mart Academy</title>
-                <meta name="description" content={course.shortDescription} />
-                <meta name="keywords" content={course.keywords.join(", ")} /> */}
+                <title>{myCourse?.courseTitle} - Mart Academy</title>
+                <meta name="description" content={myCourse?.courseDescription} />
+      
 
                 {/* Open Graph */}
-                {/* <meta property="og:title" content={course.title} />
-                <meta property="og:description" content={course.shortDescription} />
-                <meta property="og:image" content={course.image} />
-                <meta property="og:url" content={`http://hideous-ray.surge.sh/course/${id}`} /> */}
+                <meta property="og:title" content={myCourse?.courseTitle} />
+                <meta property="og:description" content={myCourse?.courseDescription} />
+                <meta property="og:image" content={myCourse?.courseImage} />
+                <meta property="og:url" content={`https://mart-academy.web.app/course/${myCourse?.courseId}`} />
 
             </Helmet>
             {/* end */}
@@ -25,12 +27,10 @@ const CourseCard = () => {
 
             <div data-aos="fade-up" className="flex flex-col items-center justify-center w-full lg:flex-row ">
 
-
-
                 <div className="group relative w-full">
                     <img
                         className="h-64 w-full object-cover transform rounded-lg bg-black/70"
-                        src={courseImage}
+                        src={myCourse?.courseImage}
                         alt="Course"
                     />
 
@@ -38,7 +38,7 @@ const CourseCard = () => {
                 </div>
                 <div className="w-full h-64  space-y-3 rounded-br-lg rounded-tr-lg p-6 text-center shadow-[0px_7px_30px_2px_rgba(100,100,111,0.2)] bg-[#18181B]">
                     <div className="space-y-1 ">
-                        <h2 className="text-left  font-medium">Wordpress Web development</h2>
+                        <h2 className="text-left  font-medium">{myCourse?.courseTitle}</h2>
                         <p className="text-xs text-left">Mart <span className='text-teal-300'>Academy</span></p>
 
                     </div>
@@ -52,7 +52,7 @@ const CourseCard = () => {
                     </div>
 
                     <div className='w-full'>
-                        <Link to={`/courses/${1}`} className="btn button Link">
+                        <Link to={`/my-courses/${myCourse?.courseId}`} className="btn button Link">
                             View Course
                         </Link>
                     </div>
