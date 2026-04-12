@@ -22,6 +22,11 @@ const DashNav = () => {
                 })}>Batches</NavLink>
             </li>
             <li>
+                <NavLink to={'enrollments'} style={({ isActive }) => ({
+                    color: isActive ? "#7aebeb	" : "",
+                })}>Enrollments</NavLink>
+            </li>
+            <li>
                 <NavLink to={'all-users'} style={({ isActive }) => ({
                     color: isActive ? "#7aebeb	" : "",
                 })}>Students</NavLink>

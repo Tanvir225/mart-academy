@@ -52,10 +52,10 @@ const CourseCard = ({ myCourse }) => {
 
                     <div className='w-full'>
                         {
-                            myCourse?.status === 'pending' ?
+                            myCourse?.status === 'pending' || myCourse?.status === 'rejected' ?
                                 <div>
                                     <p className="text-sm text-left mb-3">Please wait for Admin <sub className='text-red-600'>approval .</sub></p>
-                                    <button className="btn btn-sm btn-disabled w-full">Pending</button>
+                                    <button className="btn btn-sm btn-disabled w-full">{myCourse?.status === 'pending' ? 'Pending' : 'Rejected'}</button>
                                 </div>
                                 :
                                 <Link to={`/course/${myCourse?.courseId}`} className="btn btn-sm w-full">View Course</Link>

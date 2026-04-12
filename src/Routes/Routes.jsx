@@ -21,6 +21,7 @@ import Batch from "../Page/Dashboard/Batch/Batch";
 import AddBatch from "../Page/Dashboard/Batch/AddBatch";
 import AdminCourses from "../Page/Dashboard/AdminCourses/AdminCourses";
 import EnrollPage from "../Page/Enroll/EnrollPage";
+import Enrollments from "../Page/Dashboard/Enrollments/Enrollments";
 
 
 
@@ -104,6 +105,11 @@ const router = createBrowserRouter([
       {
         path: "add-batch",
         element: <AdminRoutes><AddBatch></AddBatch></AdminRoutes>
+
+      },
+      {
+        path: "enrollments",
+        element: <AdminRoutes><Enrollments></Enrollments></AdminRoutes>
 
       },
       {

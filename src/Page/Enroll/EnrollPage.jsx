@@ -137,7 +137,7 @@ const EnrollPage = () => {
 
 
         const res = await axios.post(
-            "/enroll",
+            "/enrolls",
             enrollData
         );
         // console.log(res?.data);
