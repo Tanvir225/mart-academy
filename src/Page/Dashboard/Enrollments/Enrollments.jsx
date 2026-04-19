@@ -3,11 +3,13 @@ import { AllCommunityModule, ModuleRegistry, QuickFilterModule } from "ag-grid-c
 import { AgGridReact } from "ag-grid-react";
 import useEnrollments from "../../../Hook/useEnrollments";
 import useAxios from "../../../Hook/useAxios";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
 const Enrollments = () => {
-    const [enrolls] = useEnrollments();
+    const [enrolls, ,refetch] = useEnrollments();
     const [search, setSearch] = useState("");
     const [rowData, setRowData] = useState([]);
     const [selected, setSelected] = useState(null);
@@ -26,34 +28,63 @@ const Enrollments = () => {
                 [field]: value,
             });
 
-            if (res.data?.acknowledged || res.data?.modifiedCount > 0) {
+            // ✅ check API success
+            if (res.data?.success && res.data?.result?.modifiedCount > 0) {
                 setRowData((prev) =>
                     prev.map((row) =>
                         row._id === id ? { ...row, [field]: value } : row
                     )
                 );
+                toast.success("Updated successfully");
+            } else {
+                toast.error(res.data?.message || "Update failed");
             }
+
         } catch (error) {
-            console.error(error);
+            console.error("Update error:", error);
+            toast.error("An error occurred while updating");
         }
     };
 
     // ✅ delete
-    const handleDelete = async (id) => {
-        const confirmDelete = confirm("Are you sure?");
-        if (!confirmDelete) return;
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then(async (result) => {
 
-        try {
-            const res = await axios.delete(`/enrolls/${id}`);
+            if (result.isConfirmed) {
+                try {
+                    const res = await axios.delete(`/enrolls/${id}`);
 
-            if (res.data?.deletedCount > 0) {
-                setRowData((prev) =>
-                    prev.filter((item) => item._id !== id)
-                );
+                    if (res?.data) {
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Enrollment deleted successfully.",
+                            icon: "success"
+                        });
+
+                        toast.success("Enrollment deleted successfully!");
+                        refetch();
+                    }
+
+                } catch (error) {
+                    console.error(error);
+
+                    Swal.fire({
+                        title: "Error!",
+                        text: "Failed to delete enrollment.",
+                        icon: "error"
+                    });
+                }
             }
-        } catch (error) {
-            console.error(error);
-        }
+
+        });
     };
 
     // ✅ status color
@@ -82,9 +113,16 @@ const Enrollments = () => {
 
     // ✅ payment fixed
     const PaymentRenderer = (props) => {
+
+        const color =
+            props.value === "paid"
+                ? "bg-green-600"
+                : props.value === "failed"
+                    ? "bg-red-600"
+                    : "bg-yellow-500";
         return (
             <select
-                className="select bg-blue-600 text-white"
+                className={`select text-white ${color}`}
                 value={props.value}
                 onChange={(e) =>
                     handleUpdate(props.data._id, "paymentStatus", e.target.value)
@@ -153,7 +191,7 @@ const Enrollments = () => {
 
     return (
         <div className="p-6">
-            <h1 className="text-xl font-thin mb-2">Enrollment Management {enrolls?.length} <sub className="text-teal-200">person</sub></h1>
+            <h1 className="text-xl font-thin mb-2">Enrolled {enrolls?.length} <sub className="text-teal-200">person</sub></h1>
 
             <input
                 type="text"
