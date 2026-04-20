@@ -1,24 +1,76 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaEdit, FaStar } from "react-icons/fa";
 import useUser from "../../Hook/useUser";
 import Loading from "../../Component/Share/Loading";
 import UpdateUserModal from "../../Component/Dashboard/User/UpdateUserModal";
+import useAxios from "../../Hook/useAxios";
+import toast from "react-hot-toast";
 // use your real data here
 
 const ProfilePage = () => {
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [openUpdate, setOpenUpdate] = useState(false);
-
-
+    const [myCourses, setMyCourses] = useState();
+    const [loading, setLoading] = useState(true);
+    const axios = useAxios();
     //user data
     const [userData, isLoading, refetch] = useUser();
 
-    if (isLoading) {
+    useEffect(() => {
+        const fetchMyCourses = async () => {
+            try {
+                const res = await axios.get(`/my-courses/${userData?.email}`);
+                setMyCourses(res.data);
+                setLoading(false);
+            } catch (error) {
+                console.error("Error fetching my courses:", error);
+                setLoading(false);
+            }
+        };
+        if (userData?.email) {
+            fetchMyCourses();
+        }
+
+    }, [axios, userData?.email]);
+
+    if (loading || isLoading) {
         return <Loading></Loading>
     }
 
+    // handle success story submit
+    const handleStorySubmit = (e) => {
+        e.preventDefault();
+        const story = e.target.story.value;
 
-    console.log(userData);
+        // story docs
+        const storyData = {
+            user: userData?.name,
+            email: userData?.email,
+            photo: userData?.photo,
+            courseTitle: selectedCourse?.courseTitle,
+            story,
+        };
+
+        // send to server
+        axios.post("/story", storyData)
+            .then(res => {
+                if (res?.data) {
+                    toast.success("Story submitted successfully!");
+                    setSelectedCourse(null);
+                } else {
+                    toast.error("Failed to submit story. Please try again.");
+                }
+            })
+            .catch(err => {
+                console.error("Error submitting story:", err);
+                toast.error("An error occurred while submitting your story. Please try again.");
+            });
+
+    };
+
+
+    // console.log(userData);
+
 
     return (
         <div className="max-w-4xl mx-auto px-4 py-6">
@@ -154,24 +206,25 @@ const ProfilePage = () => {
                     </h3>
 
                     <div className="grid md:grid-cols-2 gap-4">
-                        {courses.map(course => (
+                        {myCourses?.map(course => (
                             <div
                                 key={course.id}
                                 className="card bg-base-100 shadow-md border"
                             >
                                 <div className="card-body">
-                                    <h2 className="card-title">
-                                        {course.title}
+                                    <img className="rounded-lg h-32 md:h-40 object-cover" src={course.courseImage} alt={course.courseTitle} srcset="" />
+                                    <h2 className="card-title text-base text-teal-200">
+                                        {course.courseTitle}
                                     </h2>
 
-                                    <p>{course.description}</p>
+                                    <p className="text-xs">{course.courseDescription}</p>
 
                                     <div className="card-actions justify-end">
                                         <button
                                             className="btn btn-outline btn-sm font-light border-teal-200 hover:bg-teal-200 hover:text-black"
                                             onClick={() => setSelectedCourse(course)}
                                         >
-                                            Review Now
+                                            Success Story
                                         </button>
                                     </div>
                                 </div>
@@ -196,22 +249,42 @@ const ProfilePage = () => {
                     </h3>
 
                     <div className="grid md:grid-cols-2 gap-4">
-                        {courses.map(course => (
+                        {myCourses?.map(course => (
                             <div
                                 key={course.id}
                                 className="card bg-base-100 border shadow"
                             >
                                 <div className="card-body">
 
-                                    <h2 className="card-title">
-                                        {course.title}
+                                    <img src={course.courseImage} alt={course.courseTitle} className="h-32 object-cover rounded-lg" />
+
+                                    <h2 className="card-title text-base text-teal-200">
+                                        {course.courseTitle}
                                     </h2>
 
-                                    <p>{course.description}</p>
+                                    <p className="text-xs">{course.courseDescription}</p>
 
-                                    <span className="badge border-teal-200 badge-outline">
-                                        Purchased
-                                    </span>
+                                    <div className="flex items-center justify-center flex-wrap gap-2">
+                                        <span className="badge text-xs border-teal-200 badge-outline">
+                                            {course?.status}
+                                        </span>
+                                        <span className="badge text-xs border-teal-200 badge-outline">
+                                            {course?.paymentMethod}
+                                        </span>
+                                        <span className="badge text-xs border-teal-200 badge-outline">
+                                            {course?.amount} BDT
+                                        </span>
+                                        <span className="badge text-xs border-teal-200 badge-outline">
+                                            {course?.couponCode} || {course?.discountAmount} BDT
+                                        </span>
+                                        <span className="badge text-xs border-teal-200 badge-outline">
+                                            {course?.enrolledAt && new Date(course.enrolledAt).toLocaleDateString("en-GB", {
+                                                day: "numeric",
+                                                month: "short",
+                                                year: "numeric",
+                                            })}
+                                        </span>
+                                    </div>
 
                                 </div>
                             </div>
@@ -227,9 +300,9 @@ const ProfilePage = () => {
             {selectedCourse && (
                 <dialog id="review_modal" className="modal modal-open">
                     <div className="modal-box">
-                        <h3 className="font-bold text-lg mb-2">Review: {selectedCourse.title}</h3>
-                        <form className="space-y-4">
-                            <textarea className="textarea textarea-bordered border-teal-200 focus:outline-none w-full" placeholder="Write your review..." />
+                        <h3 className="font-bold text-lg mb-2">Story: {selectedCourse.courseTitle}</h3>
+                        <form onSubmit={handleStorySubmit} className="space-y-4">
+                            <textarea className="textarea textarea-bordered border-teal-200 focus:outline-none w-full" placeholder="Write your story..." name="story" />
 
                             <div className="modal-action">
                                 <button type="submit" className="btn button">Submit</button>
@@ -262,17 +335,4 @@ const ProfilePage = () => {
 
 export default ProfilePage;
 
-// Sample course data
-const courses = [
-    {
-        id: 1,
-        title: "Web Development",
-        description: "Learn how to build modern web applications."
-    },
-    {
-        id: 2,
-        title: "Data Science",
-        description: "Master data analysis and machine learning."
-    },
 
-];
