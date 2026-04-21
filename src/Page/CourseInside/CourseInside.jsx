@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Loading from "../../Component/Share/Loading";
 import useCourseInside from "../../Hook/useCourseInside";
 import CourseNotification from "./CourseNotification";
@@ -7,14 +8,16 @@ const CourseInside = () => {
 
     const [batchDetails, isLoading] = useCourseInside()
 
+    const [videoUrl, setVideoUrl] = useState(""); // 🔥 main state
+
     if (isLoading) {
         return <Loading></Loading>
     }
     return (
         <section>
             <CourseNotification></CourseNotification>
-            <ViedoPlayer></ViedoPlayer>
-            <CoursePanel batchDetails={batchDetails}></CoursePanel>
+            <ViedoPlayer videoUrl={videoUrl}></ViedoPlayer>
+            <CoursePanel batchDetails={batchDetails} setVideoUrl={setVideoUrl} ></CoursePanel>
         </section>
     );
 };

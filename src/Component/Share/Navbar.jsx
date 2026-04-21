@@ -9,6 +9,7 @@ import useAdmin from "../../Hook/useAdmin";
 import useNotifications from "../../Hook/useNotifications";
 import coupon from "../../assets/coupon.png";
 import useCoupons from "../../Hook/useCoupons";
+import useUser from "../../Hook/useUser";
 
 
 const Navbar = () => {
@@ -25,6 +26,7 @@ const Navbar = () => {
     //HOOK 
     const { user, logoutUser } = useAuth();
     const [isAdmin, isPending] = useAdmin();
+    const [userData] = useUser();
     console.log(isAdmin);
 
     isPending && <div>Loading...</div>
@@ -174,7 +176,7 @@ const Navbar = () => {
                                     <li>
                                         <a className="justify-between">
                                             {user?.displayName || "Xino"}
-                                            <span className="badge">S</span>
+                                            <span className="badge">{userData?.role==='student' ? 'Student' : 'Admin'}</span>
                                         </a>
                                     </li>
                                     <li className="hidden md:block"><Link to={"/profile"}>profile</Link></li>

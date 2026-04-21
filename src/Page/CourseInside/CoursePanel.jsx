@@ -9,7 +9,7 @@ import AssignmentInside from "./AssignmentInside";
 import ExamInside from "./ExamInside";
 
 
-const CoursePanel = ({batchDetails}) => {
+const CoursePanel = ({batchDetails,setVideoUrl}) => {
     return (
         <section className="my-10">
             {/* name of each tab group should be unique */}
@@ -29,7 +29,7 @@ const CoursePanel = ({batchDetails}) => {
                     Recorded
                 </label>
                 <div className="tab-content bg-base-100 border-base-300 p-6">
-                    <RecordInside batchDetails={batchDetails}></RecordInside>
+                    <RecordInside batchDetails={batchDetails} setVideoUrl={setVideoUrl}></RecordInside>
                 </div>
 
                 <label className="tab text-lg ">

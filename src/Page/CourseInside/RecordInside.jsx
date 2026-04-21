@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-const RecordInside = ({ batchDetails }) => {
+const RecordInside = ({ batchDetails, setVideoUrl }) => {
     const [isOpen, setIsOpen] = useState(null);
     const handleToggle = (idx) => {
         setIsOpen((prevIdx) => (prevIdx === idx ? null : idx));
@@ -34,7 +34,12 @@ const RecordInside = ({ batchDetails }) => {
                                     <div className={`grid overflow-hidden text-slate-600 transition-all duration-300 ease-in-out ${isOpen === module?.moduleId ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}>
                                         <div className="overflow-hidden m-3">
                                             <p className=" text-[12px] md:text-sm text-teal-200">Please join this link.</p>
-                                            <Link to={module?.recordedClass || '/my-courses'} className=" underline block py-2 text-sm text-white">Click To See Record Class for Module - {module.moduleId}</Link>
+                                            <button
+                                                onClick={() => setVideoUrl(module?.recordedClass)}
+                                                className="underline block py-2 text-sm text-white"
+                                            >
+                                                Click To See Record Class for Module - {module.moduleId}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
