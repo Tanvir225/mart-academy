@@ -3,6 +3,25 @@ import { Helmet } from 'react-helmet-async';
 
 const CourseCard = ({ myCourse }) => {
 
+    const calculateProgress = (modules = []) => {
+        let total = modules.length * 5;
+        let completed = 0;
+
+        modules.forEach((mod) => {
+            if (mod.liveClass) completed++;
+            if (mod.recordedClass) completed++;
+            if (mod.assignment) completed++;
+            if (mod.exam) completed++;
+            if (mod.contest) completed++;
+        });
+
+        if (total === 0) return 0;
+
+        return Math.round((completed / total) * 100);
+    };
+
+    const progress = calculateProgress(myCourse?.batchDetails?.modules);
+
 
     return (
         <>
@@ -45,14 +64,23 @@ const CourseCard = ({ myCourse }) => {
                     <div className='w-full'>
                         <div className='flex justify-between items-center'>
                             <p className="text-sm text-left text-teal-300">Course Progress</p>
-                            <p className="text-xs text-left">50%</p>
+                            <p className="text-xs text-left">{progress}%</p>
                         </div>
-                        <progress className="progress" value={50} max={100} ></progress>
+                        <progress
+                            className={`progress ${progress < 30
+                                    ? "progress-error"
+                                    : progress < 70
+                                        ? "progress-warning"
+                                        : "progress-success"
+                                }`}
+                            value={progress}
+                            max={100}
+                        />
                     </div>
 
                     <div className='w-full'>
                         {
-                           ( myCourse?.status === 'pending' || myCourse?.status === 'rejected' || myCourse?.paymentStatus === 'failed' || myCourse?.paymentStatus === 'pending' ) ?
+                            (myCourse?.status === 'pending' || myCourse?.status === 'rejected' || myCourse?.paymentStatus === 'failed' || myCourse?.paymentStatus === 'pending') ?
                                 <div>
                                     <p className="text-sm text-left mb-3">Please wait for Admin <sub className='text-red-600'>approval .</sub></p>
                                     <button className="btn btn-sm btn-disabled w-full">{myCourse?.status === 'pending' || myCourse?.paymentStatus === 'pending' ? 'Pending' : 'Rejected'}</button>

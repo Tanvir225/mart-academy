@@ -9,7 +9,7 @@ const CourseNotification = () => {
                 <Link to={-1} className="btn btn-sm bg-teal-200 text-black">back</Link>
             </div>
             <div className="">
-                <Link to={''} className="btn btn-sm bg-green-200 text-black font-light">game</Link>
+                <Link to={'https://www.typingtest.com/'} className="btn btn-sm bg-green-200 text-black font-light">typing test</Link>
             </div>
         </section>
     );

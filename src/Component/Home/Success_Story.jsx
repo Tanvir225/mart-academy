@@ -65,10 +65,10 @@ const Success_Story = () => {
 
 
     return (
-        <div className=" p-5">
+        <div className=" p-5 flex gap-5 items-center">
             {
                 stories.map((story) => (
-                    <div key={story._id} className="carousel rounded-box  gap-5">
+                    <div key={story._id} className="">
                         <div className="carousel-item w-72 rounded-r-2xl  border border-teal-100 flex-col p-3">
                             <img
                                 src={story?.photo}

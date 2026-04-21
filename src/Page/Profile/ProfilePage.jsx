@@ -55,8 +55,14 @@ const ProfilePage = () => {
         axios.post("/story", storyData)
             .then(res => {
                 if (res?.data) {
-                    toast.success("Story submitted successfully!");
-                    setSelectedCourse(null);
+                    if (res?.data?.status) {
+                        toast.error(res?.data?.message);
+                        setSelectedCourse(null);
+                    }
+                    else {
+                        toast.success("Story submitted successfully!");
+                        setSelectedCourse(null);
+                    }
                 } else {
                     toast.error("Failed to submit story. Please try again.");
                 }
