@@ -114,7 +114,7 @@ const Navbar = () => {
                 {/* notification area */}
                 {clickNotification && (
                     <div className="absolute top-12 right-2 bg-white shadow-lg rounded-lg p-2 w-60 h-64 overflow-y-auto z-20">
-                        <p onClick={() => setIsMark(!isMark)} className="text-xs cursor-pointer text-black text-right my-2 underline">mark as read</p>
+                        <p onClick={() => {setIsMark(!isMark) ,setClickNotification(false)}} className="text-xs cursor-pointer text-black text-right my-2 underline">{`mark as ${isMark ? 'unread' : 'read'}`}</p>
                         <div className="flex justify-between items-center text-base border-b-2 pb-1">
 
                             <h3 className="text-black ">Notifications</h3>
