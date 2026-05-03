@@ -27,6 +27,11 @@ const DashNav = () => {
                 })}>Enrollments</NavLink>
             </li>
             <li>
+                <NavLink to={'manage-coupon'} style={({ isActive }) => ({
+                    color: isActive ? "#7aebeb	" : "",
+                })}>Coupons</NavLink>
+            </li>
+            <li>
                 <NavLink to={'all-users'} style={({ isActive }) => ({
                     color: isActive ? "#7aebeb	" : "",
                 })}>Students</NavLink>

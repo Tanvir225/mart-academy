@@ -16,6 +16,7 @@ const Navbar = () => {
 
     //state
     const [isOpen, setIsOpen] = useState(false);
+    const [isMark, setIsMark] = useState(false);
     const [clickNotification, setClickNotification] = useState(false);
     const [notifications] = useNotifications();
     const [couponShown, setCouponShown] = useState(false);
@@ -112,8 +113,10 @@ const Navbar = () => {
 
                 {/* notification area */}
                 {clickNotification && (
-                    <div className="absolute top-12 right-2 bg-white shadow-lg rounded-lg p-4 w-60 h-64 overflow-y-auto z-20">
+                    <div className="absolute top-12 right-2 bg-white shadow-lg rounded-lg p-2 w-60 h-64 overflow-y-auto z-20">
+                        <p onClick={() => setIsMark(!isMark)} className="text-xs cursor-pointer text-black text-right my-2 underline">mark as read</p>
                         <div className="flex justify-between items-center text-base border-b-2 pb-1">
+
                             <h3 className="text-black ">Notifications</h3>
                             <button
                                 onClick={() => setClickNotification(false)}
@@ -155,7 +158,7 @@ const Navbar = () => {
                         <div className="flex items-center gap-5 justify-center relative ">
                             <div className="relative cursor-pointer" onClick={() => setClickNotification(!clickNotification)}>
                                 <IoIosNotificationsOutline size={30}></IoIosNotificationsOutline>
-                                <span className="badge badge-warning badge-dash badge-sm absolute bottom-5 left-5">{notifications?.length || 0}</span>
+                                <span className="badge badge-warning badge-dash badge-sm absolute bottom-5 left-5">{isMark ? 0 : notifications?.length}</span>
                             </div>
 
                             <div className="w-10 h-10 ml-2" onClick={() => setCouponShown(!couponShown)}>
@@ -176,7 +179,7 @@ const Navbar = () => {
                                     <li>
                                         <a className="justify-between">
                                             {user?.displayName || "Xino"}
-                                            <span className="badge">{userData?.role==='student' ? 'Student' : 'Admin'}</span>
+                                            <span className="badge">{userData?.role === 'student' ? 'Student' : 'Admin'}</span>
                                         </a>
                                     </li>
                                     <li className="hidden md:block"><Link to={"/profile"}>profile</Link></li>

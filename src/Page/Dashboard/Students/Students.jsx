@@ -35,46 +35,51 @@ const RoleRenderer = (params) => {
 };
 
 
-// action render
-const ActionRenderer = (props) => {
-    const { data, onView, onDelete } = props;
 
-    return (
-        <div className="flex gap-2">
-            <button
-                className="btn btn-xs btn-info text-white"
-                onClick={() => onView(data)}
-            >
-                View
-            </button>
-
-            <button
-                className="btn btn-xs btn-warning"
-                onClick={() => alert("Edit " + data.name)}
-            >
-                Edit
-            </button>
-
-            <button
-                className="btn btn-xs btn-error text-white"
-                onClick={() => onDelete(data.email)}
-            >
-                Delete
-            </button>
-        </div>
-    );
-};
 
 
 
 const Students = () => {
 
-    const [users,,refetch] = useAllUser()
+    const [users, , refetch] = useAllUser()
 
 
     const axios = useAxios();
 
     const [selectedUser, setSelectedUser] = useState(null);
+
+    // action render
+    const ActionRenderer = (props) => {
+        const { data, onView, onDelete } = props;
+
+        return (
+            <div className="flex gap-2">
+                <button
+                    className="btn btn-xs btn-info text-white"
+                    onClick={() => onView(data)}
+                >
+                    View
+                </button>
+
+                <button
+                    className="btn btn-xs btn-warning"
+                    onClick={() => {
+                        document.getElementById("user_modal").showModal();
+                        setSelectedUser(data);
+                    }}
+                >
+                    Edit
+                </button>
+
+                <button
+                    className="btn btn-xs btn-error text-white"
+                    onClick={() => onDelete(data.email)}
+                >
+                    Delete
+                </button>
+            </div>
+        );
+    };
 
     // 👉 View
     const handleView = (user) => {
@@ -123,6 +128,35 @@ const Students = () => {
         });
     };
 
+    // ========================================
+    // Update Coupon
+    // ========================================
+    const handleUpdate = async (e) => {
+        e.preventDefault();
+
+        const form = e.target;
+
+        const updatedUser = {
+            role: form.role.value,
+        };
+
+        try {
+            const res = await axios.patch(
+                `/users/${selectedUser.email}`,
+                updatedUser
+            );
+
+            await refetch();
+
+            document.getElementById("user_modal").close();
+            setSelectedUser(null);
+
+            toast.success(res?.data?.message || "User updated successfully!");
+        } catch (error) {
+            console.log(error);
+            toast.error("Failed to update user");
+        }
+    };
     // 👉 Columns
     const columnDefs = useMemo(
         () => [
@@ -303,6 +337,47 @@ const Students = () => {
                             </form>
                         </div>
 
+                    </div>
+                </dialog>
+
+                {/* UPDATE MODAL */}
+                <dialog id="user_modal" className="modal modal-middle">
+                    <div className="modal-box max-w-md">
+                        <h3 className="font-bold text-lg mb-4">
+                            Update User Role
+                        </h3>
+                        {selectedUser && (
+                            <form onSubmit={handleUpdate} className="space-y-4">
+                                <div>
+                                    <label className="block mb-1 font-medium">
+                                        Role
+                                    </label>
+                                    <select
+                                        name="role"
+                                        defaultValue={selectedUser.role}
+                                        className="select select-bordered w-full"
+                                    >
+                                        <option value="student">Student</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                </div>
+                                <div className="modal-action">
+                                    <button type="submit" className="btn btn-primary font-thin">
+                                        Update User
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="btn btn-secondary font-thin ml-2"
+                                        onClick={() => {
+                                            document.getElementById("user_modal").close();
+                                            setSelectedUser(null);
+                                        }}
+                                    >
+                                        Cancel
+                                    </button>
+                                </div>
+                            </form>
+                        )}
                     </div>
                 </dialog>
             </div>

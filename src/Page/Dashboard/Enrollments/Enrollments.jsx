@@ -190,7 +190,7 @@ const Enrollments = () => {
     );
 
     return (
-        <div className="p-6">
+        <div className="">
             <h1 className="text-xl font-thin mb-2">Enrolled {enrolls?.length} <sub className="text-teal-200">person</sub></h1>
 
             <input

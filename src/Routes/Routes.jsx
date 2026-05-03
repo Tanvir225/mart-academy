@@ -22,6 +22,7 @@ import AddBatch from "../Page/Dashboard/Batch/AddBatch";
 import AdminCourses from "../Page/Dashboard/AdminCourses/AdminCourses";
 import EnrollPage from "../Page/Enroll/EnrollPage";
 import Enrollments from "../Page/Dashboard/Enrollments/Enrollments";
+import CouponManagement from "../Page/Dashboard/CouponManagement/Couponmanagement";
 
 
 
@@ -110,6 +111,11 @@ const router = createBrowserRouter([
       {
         path: "enrollments",
         element: <AdminRoutes><Enrollments></Enrollments></AdminRoutes>
+
+      },
+      {
+        path: "manage-coupon",
+        element: <AdminRoutes><CouponManagement></CouponManagement></AdminRoutes>
 
       },
       {

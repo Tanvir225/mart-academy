@@ -9,7 +9,7 @@ const useNotifications = () => {
 
     const { data: notifications = [], refetch } =
         useQuery({
-            queryKey: ["notifications"],
+            queryKey: ["notifications",user?.email],
             queryFn: async () => {
                 const res = await axios.get(
                     `/notifications/${user?.email}`
