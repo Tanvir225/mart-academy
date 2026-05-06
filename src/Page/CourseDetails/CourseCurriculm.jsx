@@ -11,7 +11,7 @@ const CourseCurriculm = ({ courseDetails }) => {
                 {courseDetails?.modules?.map((module, index) => (
 
                     <div  key={index} className="bg-gray-900 hover:text-teal-200 p-5  rounded-lg  w-full">
-                        <h2 className=" font-semibold">Module {module?.module} : {module?.title}</h2>
+                        <h2 className=" font-semibold">{module?.title}</h2>
                         <p className="text-sm text-gray-400 mt-1">{module?.description}</p>
                     </div>
                 ))}

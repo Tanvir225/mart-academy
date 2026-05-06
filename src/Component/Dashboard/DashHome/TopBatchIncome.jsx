@@ -18,7 +18,7 @@ const TopBatchIncome = () => {
         <div>
             <h2 className="text-lg font-semibold mb-4">Top Batch Income</h2>
 
-            <div className="max-h-[300px] overflow-y-auto">
+            <div className="max-h-[300px] overflow-y-auto space-y-2">
                 {data.map((item, index) => (
                     <div
                         key={index}

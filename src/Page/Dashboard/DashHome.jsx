@@ -1,4 +1,5 @@
 import EnrollmentChart from "../../Component/Dashboard/DashHome/EnrollmentChart";
+import EnrollmentStatusChart from "../../Component/Dashboard/DashHome/EnrollmentStatusChart";
 import GenderChart from "../../Component/Dashboard/DashHome/GenderChart";
 import NotificationPanel from "../../Component/Dashboard/DashHome/NotificationPanel";
 import RecentEnrollments from "../../Component/Dashboard/DashHome/RecentEnrollments";
@@ -38,9 +39,15 @@ const DashHome = () => {
                     <TopBatchIncome></TopBatchIncome>
                 </div>
 
-                <div className="bg-[#1e293b] p-4 rounded-xl">
-                    <GenderChart></GenderChart>
-                </div>
+                <section className="bg-[#1e293b] p-2 rounded-xl flex items-end flex-col md:flex-row w-full gap-4">
+                    <div className="w-full">
+                        <EnrollmentStatusChart></EnrollmentStatusChart>
+                    </div>
+
+                    <div className="w-full">
+                        <GenderChart></GenderChart>
+                    </div>
+                </section>
 
             </div>
 

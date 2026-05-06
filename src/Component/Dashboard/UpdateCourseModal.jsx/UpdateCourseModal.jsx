@@ -77,7 +77,8 @@ const UpdateCourseModal = ({ course, isOpen, onClose,refetch }) => {
             className="input input-bordered focus:outline-none w-full"
           />
 
-          {/* Subtitle */}
+          <div className="flex items-center gap-4">
+            {/* Subtitle */}
           <input
             type="text"
             name="subtitle"
@@ -86,6 +87,17 @@ const UpdateCourseModal = ({ course, isOpen, onClose,refetch }) => {
             placeholder="Subtitle"
             className="input input-bordered focus:outline-none w-full"
           />
+
+          {/* Course Module Link */}
+          <input
+            type="text"
+            name="courseModule"
+            value={formData.courseModule}
+            onChange={handleChange}
+            placeholder="Course Module Link"
+            className="input input-bordered focus:outline-none w-full"
+          />
+          </div>
 
           {/* Thumbnail */}
           <input

@@ -7,6 +7,7 @@ const AddCourse = () => {
     const [course, setCourse] = useState({
         title: "",
         subtitle: "",
+        courseModule: "",
         description: "",
         thumbnail: "",
         introVideo: "",
@@ -100,6 +101,7 @@ const AddCourse = () => {
                 setCourse({
                     title: "",
                     subtitle: "",
+                    courseModule: "",
                     description: "",
                     thumbnail: "",
                     introVideo: "",
@@ -144,14 +146,25 @@ const AddCourse = () => {
                     onChange={handleChange}
                     required
                 />
-                <input
-                    type="text"
-                    name="subtitle"
-                    placeholder="Subtitle"
-                    className="w-full border border-teal-200 bg-transparent focus:outline-none p-2 rounded"
-                    value={course.subtitle}
-                    onChange={handleChange}
-                />
+                <div className="flex items-center gap-5">
+                    <input
+                        type="text"
+                        name="subtitle"
+                        placeholder="Subtitle"
+                        className="w-full border border-teal-200 bg-transparent focus:outline-none p-2 rounded"
+                        value={course.subtitle}
+                        onChange={handleChange}
+                    />
+
+                    <input
+                        type="text"
+                        name="courseModule"
+                        placeholder="Course Module Link"
+                        className="w-full border border-teal-200 bg-transparent focus:outline-none p-2 rounded"
+                        value={course.courseModule}
+                        onChange={handleChange}
+                    />
+                </div>
                 <textarea
                     name="description"
                     placeholder="Description"

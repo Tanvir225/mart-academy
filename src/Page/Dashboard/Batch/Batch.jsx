@@ -9,7 +9,7 @@ import Swal from 'sweetalert2';
 
 const Batch = () => {
 
-    const [batches, isLoading, refetch] = useBatches();
+    const [batches, isLoading, setSearchQuery, refetch] = useBatches();
     const axios = useAxios()
     const [selectedBatch, setSelectedBatch] = useState({});
 
@@ -63,6 +63,12 @@ const Batch = () => {
         });
     };
 
+    const handleSearchSubmit = (e)=>{
+        e.preventDefault()
+        const form = e.target;
+        const searchValue = form.search.value;
+        setSearchQuery(searchValue);
+    }
 
     return (
         <div>
@@ -74,7 +80,21 @@ const Batch = () => {
             </div>
 
             <div>
+                <form action="" onSubmit={handleSearchSubmit} className='w-full my-2 space-x-1 p-4 border rounded'>
+                    <input type="text" placeholder="Search batches..." name='search' className='input input-bordered focus:outline-none' />
+                    <button type='submit' className='btn btn-outline font-thin border-teal-200 hover:bg-teal-200 hover:text-black'>
+                        Search
+                    </button>
+                </form>
                 <div className="p-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                    {
+                        batches?.length === 0 && (
+                            <div className="text-center col-span-full py-10">
+                                No batches found.
+                            </div>
+                        )
+                    }
 
                     {batches?.map((batch) => (
                         <div

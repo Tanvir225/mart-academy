@@ -37,11 +37,11 @@ const Home = () => {
                 <title>Mart Academy -Digital Mastery</title>
                 <meta
                     name="description"
-                    content="Learn computer basics, graphics, web development, and ICT at Mart Academy. Build your digital mastery with expert-led online courses."
+                    content="Learn computer basics and data analysis, programming, and ICT at Mart Academy. Build your digital mastery with expert-led online courses."
                 />
                 <meta
                     name="keywords"
-                    content="computer basics course, graphics design course, web development course, ICT training, online courses Bangladesh"
+                    content="computer basics course, graphics design course, web development course, ICT training, online courses Bangladesh,course,10 minutes school"
                 />
                 <meta name="author" content="Mart Academy" />
 
@@ -49,7 +49,7 @@ const Home = () => {
                 <meta property="og:title" content="Mart Academy - Learn Computer Basics, Graphics & Web" />
                 <meta
                     property="og:description"
-                    content="Join Mart Academy and master Computer Basics, Graphics, Web Development, and ICT with our affordable online courses."
+                    content="Join Mart Academy and master Computer Basics, Data Analysis, Programming, and ICT with our affordable online courses."
                 />
                 <meta property="og:image" content="https://i.ibb.co.com/CK4MGtGx/contest.gif" />
                 <meta property="og:url" content="https://mart-academy.web.app/" />

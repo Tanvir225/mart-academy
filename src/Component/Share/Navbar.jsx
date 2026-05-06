@@ -57,7 +57,7 @@ const Navbar = () => {
             <li>
                 <NavLink onClick={handleClick} to={"/my-courses"} style={({ isActive }) => ({
                     color: isActive ? "#7aebeb	" : "",
-                })}>Courses</NavLink>
+                })}>My Courses</NavLink>
             </li>
             <li>
                 <NavLink to={'contact-us'} style={({ isActive }) => ({
@@ -82,8 +82,8 @@ const Navbar = () => {
                 <div onClick={() => setIsOpen(true)} className="lg:hidden">
                     <FiAlignLeft color="#D6FF7F" ></FiAlignLeft>
                 </div>
-
-                <Link to={"/"} onClick={() => setIsOpen(false)} className="text-xs sm:text-xl md:text-xl lg:text-xl">
+                <Link to={"/"}> <img className="w-10 md:w-12 ring-1 ring-teal-200 ring-offset-1 rounded-full" src="https://i.ibb.co.com/s9Nmjn4q/logo.png" alt="logo" srcset="" /></Link>
+                <Link to={"/"} onClick={() => setIsOpen(false)} className="hidden md:block text-xs sm:text-xl md:text-xl lg:text-xl">
                     MART-<span className="text-teal-300 font-bold">ACADEMY</span>
                 </Link>
 
@@ -114,7 +114,7 @@ const Navbar = () => {
                 {/* notification area */}
                 {clickNotification && (
                     <div className="absolute top-12 right-2 bg-white shadow-lg rounded-lg p-2 w-60 h-64 overflow-y-auto z-20">
-                        <p onClick={() => {setIsMark(!isMark) ,setClickNotification(false)}} className="text-xs cursor-pointer text-black text-right my-2 underline">{`mark as ${isMark ? 'unread' : 'read'}`}</p>
+                        <p onClick={() => { setIsMark(!isMark), setClickNotification(false) }} className="text-xs cursor-pointer text-black text-right my-2 underline">{`mark as ${isMark ? 'unread' : 'read'}`}</p>
                         <div className="flex justify-between items-center text-base border-b-2 pb-1">
 
                             <h3 className="text-black ">Notifications</h3>

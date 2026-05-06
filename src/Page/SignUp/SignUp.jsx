@@ -123,7 +123,7 @@ const Signup = () => {
 
                     <div className="flex items-center justify-between border-b-2 p-2">
                         <div>
-                            <img className="w-14 rounded-full ring-1 ring-offset-1 ring-teal-200" src="https://i.ibb.co.com/ZzygpVtn/logo.jpg" alt="mart-academy" srcset="" />
+                            <img className="w-14 rounded-full ring-1 ring-offset-1 ring-teal-200" src="https://i.ibb.co.com/s9Nmjn4q/logo.png" alt="mart-academy" srcset="" />
                             <h2 className="text-xl font-bold">
                                 Student Signup
                             </h2>

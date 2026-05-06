@@ -1,4 +1,4 @@
-import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer,Legend } from "recharts";
 import { useQuery } from "@tanstack/react-query";
 import useAxios from "../../../Hook/useAxios";
 
@@ -19,7 +19,7 @@ const GenderChart = () => {
 
     return (
         <div>
-            <h2 className="text-lg font-semibold mb-4">Users Ratio</h2>
+            <h2 className="text-lg font-semibold">Users Ratio</h2>
 
             <ResponsiveContainer width="100%" height={250}>
                 <PieChart>
@@ -27,7 +27,7 @@ const GenderChart = () => {
                         data={data}
                         dataKey="count"
                         nameKey="_id"
-                        outerRadius={80}
+                        outerRadius={60}
                         label
                     >
                         {data.map((entry, index) => (
@@ -35,6 +35,7 @@ const GenderChart = () => {
                         ))}
                     </Pie>
                     <Tooltip />
+                    <Legend />
                 </PieChart>
             </ResponsiveContainer>
         </div>

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 
-const CourseDetailsHero = ({courseDetails}) => {
+const CourseDetailsHero = ({ courseDetails }) => {
     return (
         <div >
             <div className="lg:h-40 space-y-3 text-center p-5">
@@ -15,23 +15,37 @@ const CourseDetailsHero = ({courseDetails}) => {
                 <div className="flex flex-col text-black lg:flex-row justify-center items-center gap-5 mt-7 ">
                     <div className="bg-teal-200 p-5 rounded-lg text-center w-full md:max-w-md">
                         <h2 className="text-lg font-semibold">Present Batch</h2>
-                        <p className="text-sm">Ends on: <span className="font-bold">{courseDetails?.summary?.batchEnd}</span></p>
+                        <p className="text-sm">Ends on: <span className="font-bold">{new Date(courseDetails?.summary?.batchEnd)?.toLocaleDateString('en-GB', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        }).toLowerCase()}</span></p>
                     </div>
 
                     <div className="bg-teal-200 p-5 rounded-lg text-center w-full md:max-w-md">
                         <h2 className="text-lg font-semibold">Admission </h2>
-                        <p className="text-sm">Starts on: <span className="font-bold">{courseDetails?.summary?.admissionStart}</span></p>
+                        <p className="text-sm">Starts on: <span className="font-bold">{new Date(courseDetails?.summary?.admissionStart)?.toLocaleDateString('en-GB', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        }).toLowerCase()}</span></p>
                     </div>
 
                     <div className="bg-teal-200 p-5 rounded-lg text-center animate-pulse w-full md:max-w-md">
                         <h2 className="text-lg font-semibold">Next Batch</h2>
-                        <p className="text-sm">Starts on: <span className="font-bold">{courseDetails?.summary?.newBatch}</span></p>
+                        <p className="text-sm">Starts on: <span className="font-bold">{new Date(courseDetails?.summary?.newBatch)?.toLocaleDateString('en-GB', {
+                            day: 'numeric',
+                            month: 'long',
+                            year: 'numeric'
+                        }).toLowerCase()}</span></p>
                     </div>
 
                 </div>
 
                 <div className="text-center my-10">
-                    <Link to={`/enroll/${courseDetails?._id}`} className="button btn text-lg">Enroll Now</Link>
+                    <Link to={`${courseDetails?.courseModule}`} className="btn btn-outline border-teal-200 font-light mr-5 my-2">Course Modules</Link>
+                    <Link to={`/enroll/${courseDetails?._id}`} className="button btn text-lg my-2">Enroll Now</Link>
+
                 </div>
             </section>
         </div>
