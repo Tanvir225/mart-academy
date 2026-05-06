@@ -35,7 +35,10 @@ const RecordInside = ({ batchDetails, setVideoUrl }) => {
                                         <div className="overflow-hidden m-3">
                                             <p className=" text-[12px] md:text-sm text-teal-200">Please join this link.</p>
                                             <button
-                                                onClick={() => setVideoUrl(module?.recordedClass)}
+                                                onClick={() => {
+                                                    setVideoUrl(module.recordedClass);
+                                                    window.scrollTo({ top: 1, behavior: "smooth" });
+                                                }}
                                                 className="underline block py-2 text-sm text-white"
                                             >
                                                 Click To See Record Class for Module - {module.moduleId}
