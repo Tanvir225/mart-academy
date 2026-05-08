@@ -9,7 +9,7 @@ const CourseDetailsHero = ({ courseDetails }) => {
                 <p className="lg:w-3/6 mx-auto border-b-2 pb-5 border-teal-200 animate-pulse">{courseDetails?.description}</p>
             </div>
 
-            <section className="my-10 lg:my-32">
+            <section className="my-10 lg:my-48">
                 <h1 className="text-xl lg:text-3xl font-semibold text-center">Next batch <span className="bg-teal-200 px-3 p-1 rounded-xl text-black">schedule</span></h1>
 
                 <div className="flex flex-col text-black lg:flex-row justify-center items-center gap-5 mt-7 ">
