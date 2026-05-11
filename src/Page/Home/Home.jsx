@@ -79,7 +79,7 @@ const Home = () => {
             <section className='my-10'>
                 <Title title="Our Courses"></Title>
 
-                <div className='grid mt-7 grid-cols-1  md:grid-cols-1 lg:grid-cols-3 gap-7 lg:gap-7'>
+                <div className='grid mt-7 grid-cols-1  md:grid-cols-1 lg:grid-cols-3 gap-7 md:gap-10'>
                     {
                         courses?.map((course, index) => <Course key={index} course={course}></Course>)
                     }
