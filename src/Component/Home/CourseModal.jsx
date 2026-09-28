@@ -30,7 +30,7 @@ const CourseModal = ({ openModal, setOpenModal }) => {
                                 <section className=''>
                                     <Title title="Our Courses"></Title>
 
-                                    <div className='w-full my-5 space-y-5'>
+                                    <div className='w-[80%] mx-auto my-5 space-y-5'>
                                         {
                                             courses?.map((course, index) => <Course key={index} course={course}></Course>)
                                         }

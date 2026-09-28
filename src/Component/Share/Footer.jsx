@@ -69,7 +69,7 @@ const Footer = () => {
                     <nav>
                         <div className="grid grid-flow-col gap-4 mb-7 md:mb-0">
                             <a href="https://www.facebook.com/martAcadmy" target="_blank" rel="noopener noreferrer"><FaFacebook size={25} /></a>
-                            <a href="#"><FaYoutube size={25} /></a>
+                            <a href="https://www.youtube.com/@martacad200"><FaYoutube size={25} /></a>
                             <a href="#"><FaLinkedin size={25} /></a>
                         </div>
                     </nav>
