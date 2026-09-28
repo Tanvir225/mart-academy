@@ -36,29 +36,29 @@ const About = () => {
     // ============================================
     const instructors = [
         {
-            name: "Instructor Name",
-            designation: "Web Development Instructor",
-            image: "https://i.ibb.co/placeholder-instructor.jpg",
-            expertise: "React • JavaScript • Node.js",
-            bio: "Focused on practical web development and helping learners build real-world projects.",
+            name: "MD Abdur Rahman",
+            designation: "Lead Instructor",
+            image: "https://i.ibb.co.com/bjkDpVtJ/slazzer-preview-3fizi.png",
+            expertise: "Computer Basics • Data Analysis",
+            bio: "Focused on Computer Basics • Data Analysis and helping learners build real-world projects.",
             facebook: "#",
             linkedin: "#",
         },
         {
-            name: "Instructor Name",
-            designation: "Graphics Design Instructor",
-            image: "https://i.ibb.co/placeholder-instructor.jpg",
+            name: "Nusrat Jahan",
+            designation: "Teacher Assistant",
+            image: "https://i.ibb.co.com/Kcffw1Jh/slazzer-preview-1b34b.png",
             expertise: "Graphics • Design • Creative Tools",
             bio: "Helping students develop creative skills through practical design-based learning.",
             facebook: "#",
             linkedin: "#",
         },
         {
-            name: "Instructor Name",
-            designation: "ICT & Computer Instructor",
-            image: "https://i.ibb.co/placeholder-instructor.jpg",
-            expertise: "Computer Basic • ICT • Office",
-            bio: "Making computer education simple, practical and easy to understand for beginners.",
+            name: "MD Abdur Rahman",
+            designation: "Lead Instructor",
+            image: "https://i.ibb.co.com/ZzwC12vH/slazzer-preview-2hkua.png",
+            expertise: "Intermediate ICT • Programming Basics",
+            bio: "Making computer • ICT education simple, practical and easy to understand for beginners.",
             facebook: "#",
             linkedin: "#",
         },
@@ -69,19 +69,19 @@ const About = () => {
     // ============================================
     const managementTeam = [
         {
-            name: "Management Name",
+            name: "MD Abdur Rahman",
             designation: "Founder & CEO",
-            image: "https://i.ibb.co/placeholder-management.jpg",
+            image: "https://i.ibb.co.com/bjkDpVtJ/slazzer-preview-3fizi.png",
             bio: "Leading Mart Academy with a vision of making quality digital education accessible to everyone.",
         },
         {
-            name: "Management Name",
+            name: "Salauddin Shuvro",
             designation: "Director",
-            image: "https://i.ibb.co/placeholder-management.jpg",
+            image: "https://i.ibb.co.com/LdZVvgg8/Whats-App-Image-2026-09-28-at-4-27-43-PM.jpg",
             bio: "Responsible for academic development, operations and maintaining the learning experience.",
         },
         {
-            name: "Management Name",
+            name: "MD Forhad Hossain",
             designation: "Academic Coordinator",
             image: "https://i.ibb.co/placeholder-management.jpg",
             bio: "Coordinating courses, instructors and student support to create a better learning environment.",
@@ -440,7 +440,7 @@ const About = () => {
                                     <img
                                         src={instructor.image}
                                         alt={instructor.name}
-                                        className="w-full h-80 object-cover group-hover:scale-105 transition duration-700"
+                                        className="w-80 h-80 object-cover group-hover:scale-105 transition duration-700"
                                     />
 
                                     <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
