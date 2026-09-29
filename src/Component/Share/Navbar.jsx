@@ -76,9 +76,9 @@ const Navbar = () => {
 
 
     return (
-        <div className="flex my-5 items-center justify-between ">
+        <div className="flex my-5 items-center justify-between">
 
-            <div className="flex items-center gap-2 lg:gap-3 z-20">
+            <div className="flex items-center gap-2 lg:gap-3 z-30">
                 <div onClick={() => setIsOpen(true)} className="lg:hidden">
                     <FiAlignLeft color="#D6FF7F" ></FiAlignLeft>
                 </div>
@@ -93,7 +93,7 @@ const Navbar = () => {
                 {links}
             </div>
 
-            <div className={`lg:hidden absolute   left-0 z-10 top-10 w-full h-full bg-base-100 p-5 transition-transform duration-300 ${isOpen ? 'translate-y-0' : '-translate-y-full -top-96'}`}>
+            <div className={`lg:hidden absolute   left-0 z-20 top-10 w-full h-full bg-base-200 p-5 transition-transform duration-300 ${isOpen ? 'translate-y-0' : '-translate-y-full -top-96'}`}>
                 <div className="flex justify-between items-center mb-5 animate-pulse z-20">
                     <Link to={"/"} className="text-xs sm:text-xl md:text-xl lg:text-xl ">
                         MART-<span className="text-teal-300 font-bold">ACADEMY</span>
