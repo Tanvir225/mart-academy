@@ -41,8 +41,8 @@ const About = () => {
             image: "https://i.ibb.co.com/bjkDpVtJ/slazzer-preview-3fizi.png",
             expertise: "Computer Basics • Data Analysis",
             bio: "Focused on Computer Basics • Data Analysis and helping learners build real-world projects.",
-            facebook: "#",
-            linkedin: "#",
+            facebook: "https://www.facebook.com/abdurrahman.tanvir.3",
+            linkedin: "https://www.linkedin.com/in/a-rahaman/",
         },
         {
             name: "Nusrat Jahan",
@@ -59,8 +59,8 @@ const About = () => {
             image: "https://i.ibb.co.com/ZzwC12vH/slazzer-preview-2hkua.png",
             expertise: "Intermediate ICT • Programming Basics",
             bio: "Making computer • ICT education simple, practical and easy to understand for beginners.",
-            facebook: "#",
-            linkedin: "#",
+            facebook: "https://www.facebook.com/abdurrahman.tanvir.3",
+            linkedin: "https://www.linkedin.com/in/a-rahaman/",
         },
     ];
 
