@@ -50,7 +50,7 @@ const About = () => {
             image: "https://i.ibb.co.com/Kcffw1Jh/slazzer-preview-1b34b.png",
             expertise: "Graphics • Design • Creative Tools",
             bio: "Helping students develop creative skills through practical design-based learning.",
-            facebook: "#",
+            facebook: "https://www.facebook.com/NNMukty",
             linkedin: "#",
         },
         {

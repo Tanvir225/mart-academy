@@ -30,18 +30,18 @@ const Signup = () => {
         const email = forms.email.value;
         const password = forms.password.value;
         const photo = forms.photo.files[0];
+        const gender = forms.gender.value;
+        const phone = forms.phone.value;
 
         // EXTRA
-        const fatherName = forms.fatherName.value;
-        const motherName = forms.motherName.value;
-        const dob = forms.dob.value;
-        const gender = forms.gender.value;
-        const blood = forms.blood.value;
-        const religion = forms.religion.value;
-        const presentAddress = forms.presentAddress.value;
-        const phone = forms.phone.value;
-        const guardianName = forms.guardianName.value;
-        const nid = forms.nid.value;
+        // const fatherName = forms.fatherName.value;
+        // const motherName = forms.motherName.value;
+        // const dob = forms.dob.value;
+        // const blood = forms.blood.value;
+        // const religion = forms.religion.value;
+        // const presentAddress = forms.presentAddress.value;
+        // const guardianName = forms.guardianName.value;
+        // const nid = forms.nid.value;
 
         try {
             // 🆔 Student ID
@@ -79,16 +79,16 @@ const Signup = () => {
                 email,
                 photo: photoURL,
                 studentId,
-                fatherName,
-                motherName,
-                dob,
+                // fatherName,
+                // motherName,
+                // dob,
                 gender,
-                blood,
-                religion,
-                presentAddress,
+                // blood,
+                // religion,
+                // presentAddress,
                 phone,
-                guardianName,
-                nid,
+                // guardianName,
+                // nid,
                 role: "student",
                 createdAt: new Date(),
             };
@@ -118,12 +118,12 @@ const Signup = () => {
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-base-200 p-6">
-            <div className="card w-full max-w-4xl bg-base-100 shadow-xl">
+            <div className="card w-full max-w-xl bg-base-100 shadow-xl">
                 <div className="card-body">
 
                     <div className="flex items-center justify-between border-b-2 p-2">
                         <div>
-                            <img className="w-14 rounded-full ring-1 ring-offset-1 ring-teal-200" src="https://i.ibb.co.com/s9Nmjn4q/logo.png" alt="mart-academy" srcset="" />
+                            <img className="w-14 rounded-full mb-2 ring-1 ring-offset-1 ring-teal-200" src="https://i.ibb.co.com/s9Nmjn4q/logo.png" alt="mart-academy" srcset="" />
                             <h2 className="text-xl font-bold">
                                 Student Signup
                             </h2>
@@ -149,7 +149,7 @@ const Signup = () => {
                             required
                         />
 
-                        <div className="grid grid-cols-2 gap-4">
+                        {/* <div className="grid grid-cols-2 gap-4">
                             <input
                                 name="fatherName"
                                 placeholder="Father Name"
@@ -162,12 +162,19 @@ const Signup = () => {
                                 className="input input-bordered w-full focus:outline-none"
                                 required
                             />
-                        </div>
+                        </div> */}
 
                         <div className="grid grid-cols-2 gap-4">
-                            <input
+                            {/* <input
                                 type="date"
                                 name="dob"
+                                className="input input-bordered w-full focus:outline-none"
+                                required
+                            /> */}
+
+                            <input
+                                name="phone"
+                                placeholder="Phone"
                                 className="input input-bordered w-full focus:outline-none"
                                 required
                             />
@@ -182,7 +189,7 @@ const Signup = () => {
                             </select>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-4">
+                        {/* <div className="grid grid-cols-2 gap-4">
                             <input
                                 name="presentAddress"
                                 placeholder="Present Address"
@@ -196,9 +203,9 @@ const Signup = () => {
                                 className="input input-bordered w-full focus:outline-none"
                                 required
                             />
-                        </div>
+                        </div> */}
 
-                        <div className="grid grid-cols-2 gap-4">
+                        {/* <div className="grid grid-cols-2 gap-4">
                             <select
                                 name="religion"
                                 className="input input-bordered w-full focus:outline-none"
@@ -222,9 +229,9 @@ const Signup = () => {
                                 <option>AB+</option>
                                 <option>AB-</option>
                             </select>
-                        </div>
+                        </div> */}
 
-                        <div className="grid grid-cols-2 gap-4">
+                        {/* <div className="grid grid-cols-2 gap-4">
 
                             <input
                                 name="guardianName"
@@ -242,7 +249,7 @@ const Signup = () => {
                                 required
                             />
 
-                        </div>
+                        </div> */}
 
 
                         <div className="grid grid-cols-2 gap-4">
