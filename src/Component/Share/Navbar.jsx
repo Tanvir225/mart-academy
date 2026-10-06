@@ -212,9 +212,11 @@ const Navbar = () => {
                                 {coupons?.length === 0 && <p className="text-xs text-gray-500">No coupons available</p>}
                                 <ul className="space-y-2 mt-2 text-white text-base ">
                                     {coupons?.map((c) => (
-                                        <li key={c._id} className="text-sm order-b-2 text-gray-300">
-                                            <span className="text-teal-200 font-mono">{c.code}</span> - {c.discountValue}% - {c.status}
-                                        </li>
+
+                                        c.status !== 'hidden' && (<li key={c._id} className="text-sm border-b-2 text-gray-300">
+                                            <span className="text-teal-200 text-[11px] font-mono">{c.courseTitle}</span> <br /> <span className="text-teal-200 font-mono">{c.code}</span> - {c.discountValue}% - {c.status}
+                                        </li>)
+
                                     ))}
                                 </ul>
 

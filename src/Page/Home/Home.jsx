@@ -904,7 +904,7 @@ const Home = () => {
 
                 <div className="mt-8">
 
-                    <Marquee
+                    {/* <Marquee
                         speed={45}
                         gradient={true}
                         gradientColor="teal"
@@ -914,7 +914,9 @@ const Home = () => {
 
                         <Success_Story />
 
-                    </Marquee>
+                    </Marquee> */}
+
+                    <Success_Story />
 
                 </div>
 

@@ -20,4 +20,5 @@ const useCourses = () => {
     return [courses, isLoading, isFetching, refetch];
 };
 
+
 export default useCourses;

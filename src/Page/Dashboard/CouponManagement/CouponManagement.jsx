@@ -5,6 +5,7 @@ import useAxios from "../../../Hook/useAxios";
 import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 import useCoupons from "../../../Hook/useCoupons";
+import useCourses from "../../../Hook/useCourses";
 
 ModuleRegistry.registerModules([AllCommunityModule]);
 
@@ -14,6 +15,8 @@ const CouponManagement = () => {
     // ✅ Single source of truth from React Query
     const [coupons = [], isLoading, refetch] = useCoupons();
 
+    //course hook
+    const [courses] = useCourses();
     const [search, setSearch] = useState("");
     const [selectedCoupon, setSelectedCoupon] = useState(null);
 
@@ -24,9 +27,14 @@ const CouponManagement = () => {
         e.preventDefault();
 
         const form = e.target;
+        const courseSelect = form.courseId;
+        const selectedOption =
+            courseSelect.options[courseSelect.selectedIndex];
 
         const newCoupon = {
             code: form.code.value.toUpperCase(),
+            courseId: form.courseId.value || null,
+            courseTitle: selectedOption.getAttribute("data-course-title") || null,
             discountType: form.discountType.value,
             discountValue: Number(form.discountValue.value),
             expireDate: form.expireDate.value,
@@ -102,6 +110,9 @@ const CouponManagement = () => {
         e.preventDefault();
 
         const form = e.target;
+        const courseSelect = form.courseId;
+        const selectedOption =
+            courseSelect.options[courseSelect.selectedIndex];
 
         const updatedCoupon = {
             code: form.code.value.toUpperCase(),
@@ -110,6 +121,8 @@ const CouponManagement = () => {
             expireDate: form.expireDate.value,
             maxUse: Number(form.maxUse.value),
             status: form.status.value,
+            courseId: form.courseId.value || null,
+            courseTitle: selectedOption.getAttribute("data-course-title") || null,
         };
 
         try {
@@ -162,14 +175,19 @@ const CouponManagement = () => {
     const columnDefs = useMemo(
         () => [
             {
+                headerName: "Course Title",
+                field: "courseTitle",
+                flex: 2,
+            },
+            {
                 headerName: "Coupon Code",
                 field: "code",
-                flex: 1,
+                flex: 1.5,
             },
             {
                 headerName: "Discount Type",
                 field: "discountType",
-                flex: 1,
+                flex: 1.5,
             },
             {
                 headerName: "Discount Value",
@@ -179,7 +197,7 @@ const CouponManagement = () => {
             {
                 headerName: "Expire Date",
                 field: "expireDate",
-                flex: 1,
+                flex: 1.5,
             },
             {
                 headerName: "Max Use",
@@ -189,7 +207,7 @@ const CouponManagement = () => {
             {
                 headerName: "Used Count",
                 field: "usedCount",
-                flex: 1,
+                flex: 1.5,
             },
             {
                 headerName: "Status",
@@ -200,7 +218,7 @@ const CouponManagement = () => {
                 headerName: "Action",
                 field: "action",
                 cellRenderer: ActionRenderer,
-                flex: 1.5,
+                flex: 2,
             },
         ],
         []
@@ -250,7 +268,7 @@ const CouponManagement = () => {
 
             {/* AG Grid */}
             <div
-                className="ag-theme-alpine w-full"
+                className="ag-theme-alpine w-full "
                 style={{ height: "600px" }}
             >
                 <AgGridReact
@@ -302,6 +320,18 @@ const CouponManagement = () => {
                                 </option>
                             </select>
 
+                            <select
+                                name="courseId"
+                                className="select select-bordered w-full"
+                            >
+                                <option value="">Select a Course</option>
+                                {courses?.map((course) => (
+                                    <option key={course._id} value={course._id} data-course-title={course.title}>
+                                        {course?.title}
+                                    </option>
+                                ))}
+                            </select>
+
                             <input
                                 name="discountValue"
                                 type="number"
@@ -333,6 +363,7 @@ const CouponManagement = () => {
                             >
                                 <option value="active">Active</option>
                                 <option value="inactive">Inactive</option>
+                                <option value="hidden">Hidden</option>
                             </select>
 
                             <button
@@ -387,6 +418,18 @@ const CouponManagement = () => {
                             </option>
                         </select>
 
+                        <select
+                            name="courseId"
+                            className="select select-bordered w-full"
+                        >
+                            <option value="">Select a Course</option>
+                            {courses?.map((course) => (
+                                <option key={course._id} value={course._id} data-course-title={course.title}>
+                                    {course?.title}
+                                </option>
+                            ))}
+                        </select>
+
                         <input
                             name="discountValue"
                             type="number"
@@ -416,6 +459,7 @@ const CouponManagement = () => {
                         >
                             <option value="active">Active</option>
                             <option value="inactive">Inactive</option>
+                            <option value="hidden">Hidden</option>
                         </select>
 
                         <button

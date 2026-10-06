@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 
 const Course = ({ course }) => {
-    
+
 
     return (
         <div data-aos="fade-up" className="w-full  ">
@@ -73,12 +73,21 @@ const Course = ({ course }) => {
                 </div>
 
                 {/* price */}
-                <div className='text-left'>
-                    <span className='badge text-black bg-teal-300 text-sm font-light w-20'>
-                        {course?.summary?.price ? `৳ ${course?.summary?.price} ` : "৳ 0"}
-                    </span>
-                </div>
-                <div className='w-full flex flex-row items-center justify-center gap-2'>
+                <section className="flex items-center justify-between gap-2">
+                    <div className='text-left'>
+                        <span className='badge text-black bg-teal-300 text-sm font-light w-20 hover:line-through'>
+                            {course?.summary?.price ? `৳ ${course?.summary?.price} ` : "৳ 0"}
+                        </span>
+                    </div>
+
+                    <p className="text-xs text-transparent
+                                    hover:text-teal-200
+                                    bg-clip-text
+                                    bg-gradient-to-tr
+                                    from-teal-300
+                                    to-purple-400">✅ Coupons Available</p>
+                </section>
+                <div className='w-full flex flex-row items-center justify-between gap-2'>
                     <Link to={`/course/${course?._id}`} className="btn button Link">
                         View Details
                     </Link>
