@@ -308,7 +308,7 @@ const ProfilePage = () => {
                     <div className="modal-box">
                         <h3 className="font-bold text-lg mb-2">Story: {selectedCourse.courseTitle}</h3>
                         <form onSubmit={handleStorySubmit} className="space-y-4">
-                            <textarea className="textarea textarea-bordered border-teal-200 focus:outline-none w-full" placeholder="Write your story..." name="story" />
+                            <textarea className="textarea required textarea-bordered border-teal-200 focus:outline-none w-full" placeholder="Write your story..." name="story" />
 
                             <div className="modal-action">
                                 <button type="submit" className="btn button">Submit</button>

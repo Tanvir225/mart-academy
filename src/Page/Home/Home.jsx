@@ -17,6 +17,7 @@ import Loading from "../../Component/Share/Loading";
 import useBanner from "../../Hook/useBanner";
 import useFaq from "../../Hook/useFaq";
 import useCourses from "../../Hook/useCourses";
+import CertificateShowcase from "../../Component/Home/CertificateShowcase";
 
 
 const Home = () => {
@@ -571,6 +572,9 @@ const Home = () => {
                 </div>
 
             </section>
+
+            {/* NEW CERTIFICATE SHOWCASE */}
+            <CertificateShowcase />
 
 
             {/* =====================================================
