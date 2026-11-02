@@ -30,9 +30,9 @@ const CertificateShowcase = () => {
   ];
 
   const certificateImages = [
-    "/certificates/certificate-1.jpg",
-    "/certificates/certificate-2.jpg",
-    "/certificates/certificate-3.jpg",
+    "/public/qr/certificate.jpg",
+    "/public/qr/certificate.jpg",
+    "/public/qr/certificate.jpg",
   ];
 
   const details = [
