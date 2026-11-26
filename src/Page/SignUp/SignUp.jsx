@@ -110,7 +110,7 @@ const Signup = () => {
             navigate("/verify-email");
         } catch (error) {
             console.error(error);
-            toast.error("Signup Failed ❌", {
+            toast.error(error.message.slice(10, 100), {
                 id: toastId,
             });
         }
@@ -266,6 +266,7 @@ const Signup = () => {
                                 name="password"
                                 type="password"
                                 placeholder="Password"
+                                title="Password must be at least 6 characters long"
                                 className="input input-bordered w-full focus:outline-none"
                                 required
                             />
