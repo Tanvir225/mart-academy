@@ -1,6 +1,5 @@
-import React from "react";
+
 import { Helmet } from "react-helmet-async";
-import Marquee from "react-fast-marquee";
 
 import Title from "../../Component/Share/Title";
 import SubTitle from "../../Component/Share/SubTitle";
@@ -18,6 +17,7 @@ import useBanner from "../../Hook/useBanner";
 import useFaq from "../../Hook/useFaq";
 import useCourses from "../../Hook/useCourses";
 import CertificateShowcase from "../../Component/Home/CertificateShowcase";
+import WhatsApp from "../../Component/Home/WhatsApp";
 
 
 const Home = () => {
@@ -441,7 +441,7 @@ const Home = () => {
                         <div
                             className="
                                 absolute
-                                -top-6
+                                -top-10
                                 -left-2
                                 lg:-left-8
                                 z-20
@@ -1057,6 +1057,10 @@ const Home = () => {
 
                 </div>
 
+            </section>
+
+            <section >
+                <WhatsApp></WhatsApp>
             </section>
 
         </div>

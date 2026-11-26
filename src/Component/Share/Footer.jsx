@@ -61,7 +61,7 @@ const Footer = () => {
 
                     <ul className="space-y-3 font-light border-t border-b border-dashed border-teal-200 p-2 text-left">
                         <li><strong>📧 Email:</strong> martacad200@gmail.com</li>
-                        <li><strong>📞 Phone:</strong> +880 1812-122545</li>
+                        <li><strong>📞 Phone:</strong> +880 1804-746339 </li>
                     </ul>
 
                     <p>Copyright © {new Date().getFullYear()} Mart Academy - All rights reserved</p>
@@ -82,7 +82,7 @@ const Footer = () => {
             {showWhatsapp && (
                 <div className="z-50">
                     <a
-                        href="https://wa.me/8801812122545"
+                        href="https://wa.me/8801804746339"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="btn bg-green-500 text-white btn-circle btn-lg fixed bottom-28 right-5  shadow-lg hover:scale-110 transition-all"

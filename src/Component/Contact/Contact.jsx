@@ -46,7 +46,7 @@ const Contact = () => {
                             <strong>📧 Email:</strong> martacad200@gmail.com
                         </li>
                         <li>
-                            <strong>📞 Phone:</strong> +880 1812-122545
+                            <strong>📞 Phone:</strong> +880 1804-746339
                         </li>
                         <li>
                             <strong>🌐 Facebook:</strong>{" "}
